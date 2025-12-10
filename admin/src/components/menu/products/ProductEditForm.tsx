@@ -1,0 +1,191 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useFormState } from "react-dom";
+import { SubmitButton } from "@/components/forms/SubmitButton";
+import {
+    type ProductActionState,
+    updateProductAction,
+    deleteProductAction,
+} from "@/lib/data/products-actions";
+import type { ProductRecord } from "@/lib/types";
+import { useState } from "react";
+import { DeleteConfirmDialog } from "@/components/shared/DeleteConfirmDialog";
+import { ImageUpload } from "@/components/forms/ImageUpload";
+import { deleteImage } from "@/lib/supabase/storage";
+
+type Props = {
+    product: ProductRecord;
+    categories: string[];
+};
+
+const initialState: ProductActionState = {};
+
+export const ProductEditForm = ({ product, categories }: Props) => {
+    const router = useRouter();
+    const [state, formAction] = useFormState(updateProductAction, initialState);
+    const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+    const [uploadedPath, setUploadedPath] = useState<string>("");
+
+    const handleDelete = async () => {
+        await deleteProductAction(product.id);
+        router.push("/menu");
+    };
+
+    const handleCancel = async () => {
+        if (uploadedPath) {
+            try {
+                await deleteImage(uploadedPath);
+            } catch (error) {
+                console.error("Failed to delete uploaded image:", error);
+            }
+        }
+        router.back();
+    };
+
+    return (
+        <div className="space-y-6">
+            <form action={formAction} className="rounded-2xl border border-white/10 bg-yellow-900/40 p-6 space-y-4">
+                <input type="hidden" name="id" value={product.id} />
+
+                <div className="grid gap-4 md:grid-cols-2">
+                    <label className="space-y-2 text-sm">
+                        <span className="text-yellow-300">Product Name *</span>
+                        <input
+                            name="name"
+                            type="text"
+                            required
+                            defaultValue={product.name}
+                            className="w-full rounded-lg border border-white/10 bg-yellow-900/60 px-3 py-2 text-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/40"
+                        />
+                    </label>
+
+                    <label className="space-y-2 text-sm">
+                        <span className="text-yellow-300">Category *</span>
+                        <select
+                            name="category"
+                            required
+                            defaultValue={product.category_name ?? ""}
+                            className="w-full rounded-lg border border-white/10 bg-yellow-900/60 px-3 py-2 text-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/40"
+                        >
+                            {categories.map((cat) => (
+                                <option key={cat} value={cat}>
+                                    {cat}
+                                </option>
+                            ))}
+                        </select>
+                    </label>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-2">
+                    <label className="space-y-2 text-sm">
+                        <span className="text-yellow-300">Price (ZAR) *</span>
+                        <input
+                            name="price"
+                            type="number"
+                            step="0.01"
+                            min="0"
+                            required
+                            defaultValue={product.price ?? 0}
+                            className="w-full rounded-lg border border-white/10 bg-yellow-900/60 px-3 py-2 text-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/40"
+                        />
+                    </label>
+
+                    <label className="space-y-2 text-sm">
+                        <span className="text-yellow-300">Stock *</span>
+                        <input
+                            name="stock"
+                            type="number"
+                            min="0"
+                            required
+                            defaultValue={product.stock ?? 0}
+                            className="w-full rounded-lg border border-white/10 bg-yellow-900/60 px-3 py-2 text-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/40"
+                        />
+                    </label>
+                </div>
+
+                <label className="block space-y-2 text-sm">
+                    <span className="text-yellow-300">Product Image</span>
+                    <ImageUpload
+                        defaultValue={product.image_url}
+                        onChange={(url, path) => setUploadedPath(path || "")}
+                        folder="products"
+                    />
+                </label>
+
+                <label className="block space-y-2 text-sm">
+                    <span className="text-yellow-300">Badge</span>
+                    <input
+                        name="badge"
+                        defaultValue={product.badge ?? ""}
+                        placeholder="Chef's pick, New, Bestseller, etc."
+                        className="w-full rounded-lg border border-white/10 bg-yellow-900/60 px-3 py-2 text-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/40"
+                    />
+                </label>
+
+                <label className="block space-y-2 text-sm">
+                    <span className="text-yellow-300">Description</span>
+                    <textarea
+                        name="description"
+                        rows={4}
+                        defaultValue={product.description ?? ""}
+                        className="w-full rounded-lg border border-white/10 bg-yellow-900/60 px-3 py-2 text-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/40"
+                    />
+                </label>
+
+                <label className="flex items-center gap-2 text-sm">
+                    <input
+                        name="is_hidden"
+                        type="checkbox"
+                        defaultChecked={product.is_hidden ?? false}
+                        className="h-4 w-4 rounded border-white/10 bg-yellow-900/60 text-indigo-600 focus:ring-2 focus:ring-indigo-400/40"
+                    />
+                    <span className="text-yellow-300">Hide this product from public view</span>
+                </label>
+
+                {state.error && <p className="text-sm text-rose-400">{state.error}</p>}
+                {state.success && (
+                    <p className="text-sm text-emerald-400">{state.success}</p>
+                )}
+
+                <div className="flex gap-3">
+                    <SubmitButton
+                        label="Save Changes"
+                        loadingLabel="Saving..."
+                        className="flex-1 bg-indigo-600 px-4 py-2 text-sm"
+                    />
+                    <button
+                        type="button"
+                        onClick={handleCancel}
+                        className="rounded-lg bg-yellow-800 px-4 py-2 text-sm text-white hover:bg-yellow-700"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </form>
+
+            {/* Delete Section */}
+            <div className="rounded-2xl border border-rose-500/30 bg-rose-500/5 p-6">
+                <h3 className="text-lg font-semibold text-white">Danger Zone</h3>
+                <p className="mt-1 text-sm text-yellow-400">
+                    Permanently delete this product. This action cannot be undone.
+                </p>
+                <button
+                    type="button"
+                    onClick={() => setShowDeleteDialog(true)}
+                    className="mt-4 rounded-lg bg-rose-600 px-4 py-2 text-sm font-medium text-white hover:bg-rose-700"
+                >
+                    Delete Product
+                </button>
+            </div>
+
+            <DeleteConfirmDialog
+                isOpen={showDeleteDialog}
+                onClose={() => setShowDeleteDialog(false)}
+                onConfirm={handleDelete}
+                title="Delete Product"
+                message={`Are you sure you want to delete "${product.name}"? This action cannot be undone.`}
+            />
+        </div>
+    );
+};

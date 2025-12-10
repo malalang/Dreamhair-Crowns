@@ -1,0 +1,136 @@
+"use server";
+
+import { revalidatePath } from "next/cache";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
+
+export type CategoryActionState = {
+    error?: string;
+    success?: string;
+};
+
+const sanitize = (value: FormDataEntryValue | null) =>
+    String(value ?? "").trim();
+
+export const createCategoryAction = async (
+    _prev: CategoryActionState,
+    formData: FormData,
+): Promise<CategoryActionState> => {
+    console.log("createCategoryAction: Received formData");
+    const categoryName = sanitize(formData.get("category_name"));
+    const image = sanitize(formData.get("image")) || null;
+    console.log("createCategoryAction: Image URL:", image);
+    const description = sanitize(formData.get("description")) || null;
+    const isHidden = formData.get("is_hidden") === "on";
+
+    if (!categoryName) {
+        return { error: "Category name is required." };
+    }
+
+    const supabase = await createSupabaseServerClient();
+
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    console.log("createCategoryAction: User:", user?.id);
+    if (authError) {
+        console.error("createCategoryAction: Auth Error:", authError);
+    }
+
+    if (!user) {
+        console.error("createCategoryAction: No authenticated user found");
+        return { error: "You must be logged in to perform this action." };
+    }
+
+    const categoryData = {
+        category_name: categoryName,
+        image,
+        description,
+        is_hidden: isHidden,
+    };
+    console.log("createCategoryAction: Inserting data:", categoryData);
+
+    const { error } = await supabase
+        .from("products_category")
+        .insert(categoryData as never);
+
+    if (error) {
+        console.error("Failed to create category", error);
+        return { error: error.message };
+    }
+
+    revalidatePath("/categories");
+    revalidatePath("/products");
+    return { success: "Category created successfully." };
+};
+
+export const updateCategoryAction = async (
+    _prev: CategoryActionState,
+    formData: FormData,
+): Promise<CategoryActionState> => {
+    console.log("updateCategoryAction: Received formData");
+    const id = sanitize(formData.get("id"));
+    const categoryName = sanitize(formData.get("category_name"));
+    const image = sanitize(formData.get("image")) || null;
+    console.log("updateCategoryAction: Image URL:", image);
+    const description = sanitize(formData.get("description")) || null;
+    const isHidden = formData.get("is_hidden") === "on";
+
+    if (!id || !categoryName) {
+        return { error: "Category ID and name are required." };
+    }
+
+    const supabase = await createSupabaseServerClient();
+    const updateData = {
+        category_name: categoryName,
+        image,
+        description,
+        is_hidden: isHidden,
+    };
+
+    const { error } = await supabase
+        .from("products_category")
+        .update(updateData as never)
+        .eq("id", id);
+
+    if (error) {
+        console.error("Failed to update category", error);
+        return { error: error.message };
+    }
+
+    revalidatePath("/categories");
+    revalidatePath("/products");
+    return { success: "Category updated successfully." };
+};
+
+export const deleteCategoryAction = async (
+    categoryId: string,
+): Promise<CategoryActionState> => {
+    if (!categoryId) {
+        return { error: "Category ID is required." };
+    }
+
+    const supabase = await createSupabaseServerClient();
+
+    // Check if category has products
+    const { data: products } = await supabase
+        .from("products")
+        .select("id")
+        .eq("category_name", categoryId)
+        .limit(1);
+
+    if (products && products.length > 0) {
+        return { error: "Cannot delete category with existing products." };
+    }
+
+    const { error } = await supabase
+        .from("products_category")
+        .delete()
+        .eq("id", categoryId);
+
+    if (error) {
+        console.error("Failed to delete category", error);
+        return { error: error.message };
+    }
+
+    revalidatePath("/categories");
+    revalidatePath("/products");
+    return { success: "Category deleted successfully." };
+};

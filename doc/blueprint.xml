@@ -1,0 +1,462 @@
+This blueprint outlines the development of **DREAMHAIR CROWNS**, a professional e-commerce platform for hair extensions, wigs, electronic hair tools, and branded sandals.
+
+Based on the provided `PA-Luxe-Creation.xml`, the existing **PA Luxe Creation** codebase is an excellent architectural match. It uses Next.js, Supabase, and Tailwind CSS with a similar "luxury/premium" aesthetic (Gold/Black) and core functionality (Product Listings, Cart, Auth, Admin Dashboard).
+
+---
+
+### **Project Blueprint: DREAMHAIR CROWNS**
+
+**Objective:** Build a minimalist, professional e-commerce website allowing customers to browse and purchase hair products and accessories independently.
+**Design Style:** Minimalist, "Black and Gold" theme.
+**Reference Architecture:** Next.js (App Router) + Supabase + Tailwind CSS.
+
+---
+
+### **1. Visual Identity & UX Design**
+
+The design will pivot from the catering aesthetic of the reference code to a high-end beauty e-commerce feel, taking inspiration from *DenimSA* (simplicity/directness) and *Silkyhairdragoncity* (organization).
+
+* **Color Palette:**
+    * **Primary:** Deep Black (`#000000` or `bg-neutral-950`).
+    * **Accent:** Gold (Modify the existing Amber in `globals.css` to a metallic Gold, e.g., `#D4AF37`).
+    * **Text:** White/Off-white for high contrast on black backgrounds.
+* **Typography:** Maintain the clean sans-serif fonts used in the reference but ensure readability for product descriptions.
+* **Layout:**
+    * **Hero Section:** High-quality imagery of Brazilian hair/wigs with a clear "Shop Now" call to action, replacing the food imagery.
+    * **Navigation:** Simplified menu: Home, Shop, Services, Gallery, Contact.
+
+---
+
+### **2. Technical Architecture & Database**
+
+We will leverage the Supabase structure defined in the reference, with minor modifications for physical goods inventory.
+
+#### **Database Schema (Supabase)**
+We will adapt the existing schema:
+
+1.  **`products` Table:**
+    * Reuse existing columns: `name`, `price`, `image_url`, `description`, `category_name`.
+    * **Modification:** Ensure `category_name` supports: "Brazilian Hair", "Wigs", "Electronics", "Sandals".
+    * **New Field Recommendation:** Add `variants` (JSONB) to handle hair lengths (12", 14", etc.) or shoe sizes, as the reference currently treats products as single units.
+2.  **`profiles` Table:**
+    * Reuse for Customer Login Area. Stores purchase history and delivery details.
+3.  **`orders` Table:**
+    * Reuse for tracking e-commerce purchases. Statuses: `pending`, `paid`, `shipped`, `delivered`.
+4.  **`testimonials` Table:**
+    * Reuse exactly for the "Testimonials Section" requirement.
+
+---
+
+### **3. Frontend Implementation (Client)**
+
+#### **Core Pages (Mapped to Requirements)**
+
+1.  **Home Page (`/`):**
+    * **Hero:** "Dreamhair Crowns" branding with Gold accents.
+    * **Featured Collections:** Grid showing "Brazilian Hair", "Electronic Accessories", "Galxboy/Steve Madden Sandals".
+    * **Newsletter Signup:** Add a static form component in the Footer or a dedicated section.
+
+2.  **Shop / E-commerce Area (`/shop` - adapted from `/menu`):**
+    * **Function:** Display products with filters for categories (Hair, Tools, Sandals).
+    * **Component:** Reuse `MenuSections` and `ProductCard`. Change "Add to Cart" logic to handle physical shipping addresses.
+    * **Cart:** Reuse the `CartContext` for state management.
+
+3.  **About Us (`/about`):**
+    * **Content:** Story of Dreamhair Crowns, focusing on quality and the "Crown" concept.
+    * **Component:** Adapt `CompanyDescription` and `OurVision` components.
+
+4.  **Services (`/services`):**
+    * **Content:** If you offer installation services, list them here. If not, this page can focus on "After-care services" or hair maintenance tips.
+
+5.  **Portfolio/Gallery (`/gallery`):**
+    * **Function:** Grid of client photos wearing the hair/sandals.
+    * **Component:** Reuse `ImageGallery` component. Connects to `products` or a new `gallery` table.
+
+6.  **Contact (`/contact`):**
+    * **Content:** Glenda Mahasha's details, phone (`0835887070`), email (`glendamahasha@icloud.com`).
+    * **Form:** Reuse `ContactForm`.
+
+7.  **Customer Login Area (`/login` & `/profile`):**
+    * **Function:** Users can view past orders and manage shipping addresses.
+    * **Component:** Reuse existing Auth and Profile structure.
+
+---
+
+### **4. Admin Dashboard Implementation**
+
+The client needs to "be able to purchase on their own," but you (the admin) need to manage the store. We will adapt the `admin` folder.
+
+* **Product Management:** Add/Edit/Delete wigs and sandals. Crucial for updating prices (Pricing Page requirement) and stock levels.
+* **Order Fulfillment:** View incoming orders, mark them as "Shipped" or "Ready for Collection".
+* **Gallery Management:** Upload images to the gallery via the Supabase storage bucket `pa-luxe-creation` (renamed to `dreamhair-crowns`).
+
+---
+
+### **5. Development Roadmap**
+
+1.  **Setup:**
+    * Clone the repository.
+    * Rename project from "PA Luxe Creation" to "DREAMHAIR CROWNS".
+    * Update `globals.css` to enforce the Black (`#000`) and Gold (`#D4AF37`) theme.
+
+2.  **Data Migration:**
+    * Run the Supabase migrations.
+    * Seed the database with Dreamhair categories: "Wigs", "Bundles", "Electronics", "Sandals" instead of food categories.
+
+3.  **Component Adaptation:**
+    * Refactor `ProductCard` to display "In Stock" instead of food-specific badges.
+    * Update `CartFooter` to calculate shipping costs if applicable.
+
+4.  **Content Population:**
+    * Upload logo (provided).
+    * Input "About Us" content and "Services" text.
+    * Add "Newsletter Signup" section to `Footer.tsx`.
+
+5.  **Deployment:**
+    * Deploy to Vercel (Client and Admin).
+    * Connect custom domain (once purchased).
+
+### **css**
+/*
+ * File: client/src/app/globals.css
+ * Theme: DREAMHAIR CROWNS (Black & Gold Minimalist)
+ */
+
+@import 'tailwindcss';
+
+@layer base {
+
+  /* Custom form element style */
+  select {
+    width: 100%;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border: 1px solid #333333; /* Darker border for dark theme */
+    border-radius: 0.375rem;
+    background-color: #000000;
+    color: white;
+    outline: none;
+  }
+
+  /* Typography Hierarchy & Custom Colors */
+  :root {
+    /* Dreamhair Gold Palette 
+       Replaces the previous Amber food-themed colors 
+    */
+    --theme-gold: #D4AF37;       /* Metallic Gold - Primary Accent */
+    --theme-gold-light: #F4CF57; /* Light Gold - Hover states/Highlights */
+    --theme-gold-dark: #AA8C2C;  /* Dark Gold - Borders/Shadows */
+    
+    --theme-black: #050505;      /* Deep Rich Black */
+    --theme-gray: #1a1a1a;       /* Off-black for cards/sections */
+  }
+
+  h1 {
+    @apply text-5xl md:text-6xl lg:text-7xl font-bold tracking-widest leading-tight;
+    font-variant-caps: small-caps;
+    color: white;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold tracking-widest leading-tight mb-8 relative inline-block;
+    font-variant-caps: small-caps;
+    color: white;
+  }
+
+  /* h2 Underline/Separator - Adjusted to Gold */
+  h2::after {
+    content: '';
+    @apply block w-1/3 h-1 bg-[var(--theme-gold)] mt-4 mx-auto rounded-full opacity-80;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl font-semibold tracking-tight text-white;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl font-semibold tracking-tight text-white;
+  }
+
+  h5 {
+    @apply text-lg md:text-xl font-medium tracking-tight text-white;
+  }
+
+  h6 {
+    @apply text-base md:text-lg font-medium tracking-wide uppercase text-white;
+  }
+
+  p {
+    @apply text-base md:text-lg font-normal leading-relaxed text-white/80;
+    text-wrap: pretty;
+  }
+
+  img {
+    object-fit: contain;
+  }
+
+  label {
+    color: var(--theme-gold); /* Gold labels for luxury feel */
+    line-height: 1.625;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* Media Queries for Typography */
+  @media (min-width: 768px) {
+    label {
+      font-size: 1rem;
+    }
+    p {
+      font-size: 1.125rem;
+    }
+    li {
+      font-size: 1.125rem;
+    }
+  }
+
+  li {
+    color: white;
+    line-height: 1.625;
+    font-size: 1rem;
+  }
+
+  /* Global Body Styles */
+  body {
+    @apply m-0 p-0 text-white h-full relative antialiased;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+    
+    /* Minimalist Background 
+       Removed the specific 'BackGround.png' to ensure a clean slate.
+       Using a deep black with a very subtle radial gradient for depth.
+    */
+    background-color: var(--theme-black);
+    background-image: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #000000 70%);
+    background-attachment: fixed;
+    color: white;
+  }
+
+  /* Card/Section Styling Updates */
+  article {
+    @apply bg-neutral-900/50 border border-white/10 rounded-md py-6 px-8 my-3 mt-6 mb-6 shadow-sm shadow-black backdrop-blur-sm;
+    transition: border-color 0.3s ease;
+  }
+
+  article:hover {
+    border-color: var(--theme-gold-dark);
+  }
+
+  nav {
+    @apply m-0 p-0 md:p-6;
+  }
+  
+  /* Utility for Gold Text Highlight */
+  .text-gold {
+    color: var(--theme-gold);
+  }
+  
+  .bg-gold {
+    background-color: var(--theme-gold);
+  }
+  
+  .border-gold {
+    border-color: var(--theme-gold);
+  }
+}
+
+additionalInfo
+""
+(string)
+
+
+brandColors
+"Black and gold"
+(string)
+
+
+brandWords
+""
+(string)
+
+
+budget
+"1500-2000"
+(string)
+
+
+businessDescription
+"Brazilian hair extensions Wig Electronic accessories such as hair tong, hot comb, straightener and hair dryer Galaxyboy sandals Steve Madden sandals "
+(string)
+
+
+businessName
+"DREAMHAIR CROWNS"
+(string)
+
+
+competitor1_dislikes
+""
+(string)
+
+
+competitor1_likes
+""
+(string)
+
+
+competitor1_name
+""
+(string)
+
+
+competitorAnalysis
+"Hair salons"
+(string)
+
+
+contactPerson
+"Glenda Mahasha "
+(string)
+
+
+contentProvider
+"client-some"
+(string)
+
+
+designStyle
+"minimalist"
+(string)
+
+
+designStyleOther
+""
+(string)
+
+
+domainStatus
+"no"
+(string)
+
+
+email
+"glendamahasha@icloud.com"
+(string)
+
+
+
+features
+(array)
+
+
+0
+"Customer Login Area"
+(string)
+
+
+1
+"E-commerce / Online Store"
+(string)
+
+
+2
+"Newsletter Signup"
+(string)
+
+
+3
+"Testimonials Section"
+(string)
+
+
+4
+"Photo Gallery"
+(string)
+
+
+hasLogo
+"yes"
+(string)
+
+
+likedWebsites
+"DenimSA- their website is not complicated you get what you’re looking for immediately after opening it. Silkyhairdragoncity- their website are well packed "
+(string)
+
+
+logoUpload
+""
+(string)
+
+
+maintenanceInterest
+"not-sure"
+(string)
+
+
+needsBlog
+"no"
+(string)
+
+
+phone
+"0835887070"
+(string)
+
+
+primaryGoal
+"Professional business, customer to be able to purchase on their own."
+(string)
+
+
+
+requiredPages
+(array)
+
+
+0
+"Home"
+(string)
+
+
+1
+"About Us"
+(string)
+
+
+2
+"Services"
+(string)
+
+
+3
+"Our Team"
+(string)
+
+
+4
+"Pricing"
+(string)
+
+
+5
+"Portfolio/Gallery"
+(string)
+
+
+6
+"Testimonials"
+(string)
+
+
+7
+"Contact"
+(string)
+
+
+successMetrics
+""
