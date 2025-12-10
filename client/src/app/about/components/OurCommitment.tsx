@@ -22,9 +22,9 @@ const OurCommitment: React.FC = () => {
 				<div className="w-full md:w-2/3 space-y-6">
 					<h3 className="text-2xl font-bold text-white font-small-caps tracking-wide">Excellence in Every Detail</h3>
 					<p className='text-white/80 leading-relaxed font-light text-lg'>
-						At PA Luxe Creation, we are committed to providing a premium experience in both our food service and event offerings.
-						We strive to be your convenient destination, delivering quality meals and luxurious interactions.
-						Our goal is to build community trust through innovation and exceptional service in Evander.
+						At Dreamhair Crowns, we are committed to providing a premium experience in every interaction.
+						We strive to be your trusted destination for luxury hair and fashion, delivering quality products that empower you to shine.
+						Our goal is to build community trust through consistency and exceptional service in Evander.
 					</p>
 				</div>
 			</div>

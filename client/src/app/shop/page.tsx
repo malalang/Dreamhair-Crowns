@@ -4,7 +4,7 @@ import Loading from '@/components/ui/Loading';
 // import PromotionsBanner from '@/app/shop/components/PromotionsBanner';
 import MenuSections from '@/app/shop/components/MenuSections';
 import Main from '@/components/ui/layout/Main';
-import { CgMenuCheese } from 'react-icons/cg';
+import { RiVipCrownFill } from 'react-icons/ri';
 import SearchBar from './components/SearchBar';
 import { createClient } from '@/lib/supabase/server';
 import { Database } from '@/lib/types/database.types';
@@ -28,6 +28,12 @@ export default async function HomePage({
 			.select('*')
 			.order('id', { ascending: true })
 	]);
+	// ... (skipping unchanged code for brevity in prompt, but tool needs exact context)
+	// Actually I'll just target the import and the component usage separately or include enough context.
+
+	// Wait, I can't skip lines in TargetContent. 
+	// I will do two separate replaces.
+
 
 	const { data: productsData, error: productsError } = productsResult;
 	const { data: categoriesData, error: categoriesError } = categoriesResult;
@@ -158,7 +164,7 @@ export default async function HomePage({
 			</Suspense>
 			<Main
 				tittle='Shop'
-				Icon={CgMenuCheese}
+				Icon={RiVipCrownFill}
 				heading='Crown Yourself in Luxury'>
 				<Suspense fallback={<Loading message='Loading Products...' />}>
 					<MenuSections

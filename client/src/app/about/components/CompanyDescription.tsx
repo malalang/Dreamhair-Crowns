@@ -17,11 +17,10 @@ const CompanyDescription: React.FC = () => {
 						<div className="w-12 h-12 rounded-full bg-amber-500/10 flex items-center justify-center mb-6 text-amber-500">
 							<VscSymbolStructure className="text-2xl" />
 						</div>
-						<h3 className="text-xl font-bold text-white mb-4 font-small-caps tracking-widest">Legal Structure</h3>
+						<h3 className="text-xl font-bold text-white mb-4 font-small-caps tracking-widest">Brand Identity</h3>
 						<p className="text-white/60 leading-relaxed font-light">
-							PA Luxe Creation PTY Ltd is registered as a Private Company (PTY). This structure
-							ensures limited liability protection, establishes the business
-							as a separate legal entity, and enhances our credibility seeking to foster long-term growth.
+							DREAMHAIR CROWNS is more than a beauty brand; it is a movement empowering women to embrace their inner royalty.
+							Registered as a premier beauty retailer, we operate with full transparency and commitment to consumer protection.
 						</p>
 					</div>
 				</div>
@@ -37,8 +36,8 @@ const CompanyDescription: React.FC = () => {
 						</div>
 						<h3 className="text-xl font-bold text-white mb-4 font-small-caps tracking-widest">Value Proposition</h3>
 						<p className="text-white/80 leading-relaxed font-light italic text-lg">
-							&ldquo;Delivering unbeatable pricing, premium service quality, and
-							cutting-edge convenience through culinary excellence and industrial engineering.&rdquo;
+							&ldquo;Delivering unmatched quality in hair extensions and curated fashion items,
+							ensuring every customer crowns themselves in luxury and confidence.&rdquo;
 						</p>
 					</div>
 				</div>

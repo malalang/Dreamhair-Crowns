@@ -4,13 +4,13 @@ import { IoFlag, IoRocketOutline } from 'react-icons/io5';
 
 const MilestonesAndVision: React.FC = () => {
 	const milestones = [
-		{ year: '2024', title: 'Inception', desc: 'PA Luxe Creation established, merging culinary art with event convenience.' },
-		{ year: '2025', title: 'Expansion', desc: 'Opened new flagship facility in Evander, introducing the luxury 360° Photo Booth lane.' },
+		{ year: '2024', title: 'Inception', desc: 'Dreamhair Crowns established by Glenda Mahasha, introducing premium hair solutions to Evander.' },
+		{ year: '2025', title: 'Expansion', desc: 'Launched full e-commerce platform and expanded product line to include designer footwear.' },
 	];
 
 	return (
 		<Section
-			heading='Our journey began with a vision to transform convenience in Evander. Here are some key moments and our aspirations for the future.'
+			heading='Our journey began with a vision to redefine beauty standards in Evander. Here are some key moments and our aspirations for the future.'
 			tittle='Milestones & Future Vision'>
 
 			<div className="flex flex-col md:flex-row gap-16 md:gap-24">
@@ -40,9 +40,9 @@ const MilestonesAndVision: React.FC = () => {
 						<IoRocketOutline className="text-4xl text-amber-500 mb-6" />
 						<h3 className="text-2xl font-bold text-white font-small-caps mb-4">Our Future Horizon</h3>
 						<p className='text-white/80 leading-relaxed font-light'>
-							Our vision is to become Evander&apos;s premier destination for these combined services,
-							driven by innovation, quality, and community trust. We aim to continuously innovate,
-							expand our offerings, and deepen our connection with the community we serve.
+							Our vision is to become South Africa&apos;s leading provider of luxury beauty essentials,
+							driven by innovation, quality, and style. We aim to continuously expand our curated collections,
+							ensuring every woman has access to the crown she deserves.
 						</p>
 					</div>
 				</div>

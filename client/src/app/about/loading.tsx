@@ -1,5 +1,5 @@
 import Loading from '@/components/ui/Loading';
 
 export default function LoadingPage() {
-	return <Loading message='Loading About PA Luxe Creation...' />;
+	return <Loading message='Loading About Dreamhair Crowns...' />;
 }

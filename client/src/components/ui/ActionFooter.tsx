@@ -30,7 +30,7 @@ const ActionFooter: React.FC<ActionFooterProps> = ({ itemId, table, commentsCoun
 
     const handleShare = () => {
         const shareData = {
-            title: 'PA Luxe Creation',
+            title: 'Dreamhair Crowns',
             text: 'Check this out!',
             url: window.location.href,
         };

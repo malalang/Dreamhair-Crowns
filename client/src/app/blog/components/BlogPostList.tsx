@@ -2,21 +2,21 @@ import React from 'react';
 
 const posts = [
 	{
-		title: 'The Secret to Our Famous Kota',
+		title: 'Maintenance 101: Caring for Your Virgin Hair',
 		date: 'July 24, 2025',
 		excerpt:
-			'Discover the fresh ingyellowients and secret spices that make our Kotas the talk of the town...',
+			'Learn the secrets to keeping your bundles silky, shiny, and tangle-free for months...',
 	},
 	{
-		title: '5 Tips for a Sparkling Clean Car',
+		title: 'Wig Installation Tips for Beginners',
 		date: 'July 20, 2025',
-		excerpt: 'Learn our top tips for maintaining a pristine car between professional washes...',
+		excerpt: 'Achieve a flawless melt with our step-by-step guide to installing your HD lace wig at home...',
 	},
 	{
-		title: 'Community Day at PA Luxe Creation',
+		title: 'The Dreamhair Community Event',
 		date: 'July 15, 2025',
 		excerpt:
-			'A look back at our recent community event, filled with good food and great company...',
+			'A look back at our recent pop-up, celebrating beauty, confidence, and the launch of our sandal line...',
 	},
 ];
 
