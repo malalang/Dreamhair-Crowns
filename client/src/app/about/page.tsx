@@ -10,7 +10,7 @@ import StrengthsAndOpportunities from './components/StrengthsAndOpportunities';
 import WeaknessesAndThreats from './components/WeaknessesAndThreats';
 import MilestonesAndVision from './components/MilestonesAndVision';
 import Main from '@/components/ui/layout/Main';
-import { IoFastFoodOutline } from 'react-icons/io5';
+import { RiVipCrownFill } from 'react-icons/ri';
 import Section from '@/components/ui/layout/Section';
 
 const AboutPage = () => {
@@ -18,7 +18,7 @@ const AboutPage = () => {
 
 		<Main
 			tittle='Our Story'
-			Icon={IoFastFoodOutline}
+			Icon={RiVipCrownFill}
 			className="space-y-32">
 
 			{/* Intro Section - Journey */}

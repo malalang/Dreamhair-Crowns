@@ -10,7 +10,7 @@ const OurJourney: React.FC = () => {
 					<div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
 						<Image
 							src='/PA_Logo.png'
-							alt='PA Luxe Creation Logo'
+							alt='Dreamhair Crowns Logo'
 							fill
 							className='object-contain bg-black p-8'
 						/>
@@ -18,15 +18,15 @@ const OurJourney: React.FC = () => {
 				</div>
 				<div className="media-body w-full md:w-2/3">
 					<h2 className="text-4xl md:text-5xl font-bold text-white mb-8 font-small-caps tracking-wide">
-						From Vision to <span className="text-amber-500">Reality</span>
+						From Vision to <span className="text-amber-500">Royalty</span>
 					</h2>
 					<p className='text-lg md:text-xl text-white/80 leading-relaxed font-light'>
-						<span className="text-6xl float-left mr-4 mt-[-1rem] text-amber-500 font-serif">P</span>
-						A Luxe Creation PTY Ltd was established in 2024 by Precious Nyathi, driven by a desire to elevate the standard of service in Evander.
-						Identifying a gap for modern, high-quality convenience, the concept of a dual-service establishment emerged—combining exquisite culinary experiences with premium care.
+						<span className="text-6xl float-left mr-4 mt-[-1rem] text-amber-500 font-serif">D</span>
+						reamhair Crowns was established by <span className="text-amber-500 font-medium">Glenda Mahasha</span>, driven by a simple yet powerful belief: your hair is the crown you never take off.
+						Identifying a need for premium, accessible luxury in South Africa, we curated a collection that empowers women to express their unique beauty.
 					</p>
 					<p className='text-lg md:text-xl text-white/80 leading-relaxed font-light mt-6'>
-						Our journey is fueled by a relentless commitment to excellence, community value, and the belief that everyday services should feel extraordinary.
+						Our journey is fueled by a relentless commitment to quality, elegance, and providing the confidence that comes with knowing you look your absolute best.
 					</p>
 				</div>
 			</div>

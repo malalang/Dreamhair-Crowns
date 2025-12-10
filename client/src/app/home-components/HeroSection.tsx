@@ -22,12 +22,12 @@ const HeroSection: React.FC = () => {
 				</div>
 
 				<h1 className="mb-6 text-5xl md:text-7xl lg:text-8xl font-bold tracking-widest text-white drop-shadow-sm font-small-caps">
-					Crown Yourself in <span className="text-[var(--theme-gold)]">Luxury</span>
+					Wear Your <span className="text-[var(--theme-gold)]">Crown.</span>
 				</h1>
 
 				<p className='mt-4 text-xl md:text-2xl text-white/80 font-light max-w-3xl leading-relaxed tracking-wide'>
-					Premium Brazilian hair, exclusive wigs, and electronic styling tools.
-					<span className="block mt-2 font-medium text-[var(--theme-gold)]">The ultimate beauty experience.</span>
+					Experience the finest Brazilian hair extensions, precision styling tools, and designer footwear curated for the modern queen.
+					<span className="block mt-2 font-medium text-[var(--theme-gold)]">Crown Yourself in Luxury.</span>
 				</p>
 
 				<div className='flex flex-col sm:flex-row w-full justify-center gap-6 mt-12'>

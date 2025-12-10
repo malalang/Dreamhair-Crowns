@@ -61,7 +61,7 @@ const Footer: React.FC = () => {
                         <ul className="space-y-6">
                             <li className="flex items-start gap-3 text-white/60">
                                 <HiLocationMarker className="text-amber-500 text-xl flex-shrink-0" />
-                                <span>Mpumalanga, South Africa</span>
+                                <span>Evander, Mpumalanga</span>
                             </li>
                             <li className="flex items-center gap-3 text-white/60">
                                 <HiPhone className="text-amber-500 text-xl flex-shrink-0" />
@@ -76,8 +76,8 @@ const Footer: React.FC = () => {
 
                     {/* Newsletter */}
                     <div>
-                        <h4 className="text-lg font-bold text-white mb-6 font-small-caps tracking-widest">Newsletter</h4>
-                        <p className="text-white/60 mb-4">Subscribe for exclusive offers and new arrivals.</p>
+                        <h4 className="text-lg font-bold text-white mb-6 font-small-caps tracking-widest">Join the Royal Court</h4>
+                        <p className="text-white/60 mb-4">Sign up for exclusive access to new wig drops, sandal arrivals, and VIP discounts.</p>
                         <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
                             <input
                                 type="email"

@@ -5,19 +5,19 @@ const KeyHighlights: React.FC = () => {
 	const highlights = [
 		{
 			id: 1,
-			text: 'Dual-Service Convenience: Enjoy a tasty meal while your car is being taken care of.',
+			text: 'Premium Quality: 100% Virgin Hair extensions and wigs sourced for longevity.',
 		},
-		{ id: 2, text: "Affordability: Quality food and Photo boot services that won't break the bank." },
+		{ id: 2, text: "Curated Style: Exclusive footwear and tools selected for the modern queen." },
 		{
 			id: 3,
-			text: "Community-Centric: We're dedicated to serving and supporting the Evander community.",
+			text: "Royal Service: We believe every customer deserves to feel like royalty.",
 		},
 	];
 
 	return (
 		<Section
 			Icon={IoSparklesOutline}
-			tittle='The PA Luxe Creation Difference'>
+			tittle='The Dreamhair Difference'>
 			<div className=' grid md:grid-cols-2 gap-8'>
 				{highlights.map((highlight) => (
 					<div
