@@ -18,6 +18,7 @@ const publicPaths = [
 	{ path: '/shop', icon: HiShoppingBag, label: 'Shop' },
 	{ path: '/services', icon: HiBriefcase, label: 'Services' },
 	{ path: '/gallery', icon: HiPhoto, label: 'Gallery' },
+	{ path: '/about', icon: HiInformationCircle, label: 'About' },
 	{ path: '/contact', icon: HiEnvelope, label: 'Contact' },
 ];
 

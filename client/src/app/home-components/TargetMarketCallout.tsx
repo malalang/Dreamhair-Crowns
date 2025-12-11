@@ -12,26 +12,26 @@ const TargetMarketCallout: React.FC = () => {
 	const targetMarkets = [
 		{
 			id: 1,
-			title: 'Local Residents',
-			text: 'Families, students, and neighbours seeking a premium yet accessible spot for dining and memories.',
+			title: 'Beauty Enthusiasts',
+			text: 'Women who appreciate high-quality hair and want to invest in their confidence.',
 			icon: IoHomeOutline,
 		},
 		{
 			id: 2,
-			title: 'Professionals',
-			text: 'Efficient, high-quality service for government officials and corporate teams on the go.',
+			title: 'Professional Stylists',
+			text: 'Salon owners and stylists seeking premium bundles and tools for their clients.',
 			icon: IoBriefcaseOutline,
 		},
 		{
 			id: 3,
-			title: 'Travellers',
-			text: 'A refreshing sanctuary for those passing through Evander, offering rest and rejuvenation.',
+			title: 'Trendsetters',
+			text: 'Fashion-forward individuals looking for the latest styles in wigs and footwear.',
 			icon: IoCarSportOutline,
 		},
 		{
 			id: 4,
-			title: 'Local Business',
-			text: 'Strategic partnerships for corporate catering and exclusive event hosting.',
+			title: 'Global Queens',
+			text: 'International customers seeking reliable, luxury products shipped worldwide.',
 			icon: IoBusinessOutline,
 		},
 	];

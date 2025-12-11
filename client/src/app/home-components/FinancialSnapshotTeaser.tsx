@@ -7,12 +7,12 @@ const FinancialSnapshotTeaser: React.FC = () => {
 		<Section
 			Icon={IoTrendingUpOutline}
 			tittle='Building a Sustainable Future'
-			heading="Since our inception, we've seen promising traction and are on a solid path toward sustainable growth. Our commitment to quality and convenience continues to drive our success.">
+			heading="Since our inception, we've seen promising traction and are on a solid path toward sustainable growth. Our commitment to quality and elegance continues to drive our success.">
 			<div className='mt-6'>
 				<Link
 					variant='button'
-					href='/about#financials'>
-					View Our Financial Snapshot...
+					href='/about'>
+					Discover Our Story...
 				</Link>
 			</div>
 		</Section>

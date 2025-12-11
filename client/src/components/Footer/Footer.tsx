@@ -25,11 +25,11 @@ const Footer: React.FC = () => {
                                 />
                             </div>
                             <span className="text-2xl font-bold text-white tracking-widest font-small-caps">
-                                PA <span className="text-amber-500">Luxe</span>
+                                DREAMHAIR <span className="text-amber-500">CROWNS</span>
                             </span>
                         </div>
                         <p className="text-white/60 leading-relaxed">
-                            Elevating dining and event experiences in Evander. From exquisite culinary creations to immersive 360° photo memories.
+                            Your premier destination for luxury hair extensions, wigs, and fashion accessories. Crown yourself in quality and style.
                         </p>
                         <div className="flex gap-4">
                             {[FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn].map((Icon, i) => (

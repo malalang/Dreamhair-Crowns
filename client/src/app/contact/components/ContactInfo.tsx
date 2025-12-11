@@ -10,19 +10,19 @@ const ContactInfo: React.FC = () => {
 
 					<IoLocationSharp className='text-white w-10 h-10  ' />
 					<p>
-						<strong>Address:</strong> 123 Main Street, Phalaborwa, 1390
+						<strong>Location:</strong> Evander, Mpumalanga, South Africa
 					</p>
 				</article>
 				<article className='flex items-center  gap-2 p-2'>
 					<IoCall className='text-white w-10 h-10  ' />
 					<p>
-						<strong>Phone Number:</strong> (+27) 15 781 1234
+						<strong>Phone Number:</strong> 083 588 7070
 					</p>
 				</article>
 				<article className='flex items-center  gap-2 p-2'>
 					<IoMail className='text-white w-10 h-10  ' />
 					<p>
-						<strong>Email Address:</strong> contact@centraleatery.co.za
+						<strong>Email Address:</strong> glendamahasha@icloud.com
 					</p>
 				</article>
 			</div>

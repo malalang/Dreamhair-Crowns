@@ -10,7 +10,7 @@ const ContactSection: React.FC = () => {
 			<ContactInfo />
 			<Section
 				Icon={IoChatbubblesOutline}
-				tittle='Visit Us Today!'>
+				tittle='Get in Touch'>
 				<div className='mt-8'>
 					<MapEmbed />
 				</div>
