@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
                         <div className="flex items-center gap-3">
                             <div className="relative w-12 h-12">
                                 <Image
-                                    src='/PA_Logo.png'
+                                    src='/Logo.jpg'
                                     alt='PA Catering Logo'
                                     fill
                                     className='object-contain'

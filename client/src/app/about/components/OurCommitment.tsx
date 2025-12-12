@@ -14,7 +14,7 @@ const OurCommitment: React.FC = () => {
 						<Image
 							alt='PA Logo'
 							fill
-							src='/PA_Logo.png'
+							src='/Logo.jpg'
 							className="object-contain"
 						/>
 					</div>

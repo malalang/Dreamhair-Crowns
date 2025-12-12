@@ -8,7 +8,7 @@ const Loading = ({ message = 'Loading...' }: { message?: string }) => (
 		<Section className='flex flex-col items-center text-center max-w-md'>
 			<div className='mt-8 animate-pulse'>
 				<Image
-					src='/PA_Logo.png'
+					src='/Logo.jpg'
 					alt='Dreamhair Crowns Logo'
 					width={220}
 					height={220}

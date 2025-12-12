@@ -7930,7 +7930,7 @@ const OurCommitment: React.FC = () => {
 						<Image
 							alt='PA Logo'
 							fill
-							src='/PA_Logo.png'
+							src='/Logo.jpg'
 							className="object-contain"
 						/>
 					</div>
@@ -7963,7 +7963,7 @@ const OurJourney: React.FC = () => {
 					<div className="absolute inset-0 bg-amber-500/20 blur-2xl transform group-hover:scale-110 transition-transform duration-700"></div>
 					<div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
 						<Image
-							src='/PA_Logo.png'
+							src='/Logo.jpg'
 							alt='PA Luxe Creation Logo'
 							fill
 							className='object-contain bg-black p-8'
@@ -9107,7 +9107,7 @@ const HeroSection: React.FC = () => {
 				<div className="mb-8 p-6 bg-black/40 backdrop-blur-xl rounded-full border border-white/10 shadow-[0_0_50px_-12px_rgba(212,175,55,0.2)]">
 					{/* Placeholder for Logo */}
 					<Image
-						src='/PA_Logo.png'
+						src='/Logo.jpg'
 						alt='Dreamhair Crowns Logo'
 						width={200}
 						height={200}
@@ -9405,7 +9405,7 @@ export const metadata: Metadata = {
 		siteName: 'DREAMHAIR CROWNS',
 		images: [
 			{
-				url: '/PA_Logo.png', // We need to update this later when we have a logo
+				url: '/Logo.jpg', // We need to update this later when we have a logo
 				width: 800,
 				height: 600,
 			},
@@ -12195,7 +12195,7 @@ const Footer: React.FC = () => {
                         <div className="flex items-center gap-3">
                             <div className="relative w-12 h-12">
                                 <Image
-                                    src='/PA_Logo.png'
+                                    src='/Logo.jpg'
                                     alt='PA Catering Logo'
                                     fill
                                     className='object-contain'
@@ -12354,7 +12354,7 @@ const DesktopNavbar: React.FC = () => {
 			<AppLink href='/' className='shrink-0'>
 				{/* Placeholder logo until we have the real file, or text fallback */}
 				<Image
-					src='/PA_Logo.png'
+					src='/Logo.jpg'
 					alt='Dreamhair Crowns Logo'
 					width={64}
 					height={64}
@@ -13319,7 +13319,7 @@ const Loading = ({ message = 'Loading...' }: { message?: string }) => (
 		<Section className='flex flex-col items-center text-center max-w-md'>
 			<div className='mt-8 animate-pulse'>
 				<Image
-					src='/PA_Logo.png'
+					src='/Logo.jpg'
 					alt='PA Luxe Creation Logo'
 					width={220}
 					height={220}
@@ -16657,7 +16657,7 @@ admin/public/Menus/mexicanChilli.png
 admin/public/Menus/petter.png
 admin/public/Menus/Pineapply.png
 admin/public/next.svg
-admin/public/PA_Logo.png
+admin/public/Logo.jpg
 admin/public/vercel.svg
 admin/public/window.svg
 admin/README.md
@@ -16780,7 +16780,7 @@ client/public/Menus/petter.png
 client/public/Menus/Pineapply - Copy.png
 client/public/Menus/Pineapply.png
 client/public/next.svg
-client/public/PA_Logo.png
+client/public/Logo.jpg
 client/public/PhotoBoot.jpg
 client/public/robots.txt
 client/public/users/Abram.jpg
@@ -17927,7 +17927,7 @@ const Footer: React.FC = () => {
                         <div className="flex items-center gap-3">
                             <div className="relative w-12 h-12">
                                 <Image
-                                    src='/PA_Logo.png'
+                                    src='/Logo.jpg'
                                     alt='PA Catering Logo'
                                     fill
                                     className='object-contain'
@@ -24059,7 +24059,7 @@ const OurCommitment: React.FC = () => {
 						<Image
 							alt='PA Logo'
 							fill
-							src='/PA_Logo.png'
+							src='/Logo.jpg'
 							className="object-contain"
 						/>
 					</div>
@@ -24092,7 +24092,7 @@ const OurJourney: React.FC = () => {
 					<div className="absolute inset-0 bg-amber-500/20 blur-2xl transform group-hover:scale-110 transition-transform duration-700"></div>
 					<div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
 						<Image
-							src='/PA_Logo.png'
+							src='/Logo.jpg'
 							alt='PA Luxe Creation Logo'
 							fill
 							className='object-contain bg-black p-8'
@@ -25144,7 +25144,7 @@ const Loading = ({ message = 'Loading...' }: { message?: string }) => (
 		<Section className='flex flex-col items-center text-center max-w-md'>
 			<div className='mt-8 animate-pulse'>
 				<Image
-					src='/PA_Logo.png'
+					src='/Logo.jpg'
 					alt='PA Luxe Creation Logo'
 					width={220}
 					height={220}
@@ -26895,7 +26895,7 @@ const HeroSection: React.FC = () => {
 			<div className="relative z-10 flex flex-col items-center max-w-5xl mx-auto px-4 animate-in fade-in zoom-in duration-1000">
 				<div className="mb-8 p-6 bg-black/40 backdrop-blur-xl rounded-full border border-amber-500/20 shadow-[0_0_50px_-12px_rgba(245,158,11,0.3)]">
 					<Image
-						src='/PA_Logo.png'
+						src='/Logo.jpg'
 						alt='PA Luxe Creation Logo'
 						width={180}
 						height={180}
@@ -30308,7 +30308,7 @@ export const metadata: Metadata = {
 		siteName: 'PA Catering',
 		images: [
 			{
-				url: '/PA_Logo.png',
+				url: '/Logo.jpg',
 				width: 800,
 				height: 600,
 			},
@@ -32377,7 +32377,7 @@ const DesktopNavbar: React.FC = () => {
 		<nav className='hidden md:flex gap-4 justify-between items-center p-0 m-0 w-full'>
 			<AppLink href='/' className='shrink-0'>
 				<Image
-					src='/PA_Logo.png'
+					src='/Logo.jpg'
 					alt='PA Catering Logo'
 					width={64}
 					height={64}

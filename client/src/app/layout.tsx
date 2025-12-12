@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 		siteName: 'DREAMHAIR CROWNS',
 		images: [
 			{
-				url: '/PA_Logo.png', // We need to update this later when we have a logo
+				url: '/Logo.jpg', // We need to update this later when we have a logo
 				width: 800,
 				height: 600,
 			},

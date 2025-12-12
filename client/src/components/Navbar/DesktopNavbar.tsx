@@ -34,7 +34,7 @@ const DesktopNavbar: React.FC = () => {
 			<AppLink href='/' className='shrink-0'>
 				{/* Placeholder logo until we have the real file, or text fallback */}
 				<Image
-					src='/PA_Logo.png'
+					src='/Logo.jpg'
 					alt='Dreamhair Crowns Logo'
 					width={64}
 					height={64}

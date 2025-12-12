@@ -9,7 +9,7 @@ const OurJourney: React.FC = () => {
 					<div className="absolute inset-0 bg-amber-500/20 blur-2xl transform group-hover:scale-110 transition-transform duration-700"></div>
 					<div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
 						<Image
-							src='/PA_Logo.png'
+							src='/Logo.jpg'
 							alt='Dreamhair Crowns Logo'
 							fill
 							className='object-contain bg-black p-8'
