@@ -61,7 +61,7 @@ const Footer: React.FC = () => {
                         <ul className="space-y-6">
                             <li className="flex items-start gap-3 text-white/60">
                                 <HiLocationMarker className="text-amber-500 text-xl flex-shrink-0" />
-                                <span>Evander, Mpumalanga</span>
+                                <span>03 Aloe Crescent, Marlboro Gardens, Alexandra (Online Store SA)</span>
                             </li>
                             <li className="flex items-center gap-3 text-white/60">
                                 <HiPhone className="text-amber-500 text-xl flex-shrink-0" />

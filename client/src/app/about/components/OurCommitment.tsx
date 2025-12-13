@@ -24,7 +24,7 @@ const OurCommitment: React.FC = () => {
 					<p className='text-white/80 leading-relaxed font-light text-lg'>
 						At Dreamhair Crowns, we are committed to providing a premium experience in every interaction.
 						We strive to be your trusted destination for luxury hair and fashion, delivering quality products that empower you to shine.
-						Our goal is to build community trust through consistency and exceptional service in Evander.
+						Our goal is to build community trust through consistency and exceptional service across South Africa.
 					</p>
 				</div>
 			</div>

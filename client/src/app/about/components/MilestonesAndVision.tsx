@@ -4,13 +4,13 @@ import { IoFlag, IoRocketOutline } from 'react-icons/io5';
 
 const MilestonesAndVision: React.FC = () => {
 	const milestones = [
-		{ year: '2024', title: 'Inception', desc: 'Dreamhair Crowns established by Glenda Mahasha, introducing premium hair solutions to Evander.' },
+		{ year: '2024', title: 'Inception', desc: 'Dreamhair Crowns established by Glenda Mahasha, introducing premium hair solutions to South Africa.' },
 		{ year: '2025', title: 'Expansion', desc: 'Launched full e-commerce platform and expanded product line to include designer footwear.' },
 	];
 
 	return (
 		<Section
-			heading='Our journey began with a vision to redefine beauty standards in Evander. Here are some key moments and our aspirations for the future.'
+			heading='Our journey began with a vision to redefine beauty standards online. Here are some key moments and our aspirations for the future.'
 			tittle='Milestones & Future Vision'>
 
 			<div className="flex flex-col md:flex-row gap-16 md:gap-24">

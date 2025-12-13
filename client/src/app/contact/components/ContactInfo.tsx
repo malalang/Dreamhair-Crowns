@@ -10,7 +10,7 @@ const ContactInfo: React.FC = () => {
 
 					<IoLocationSharp className='text-white w-10 h-10  ' />
 					<p>
-						<strong>Location:</strong> Evander, Mpumalanga, South Africa
+						<strong>Location:</strong> 03 Aloe Crescent, Marlboro Gardens, Alexandra (Online Store SA)
 					</p>
 				</article>
 				<article className='flex items-center  gap-2 p-2'>

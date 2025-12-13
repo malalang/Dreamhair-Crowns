@@ -41,7 +41,7 @@ const TargetMarketCallout: React.FC = () => {
 			Icon={BiBullseye}
 			tittle='Who We Serve'
 			id='target-market'
-			heading='Curated experiences for the diverse tapestry of the Evander community.'>
+			heading='Curated experiences for the diverse tapestry of our beauty community.'>
 			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
 				{targetMarkets.map((market) => (
 					<article
