@@ -12,7 +12,7 @@ const HeroSection: React.FC = () => {
 				<div className="mb-8 p-6 bg-black/40 backdrop-blur-xl rounded-full border border-white/10 shadow-[0_0_50px_-12px_rgba(212,175,55,0.2)]">
 					{/* Placeholder for Logo */}
 					<Image
-						src='/Logo.jpg'
+						src='/Logo.png'
 						alt='Dreamhair Crowns Logo'
 						width={200}
 						height={200}
