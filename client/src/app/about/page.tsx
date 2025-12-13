@@ -6,8 +6,6 @@ import OurVision from './components/OurVision';
 import KeyLeadership from './components/KeyLeadership';
 import CompanyDescription from './components/CompanyDescription';
 import KeyHighlights from './components/KeyHighlights';
-import StrengthsAndOpportunities from './components/StrengthsAndOpportunities';
-import WeaknessesAndThreats from './components/WeaknessesAndThreats';
 import MilestonesAndVision from './components/MilestonesAndVision';
 import Main from '@/components/ui/layout/Main';
 import { RiVipCrownFill } from 'react-icons/ri';
@@ -42,13 +40,7 @@ const AboutPage = () => {
 				</div>
 			</div>
 
-			{/* SWOT Analysis Section */}
-			<Section tittle="Strategic Overview" className="bg-white/5 border border-white/5 rounded-3xl p-8 md:p-12">
-				<div className="grid md:grid-cols-2 gap-12">
-					<StrengthsAndOpportunities />
-					<WeaknessesAndThreats />
-				</div>
-			</Section>
+
 
 			{/* Highlights & Leadership */}
 			<div className="space-y-24">
