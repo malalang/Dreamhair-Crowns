@@ -6,7 +6,7 @@ import Loading from '@/components/ui/Loading';
 
 import Button from '@/components/ui/Button';
 import TextInput from '@/components/ui/TextInput';
-import AppLink from '@/components/ui/Link';
+import Link from 'next/link';
 import Section from '@/components/ui/layout/Section';
 
 export default function LoginForm() {
@@ -47,8 +47,8 @@ export default function LoginForm() {
                     Sign In
                 </Button>
             </form>
-            <p className='mt-6 text-white/70'>
-                Don&apos;t have an account? <AppLink href='/register'>Sign Up</AppLink>
+            <p className='mt-6 text-white/70 text-center'>
+                Don&apos;t have an account? <Link href='/register' className="text-amber-500 hover:text-amber-400 font-bold transition-colors duration-200">Sign Up</Link>
             </p>
         </Section>
     );
