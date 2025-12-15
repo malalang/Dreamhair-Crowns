@@ -12,8 +12,8 @@ export const NAV_ITEMS: NavItem[] = [
     icon: "HiOutlineChartBar",
   },
   {
-    label: "Menu",
-    href: "/menu",
+    label: "Products",
+    href: "/Products",
     icon: "PiBowlFoodBold",
   },
   {
@@ -31,11 +31,6 @@ export const NAV_ITEMS: NavItem[] = [
     label: "Profiles",
     href: "/profiles",
     icon: "HiOutlineUsers",
-  },
-  {
-    label: "Photo Bookings",
-    href: "/photo-bookings",
-    icon: "HiOutlineCamera",
   },
   {
     label: "Testimonials",

@@ -28,10 +28,10 @@ export const AdminSidebar = () => {
           </button>
 
           <div className="text-center">
-            <div className="text-xs uppercase tracking-[0.3em] text-indigo-400">
-              PA Catering
+            <div className="text-xs uppercase tracking-[0.3em] text-[var(--theme-gold)]">
+              DREAMHAIR
             </div>
-            <p className="text-sm font-semibold text-white">Admin</p>
+            <p className="text-sm font-semibold text-white">CROWNS Admin</p>
           </div>
 
           <div className="w-10" /> {/* Spacer for centering */}
@@ -56,10 +56,10 @@ export const AdminSidebar = () => {
           className="mb-10 block"
           onClick={() => setMobileMenuOpen(false)}
         >
-          <div className="text-xs uppercase tracking-[0.4em] text-indigo-400">
-            PA Catering
+          <div className="text-xs uppercase tracking-[0.4em] text-[var(--theme-gold)]">
+            DREAMHAIR
           </div>
-          <p className="text-xl font-semibold text-white">Admin Console</p>
+          <p className="text-xl font-semibold text-white">Crowns Admin</p>
         </Link>
 
         <div onClick={() => setMobileMenuOpen(false)}>
@@ -69,9 +69,9 @@ export const AdminSidebar = () => {
         <div className="mt-auto rounded-xl border border-white/10 bg-yellow-900/80 p-4 text-sm text-yellow-300">
           <p className="font-semibold text-white">Daily Ops Checklist</p>
           <ul className="mt-2 space-y-1 text-xs text-yellow-400">
-            <li>• Confirm menu availability</li>
-            <li>• Assign pending orders</li>
-            <li>• Update stock counts</li>
+            <li>• Check new orders</li>
+            <li>• Update stock levels</li>
+            <li>• Review customer messages</li>
           </ul>
         </div>
       </aside>

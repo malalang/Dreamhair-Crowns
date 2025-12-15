@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PA Catering Admin",
-  description: "Operations console for menu, orders, and logistics",
+  title: "Dreamhair Crowns Admin",
+  description: "Operations console for products, orders, and logistics",
 };
 
 export default function RootLayout({

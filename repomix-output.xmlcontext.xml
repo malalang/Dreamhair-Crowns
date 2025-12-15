@@ -6914,7 +6914,7 @@ export type SupabaseServerClient = Awaited<
 <file path="admin/src/lib/supabase/storage.ts">
 import { createSupabaseBrowserClient } from "./client";
 
-export const STORAGE_BUCKET = "pa-luxe-creation";
+export const STORAGE_BUCKET = "dreamhair_crowns";
 
 export const uploadImage = async (file: File, path: string) => {
     const supabase = createSupabaseBrowserClient();
@@ -13372,7 +13372,7 @@ export const getProductById = async (id: string) => {
 <file path="client/src/lib/supabase/storage.ts">
 import { createClient } from "./client";
 
-export const STORAGE_BUCKET = "pa-luxe-creation";
+export const STORAGE_BUCKET = "dreamhair_crowns";
 
 export const uploadImage = async (file: File, path: string) => {
     const supabase = createClient();

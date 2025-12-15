@@ -1,6 +1,6 @@
 import { createSupabaseBrowserClient } from "./client";
 
-export const STORAGE_BUCKET = "pa-luxe-creation";
+export const STORAGE_BUCKET = "dreamhair_crowns";
 
 export const uploadImage = async (file: File, path: string) => {
     const supabase = createSupabaseBrowserClient();

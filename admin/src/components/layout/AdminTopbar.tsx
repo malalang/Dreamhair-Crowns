@@ -11,8 +11,8 @@ type Props = {
 export const AdminTopbar = ({ profile }: Props) => (
   <header className="flex flex-col gap-4 border-b border-white/5 bg-yellow-950/60 px-4 py-4 backdrop-blur">
     <div>
-      <p className="text-sm uppercase tracking-[0.35em] text-indigo-300">
-        Operations
+      <p className="text-sm uppercase tracking-[0.35em] text-[var(--theme-gold)]">
+        Dreamhair Admin
       </p>
       <h1 className="text-xl font-semibold text-white">
         Welcome back, {profile.display_name ?? "Admin"}

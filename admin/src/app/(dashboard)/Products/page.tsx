@@ -1,6 +1,6 @@
-import { AddProductPanel } from "@/components/menu/products/AddProductPanel";
-import { ProductBoard } from "@/components/menu/products/ProductBoard";
-import { CategoriesBoard } from "@/components/menu/CategoriesBoard";
+import { AddProductPanel } from "@/components/Products/products/AddProductPanel";
+import { ProductBoard } from "@/components/Products/products/ProductBoard";
+import { CategoriesBoard } from "@/components/Products/CategoriesBoard";
 import { fetchProductCatalog } from "@/lib/data/products";
 import { fetchCategories } from "@/lib/data/categories";
 import { fetchComments } from "@/lib/data/comments";

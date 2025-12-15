@@ -1,6 +1,6 @@
 import { notFound, redirect } from "next/navigation";
 import { DashboardShell } from "@/components/layout/DashboardShell";
-import { ProductEditForm } from "@/components/menu/products/ProductEditForm";
+import { ProductEditForm } from "@/components/Products/products/ProductEditForm";
 import { fetchProductCatalog } from "@/lib/data/products";
 
 type Props = {
