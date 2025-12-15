@@ -48,7 +48,7 @@ export default function LoginForm() {
                 </Button>
             </form>
             <p className='mt-6 text-white/70 text-center'>
-                Don&apos;t have an account? <Link href='/register' className="text-amber-500 hover:text-amber-400 font-bold transition-colors duration-200">Sign Up</Link>
+                Don&apos;t have an account? <Link  href='/register' className="text-amber-500 hover:text-amber-400 font-bold transition-colors duration-200">Sign Up</Link>
             </p>
         </Section>
     );

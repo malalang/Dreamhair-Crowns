@@ -145,6 +145,8 @@ client/package.json
 client/postcss.config.mjs
 client/public/file.svg
 client/public/globe.svg
+client/public/Logo.jpg
+client/public/Logo.png
 client/public/next.svg
 client/public/robots.txt
 client/public/vercel.svg
@@ -163,8 +165,6 @@ client/src/app/about/components/MilestonesAndVision.tsx
 client/src/app/about/components/OurCommitment.tsx
 client/src/app/about/components/OurJourney.tsx
 client/src/app/about/components/OurVision.tsx
-client/src/app/about/components/StrengthsAndOpportunities.tsx
-client/src/app/about/components/WeaknessesAndThreats.tsx
 client/src/app/about/components/WhatMakesUsSpecial.tsx
 client/src/app/about/loading.tsx
 client/src/app/about/page.tsx
@@ -400,39 +400,6 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-</file>
-
-<file path="admin/package.json">
-{
-  "name": "admin",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "biome check",
-    "format": "biome format --write"
-  },
-  "dependencies": {
-    "@supabase/ssr": "^0.7.0",
-    "@supabase/supabase-js": "^2.81.1",
-    "date-fns": "^4.1.0",
-    "next": "16.0.7",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
-    "react-icons": "^5.5.0"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "2.2.0",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "tailwindcss": "^4",
-    "typescript": "^5"
-  }
-}
 </file>
 
 <file path="admin/postcss.config.mjs">
@@ -7429,50 +7396,6 @@ const nextConfig: NextConfig = {
 module.exports = nextConfig;
 </file>
 
-<file path="client/package.json">
-{
-  "name": "client",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "analyze": "cross-env ANALYZE=true next build",
-    "start": "next start",
-    "lint": "biome check",
-    "format": "biome format --write"
-  },
-  "dependencies": {
-    "@radix-ui/react-slot": "^1.2.4",
-    "@supabase/auth-helpers-nextjs": "^0.10.0",
-    "@supabase/ssr": "^0.7.0",
-    "@supabase/supabase-js": "^2.81.1",
-    "@vercel/analytics": "^1.5.0",
-    "class-variance-authority": "^0.7.1",
-    "classnames": "^2.5.1",
-    "clsx": "^2.1.1",
-    "next": "16.0.7",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
-    "react-hook-form": "^7.66.0",
-    "react-icons": "^5.5.0",
-    "tw-animate-css": "^1.4.0",
-    "tailwind-merge": "^3.4.0"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "2.2.0",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "babel-plugin-react-compiler": "1.0.0",
-    "cross-env": "^7.0.3",
-    "tailwindcss": "^4",
-    "typescript": "^5"
-  }
-}
-</file>
-
 <file path="client/postcss.config.mjs">
 const config = {
   plugins: {
@@ -7641,410 +7564,6 @@ const RegisterPage = () => {
 export default RegisterPage;
 </file>
 
-<file path="client/src/app/about/components/CompanyDescription.tsx">
-import React from 'react';
-import { IoBusinessSharp } from 'react-icons/io5';
-import { VscSymbolStructure } from 'react-icons/vsc';
-import { RxValue } from 'react-icons/rx';
-import Section from '@/components/ui/layout/Section';
-
-const CompanyDescription: React.FC = () => {
-	return (
-		<Section tittle='Corporate Profile' Icon={IoBusinessSharp}>
-			<div className="grid md:grid-cols-2 gap-8">
-				{/* Legal Structure Card */}
-				<div className="group p-8 rounded-3xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 transition-all duration-500 relative overflow-hidden">
-					<div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
-						<VscSymbolStructure className="text-8xl text-white" />
-					</div>
-					<div className="relative z-10">
-						<div className="w-12 h-12 rounded-full bg-amber-500/10 flex items-center justify-center mb-6 text-amber-500">
-							<VscSymbolStructure className="text-2xl" />
-						</div>
-						<h3 className="text-xl font-bold text-white mb-4 font-small-caps tracking-widest">Brand Identity</h3>
-						<p className="text-white/60 leading-relaxed font-light">
-							DREAMHAIR CROWNS is more than a beauty brand; it is a movement empowering women to embrace their inner royalty.
-							Registered as a premier beauty retailer, we operate with full transparency and commitment to consumer protection.
-						</p>
-					</div>
-				</div>
-
-				{/* Value Prop Card */}
-				<div className="group p-8 rounded-3xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 transition-all duration-500 relative overflow-hidden">
-					<div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
-						<RxValue className="text-8xl text-white" />
-					</div>
-					<div className="relative z-10">
-						<div className="w-12 h-12 rounded-full bg-amber-500/10 flex items-center justify-center mb-6 text-amber-500">
-							<RxValue className="text-2xl" />
-						</div>
-						<h3 className="text-xl font-bold text-white mb-4 font-small-caps tracking-widest">Value Proposition</h3>
-						<p className="text-white/80 leading-relaxed font-light italic text-lg">
-							&ldquo;Delivering unmatched quality in hair extensions and curated fashion items,
-							ensuring every customer crowns themselves in luxury and confidence.&rdquo;
-						</p>
-					</div>
-				</div>
-			</div>
-		</Section>
-	);
-};
-
-export default CompanyDescription;
-</file>
-
-<file path="client/src/app/about/components/CoreValues.tsx">
-import { IoBulbOutline, IoShieldCheckmarkOutline, IoPeopleOutline } from 'react-icons/io5';
-import Icon from '@/components/ui/Icon';
-import Section from '@/components/ui/layout/Section';
-
-const CoreValues: React.FC = () => {
-	return (
-		<Section tittle='Our Core Values' Icon={IoBulbOutline}>
-			<div className='mt-12 grid grid-cols-1 md:grid-cols-3 gap-8'>
-				{[
-					{ icon: IoBulbOutline, title: 'Innovation', desc: "We constantly seek new ways to elevate our culinary and event experiences." },
-					{ icon: IoShieldCheckmarkOutline, title: 'Quality', desc: "Uncompromising commitment to premium ingredients and exceptional service." },
-					{ icon: IoPeopleOutline, title: 'Community', desc: "Building strong relationships and contributing positively to the Evander community." },
-				].map((item, idx) => (
-					<article key={idx} className="group p-8 rounded-3xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 hover:bg-white/5 transition-all duration-500 flex flex-col items-center text-center">
-						<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-600/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-							<item.icon className="text-3xl text-amber-500" />
-						</div>
-						<h3 className="text-xl font-bold text-white mb-4 font-small-caps tracking-widest">{item.title}</h3>
-						<p className="text-white/60 leading-relaxed font-light">{item.desc}</p>
-					</article>
-				))}
-			</div>
-		</Section>
-	);
-};
-
-export default CoreValues;
-</file>
-
-<file path="client/src/app/about/components/KeyHighlights.tsx">
-// components/KeyHighlights.tsx
-import React from 'react';
-import { IoBusiness, IoPricetag, IoCalendar } from 'react-icons/io5';
-import Icon from '@/components/ui/Icon';
-import Section from '@/components/ui/layout/Section';
-
-const KeyHighlights = () => {
-	return (
-		<Section tittle='Why Choose Us' Icon={IoBusiness}>
-			<div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
-				{/* Highlight 1: Unique Combination of Services */}
-				<article className="p-8 rounded-3xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 transition-all duration-500">
-					<div className="flex items-center gap-4 mb-6">
-						<div className="p-3 rounded-full bg-amber-500/10 text-amber-500">
-							<IoBusiness className="text-2xl" />
-						</div>
-						<h3 className="text-lg font-bold text-white font-small-caps tracking-wide">Dual-Service Excellence</h3>
-					</div>
-					<p className='text-white/60 leading-relaxed font-light'>
-						PA Luxe Creation is a unique destination combining a <span className="text-white font-medium">premium eatery</span> with a <span className="text-white font-medium">360° Photo Booth</span> experience.
-					</p>
-				</article>
-
-				{/* Highlight 2: Competitive Photo boot Pricing */}
-				<article className="p-8 rounded-3xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 transition-all duration-500">
-					<div className="flex items-center gap-4 mb-6">
-						<div className="p-3 rounded-full bg-amber-500/10 text-amber-500">
-							<IoPricetag className="text-2xl" />
-						</div>
-						<h3 className="text-lg font-bold text-white font-small-caps tracking-wide">Competitive Value</h3>
-					</div>
-					<p className='text-white/60 leading-relaxed font-light'>
-						We offer accessible luxury with competitive pricing for our Photo Booth packages, ensuring premium memories are within reach.
-					</p>
-				</article>
-
-				{/* Highlight 3: Advanced Booking and Modern POS */}
-				<article className="p-8 rounded-3xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 transition-all duration-500">
-					<div className="flex items-center gap-4 mb-6">
-						<div className="p-3 rounded-full bg-amber-500/10 text-amber-500">
-							<IoCalendar className="text-2xl" />
-						</div>
-						<h3 className="text-lg font-bold text-white font-small-caps tracking-wide">Seamless Experience</h3>
-					</div>
-					<p className='text-white/60 leading-relaxed font-light'>
-						Powered by advanced booking systems and modern POS integration, ensuring a smooth, hassle-free journey from reservation to memory.
-					</p>
-				</article>
-			</div>
-		</Section>
-	);
-};
-
-export default KeyHighlights;
-</file>
-
-<file path="client/src/app/about/components/MilestonesAndVision.tsx">
-import Icon from '@/components/ui/Icon';
-import Section from '@/components/ui/layout/Section';
-import { IoFlag, IoRocketOutline } from 'react-icons/io5';
-
-const MilestonesAndVision: React.FC = () => {
-	const milestones = [
-		{ year: '2024', title: 'Inception', desc: 'Dreamhair Crowns established by Glenda Mahasha, introducing premium hair solutions to Evander.' },
-		{ year: '2025', title: 'Expansion', desc: 'Launched full e-commerce platform and expanded product line to include designer footwear.' },
-	];
-
-	return (
-		<Section
-			heading='Our journey began with a vision to redefine beauty standards in Evander. Here are some key moments and our aspirations for the future.'
-			tittle='Milestones & Future Vision'>
-
-			<div className="flex flex-col md:flex-row gap-16 md:gap-24">
-				{/* Timeline Column */}
-				<div className="w-full md:w-1/2 relative">
-					<div className="absolute left-8 top-0 bottom-0 w-px bg-white/10 md:left-1/2"></div>
-					<div className="space-y-12">
-						{milestones.map((m, i) => (
-							<div key={i} className={`relative flex items-center md:justify-between w-full ${i % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-								<div className="absolute left-8 -translate-x-1/2 w-4 h-4 rounded-full bg-amber-500 shadow-[0_0_20px_rgba(245,158,11,0.5)] md:left-1/2"></div>
-								<div className="pl-20 md:pl-0 md:w-[42%]">
-									<span className="text-amber-500 font-bold font-mono text-lg mb-1 block">{m.year}</span>
-									<h3 className="text-white text-xl font-bold font-small-caps">{m.title}</h3>
-									<p className="text-white/60 text-sm mt-2">{m.desc}</p>
-								</div>
-							</div>
-						))}
-					</div>
-				</div>
-
-				{/* Vision Column */}
-				<div className="w-full md:w-1/2 flex items-center">
-					<div className='p-8 rounded-3xl bg-amber-500/5 border border-amber-500/20 backdrop-blur-sm relative overflow-hidden group'>
-						<div className="absolute -right-8 -bottom-8 text-9xl text-amber-500/5 group-hover:text-amber-500/10 transition-colors">
-							<IoRocketOutline />
-						</div>
-						<IoRocketOutline className="text-4xl text-amber-500 mb-6" />
-						<h3 className="text-2xl font-bold text-white font-small-caps mb-4">Our Future Horizon</h3>
-						<p className='text-white/80 leading-relaxed font-light'>
-							Our vision is to become South Africa&apos;s leading provider of luxury beauty essentials,
-							driven by innovation, quality, and style. We aim to continuously expand our curated collections,
-							ensuring every woman has access to the crown she deserves.
-						</p>
-					</div>
-				</div>
-			</div>
-		</Section>
-	);
-};
-
-export default MilestonesAndVision;
-</file>
-
-<file path="client/src/app/about/components/OurCommitment.tsx">
-import Section from '@/components/ui/layout/Section';
-import Image from 'next/image';
-import { IoShieldCheckmark } from 'react-icons/io5';
-
-const OurCommitment: React.FC = () => {
-	return (
-		<Section
-			Icon={IoShieldCheckmark}
-			tittle='Our Commitment'>
-
-			<div className="flex flex-col md:flex-row items-center gap-12 bg-white/5 border border-white/5 rounded-3xl p-8 backdrop-blur-sm">
-				<div className="w-full md:w-1/3 flex justify-center">
-					<div className="relative w-48 h-48 md:w-full md:h-64 opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-500">
-						<Image
-							alt='PA Logo'
-							fill
-							src='/Logo.jpg'
-							className="object-contain"
-						/>
-					</div>
-				</div>
-				<div className="w-full md:w-2/3 space-y-6">
-					<h3 className="text-2xl font-bold text-white font-small-caps tracking-wide">Excellence in Every Detail</h3>
-					<p className='text-white/80 leading-relaxed font-light text-lg'>
-						At Dreamhair Crowns, we are committed to providing a premium experience in every interaction.
-						We strive to be your trusted destination for luxury hair and fashion, delivering quality products that empower you to shine.
-						Our goal is to build community trust through consistency and exceptional service in Evander.
-					</p>
-				</div>
-			</div>
-		</Section>
-	);
-};
-
-export default OurCommitment;
-</file>
-
-<file path="client/src/app/about/components/OurVision.tsx">
-import Section from '@/components/ui/layout/Section';
-import { IoEye } from 'react-icons/io5';
-
-const OurVision: React.FC = () => {
-	return (
-		<Section
-			Icon={IoEye}
-			tittle='Our Vision'
-			className="flex flex-col items-center justify-center text-center">
-			<article className="max-w-3xl mx-auto relative">
-				<div className="absolute -top-12 -left-12 text-9xl text-amber-500/10 font-serif leading-none">&ldquo;</div>
-				<p className='text-3xl md:text-4xl font-light leading-snug text-white'>
-					To become Evander&apos;s <span className="text-amber-500 font-normal">premier destination</span> for
-					affordable luxury, driven by innovation, quality, and community trust.
-				</p>
-				<div className="absolute -bottom-12 -right-12 text-9xl text-amber-500/10 font-serif leading-none rotate-180">&ldquo;</div>
-			</article>
-		</Section>
-	);
-};
-
-export default OurVision;
-</file>
-
-<file path="client/src/app/about/components/StrengthsAndOpportunities.tsx">
-import Icon from '@/components/ui/Icon';
-import Section from '@/components/ui/layout/Section';
-import React from 'react';
-import { GiMuscleUp, GiOppositeHearts } from 'react-icons/gi';
-
-const StrengthsAndOpportunities: React.FC = () => {
-	const strengths = [
-		'20–30% More Competitive Pricing',
-		'Multidisciplinary Leadership',
-		'Dual-Service Venue Convenience',
-	];
-
-	const opportunities = ['Taxi Fleet Bulk Partnerships', 'Loyalty Program Integration', 'Corporate Event Expansion'];
-
-	return (
-		<Section tittle='Strengths & Opportunities'>
-			<div className='flex flex-col gap-6 h-full'>
-				<article className="flex-1 p-8 rounded-3xl bg-neutral-900/50 border border-white/5 hover:border-emerald-500/30 transition-all duration-500 group">
-					<div className="flex items-center gap-4 mb-6">
-						<div className="p-3 rounded-full bg-emerald-500/10 text-emerald-500 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
-							<GiMuscleUp className="text-2xl" />
-						</div>
-						<h3 className="text-xl font-bold text-white font-small-caps tracking-wide">Strengths</h3>
-					</div>
-					<ul className='space-y-4'>
-						{strengths.map((str, index) => (
-							<li key={index} className="flex items-start gap-3 text-white/70">
-								<span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2"></span>
-								{str}
-							</li>
-						))}
-					</ul>
-				</article>
-
-				<article className="flex-1 p-8 rounded-3xl bg-neutral-900/50 border border-white/5 hover:border-blue-500/30 transition-all duration-500 group">
-					<div className="flex items-center gap-4 mb-6">
-						<div className="p-3 rounded-full bg-blue-500/10 text-blue-500 group-hover:bg-blue-500 group-hover:text-white transition-colors">
-							<GiOppositeHearts className="text-2xl" />
-						</div>
-						<h3 className="text-xl font-bold text-white font-small-caps tracking-wide">Opportunities</h3>
-					</div>
-					<ul className='space-y-4'>
-						{opportunities.map((opp, index) => (
-							<li key={index} className="flex items-start gap-3 text-white/70">
-								<span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2"></span>
-								{opp}
-							</li>
-						))}
-					</ul>
-				</article>
-			</div>
-		</Section>
-	);
-};
-
-export default StrengthsAndOpportunities;
-</file>
-
-<file path="client/src/app/about/components/WeaknessesAndThreats.tsx">
-import Section from '@/components/ui/layout/Section';
-import React from 'react';
-
-const WeaknessesAndThreats: React.FC = () => {
-	const weaknesses = ['Reliance on local foot traffic patterns', 'Developing brand awareness in new markets', 'Capital allocation constraints'];
-	const threats = ['Aggressive competitor price matching', 'Economic downturns affecting luxury spend', 'Global supply chain disruptions'];
-
-	return (
-		<Section tittle='Weaknesses & Threats'>
-			<div className='flex flex-col gap-6 h-full'>
-				<article className="flex-1 p-8 rounded-3xl bg-neutral-900/50 border border-white/5 hover:border-orange-500/30 transition-all duration-500 group">
-					<div className="flex items-center gap-4 mb-6">
-						<div className="w-2 h-2 rounded-full bg-orange-500"></div>
-						<h3 className="text-xl font-bold text-white font-small-caps tracking-wide">Weaknesses</h3>
-					</div>
-					<ul className='space-y-4'>
-						{weaknesses.map((item, index) => (
-							<li key={index} className="flex items-start gap-3 text-white/50 group-hover:text-white/70 transition-colors">
-								<span className="w-1.5 h-1.5 rounded-full bg-white/10 mt-2"></span>
-								{item}
-							</li>
-						))}
-					</ul>
-				</article>
-				<article className="flex-1 p-8 rounded-3xl bg-neutral-900/50 border border-white/5 hover:border-red-500/30 transition-all duration-500 group">
-					<div className="flex items-center gap-4 mb-6">
-						<div className="w-2 h-2 rounded-full bg-red-500"></div>
-						<h3 className="text-xl font-bold text-white font-small-caps tracking-wide">Threats</h3>
-					</div>
-					<ul className='space-y-4'>
-						{threats.map((item, index) => (
-							<li key={index} className="flex items-start gap-3 text-white/50 group-hover:text-white/70 transition-colors">
-								<span className="w-1.5 h-1.5 rounded-full bg-white/10 mt-2"></span>
-								{item}
-							</li>
-						))}
-					</ul>
-				</article>
-			</div>
-		</Section>
-	);
-};
-
-export default WeaknessesAndThreats;
-</file>
-
-<file path="client/src/app/about/components/WhatMakesUsSpecial.tsx">
-import { IoSparkles, IoCalendar, IoPeople, IoFastFood } from 'react-icons/io5';
-import Icon from '@/components/ui/Icon';
-import Section from '@/components/ui/layout/Section';
-
-const WhatMakesUsSpecial: React.FC = () => {
-	return (
-		<Section tittle='Our Distinctive Edge' Icon={IoSparkles}>
-			<div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-				{[
-					{ icon: IoSparkles, title: 'Modern Facilities', desc: "State-of-the-art facilities for both dining and photography, ensuring superior comfort and service." },
-					{ icon: IoCalendar, title: 'Digital Ecosystem', desc: "Seamless digital booking for food and photos, saving time with integrated scheduling." },
-					{ icon: IoPeople, title: 'Multidisciplinary Experts', desc: "Leadership spanning industrial engineering and design, optimizing every touchpoint of your experience." },
-					{ icon: IoFastFood, title: 'Dual-Service Convenience', desc: "The unique convergence of high-end dining and luxury photo experiences in a single location." },
-				].map((item, idx) => (
-					<article key={idx} className="group p-8 rounded-3xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 hover:bg-white/5 transition-all duration-500">
-						<div className="w-12 h-12 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-							<item.icon className="text-2xl" />
-						</div>
-						<h3 className="text-xl font-bold text-white mb-4 font-small-caps tracking-wide">{item.title}</h3>
-						<p className="text-white/60 leading-relaxed font-light">{item.desc}</p>
-					</article>
-				))}
-			</div>
-		</Section>
-	);
-};
-
-export default WhatMakesUsSpecial;
-</file>
-
-<file path="client/src/app/about/loading.tsx">
-import Loading from '@/components/ui/Loading';
-
-export default function LoadingPage() {
-	return <Loading message='Loading About Dreamhair Crowns...' />;
-}
-</file>
-
 <file path="client/src/app/api/seed/route.ts">
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
@@ -8177,48 +7696,6 @@ export async function POST() {
 }
 </file>
 
-<file path="client/src/app/blog/components/BlogPostList.tsx">
-import React from 'react';
-
-const posts = [
-	{
-		title: 'Maintenance 101: Caring for Your Virgin Hair',
-		date: 'July 24, 2025',
-		excerpt:
-			'Learn the secrets to keeping your bundles silky, shiny, and tangle-free for months...',
-	},
-	{
-		title: 'Wig Installation Tips for Beginners',
-		date: 'July 20, 2025',
-		excerpt: 'Achieve a flawless melt with our step-by-step guide to installing your HD lace wig at home...',
-	},
-	{
-		title: 'The Dreamhair Community Event',
-		date: 'July 15, 2025',
-		excerpt:
-			'A look back at our recent pop-up, celebrating beauty, confidence, and the launch of our sandal line...',
-	},
-];
-
-const BlogPostList: React.FC = () => {
-	return (
-		<div className='grid grid-cols-1 md:grid-cols-2  gap-6'>
-			{posts.map((post, index) => (
-				<div
-					key={index}
-					className='bg-black/50 p-6 rounded-md shadow-lg hover:shadow-yellow-500/50 transition-shadow duration-300'>
-					<h3 className='text-xl font-bold mb-2'>{post.title}</h3>
-					<p className='text-sm text-white mb-2'>{post.date}</p>
-					<p className='text-white'>{post.excerpt}</p>
-				</div>
-			))}
-		</div>
-	);
-};
-
-export default BlogPostList;
-</file>
-
 <file path="client/src/app/blog/loading.tsx">
 import Loading from '@/components/ui/Loading';
 
@@ -8247,61 +7724,6 @@ const BlogNewsPage: React.FC = () => {
 };
 
 export default BlogNewsPage;
-</file>
-
-<file path="client/src/app/contact/components/ContactInfo.tsx">
-import Section from '@/components/ui/layout/Section';
-import { IoLocationSharp, IoCall, IoMail } from 'react-icons/io5';
-
-const ContactInfo: React.FC = () => {
-	return (
-		<Section tittle='Contact Information' >
-			<div className='md:flex md:flex-wrap md:gap-4'>
-
-				<article className='flex items-center  gap-2 p-4 '>
-
-					<IoLocationSharp className='text-white w-10 h-10  ' />
-					<p>
-						<strong>Address:</strong> 123 Main Street, Phalaborwa, 1390
-					</p>
-				</article>
-				<article className='flex items-center  gap-2 p-2'>
-					<IoCall className='text-white w-10 h-10  ' />
-					<p>
-						<strong>Phone Number:</strong> (+27) 15 781 1234
-					</p>
-				</article>
-				<article className='flex items-center  gap-2 p-2'>
-					<IoMail className='text-white w-10 h-10  ' />
-					<p>
-						<strong>Email Address:</strong> contact@centraleatery.co.za
-					</p>
-				</article>
-			</div>
-		</Section>
-	);
-};
-
-export default ContactInfo;
-</file>
-
-<file path="client/src/app/contact/components/MapEmbed.tsx">
-const MapEmbed = () => (
-  <div className="w-full h-96 rounded-lg overflow-hidden mt-8">
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.3059669869!2d-74.25986773715416!3d40.69767006372085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1234567890"
-      width="100%"
-      height="100%"
-      style={{ border: 0 }}
-      allowFullScreen
-      loading="lazy"
-      referrerPolicy="no-referrer-when-downgrade"
-      className="rounded-lg"
-    />
-  </div>
-);
-
-export default MapEmbed;
 </file>
 
 <file path="client/src/app/contact/components/OperatingHours.tsx">
@@ -8727,89 +8149,6 @@ export default function Gallery() {
 }
 </file>
 
-<file path="client/src/app/home-components/AboutUsSnippet.tsx">
-import Icon from '@/components/ui/Icon';
-import Section from '@/components/ui/layout/Section';
-import AppLink from '@/components/ui/Link';
-import { IoInformationCircleOutline } from 'react-icons/io5';
-
-const AboutUsSnippet: React.FC = () => {
-	return (
-		<Section
-			Icon={IoInformationCircleOutline}
-			tittle='Our Love for Luxury'
-			className="text-center"
-			heading=''>
-			<div className="flex flex-col items-center space-y-8">
-				<p className="max-w-3xl mx-auto text-lg md:text-xl text-white/90 leading-relaxed font-light">
-					Dreamhair Crowns is redefining the beauty industry by combining
-					<span className="text-amber-400 font-medium"> premium quality hair </span>
-					with
-					<span className="text-amber-400 font-medium"> exclusive fashion curation</span>.
-				</p>
-
-				<div className="grid md:grid-cols-2 gap-8 w-full max-w-4xl mt-12">
-					<div className="group bg-neutral-900/50 border border-white/5 rounded-3xl p-8 hover:border-amber-500/30 hover:bg-white/5 transition-all duration-500 relative overflow-hidden">
-						<div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
-							<IoInformationCircleOutline className="text-8xl text-white" />
-						</div>
-						<h4 className="text-xl font-bold text-white mb-3 font-small-caps tracking-wide group-hover:text-amber-500 transition-colors">Premium Hair</h4>
-						<p className="text-white/70 font-light leading-relaxed">
-							Discover our collection of 100% Virgin Brazilian bundles and HD lace wigs, designed for volume, shine, and longevity.
-						</p>
-					</div>
-					<div className="group bg-neutral-900/50 border border-white/5 rounded-3xl p-8 hover:border-amber-500/30 hover:bg-white/5 transition-all duration-500 relative overflow-hidden">
-						<div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
-							<IoInformationCircleOutline className="text-8xl text-white" />
-						</div>
-						<h4 className="text-xl font-bold text-white mb-3 font-small-caps tracking-wide group-hover:text-amber-500 transition-colors">Precision Styling</h4>
-						<p className="text-white/70 font-light leading-relaxed">
-							Maintain your crown at home with our professional-grade hot combs, straighteners, and dryers.
-						</p>
-					</div>
-				</div>
-
-				<div className='mt-8'>
-					<AppLink
-						variant='primary'
-						href='/about'
-						className="px-8 py-3 text-sm tracking-widest uppercase border border-amber-500/50 hover:bg-amber-500/10">
-						Read Our Full Story
-					</AppLink>
-				</div>
-			</div>
-		</Section>
-	);
-};
-
-export default AboutUsSnippet;
-</file>
-
-<file path="client/src/app/home-components/ContactSection.tsx">
-import MapEmbed from '@/app/contact/components/MapEmbed';
-import { IoLocationSharp, IoCall, IoChatbubblesOutline } from 'react-icons/io5';
-import Icon from '@/components/ui/Icon';
-import ContactInfo from '@/app/contact/components/ContactInfo';
-import Section from '@/components/ui/layout/Section';
-
-const ContactSection: React.FC = () => {
-	return (
-		<>
-			<ContactInfo />
-			<Section
-				Icon={IoChatbubblesOutline}
-				tittle='Visit Us Today!'>
-				<div className='mt-8'>
-					<MapEmbed />
-				</div>
-			</Section>
-		</>
-	);
-};
-
-export default ContactSection;
-</file>
-
 <file path="client/src/app/home-components/FeaturedItemsServices.tsx">
 'use client';
 import React, { useState, useEffect } from 'react';
@@ -8884,96 +8223,6 @@ const FeaturedItemsServices: React.FC = () => {
 };
 
 export default FeaturedItemsServices;
-</file>
-
-<file path="client/src/app/home-components/FinancialSnapshotTeaser.tsx">
-import Section from '@/components/ui/layout/Section';
-import Link from '@/components/ui/Link';
-import { IoTrendingUpOutline } from 'react-icons/io5';
-
-const FinancialSnapshotTeaser: React.FC = () => {
-	return (
-		<Section
-			Icon={IoTrendingUpOutline}
-			tittle='Building a Sustainable Future'
-			heading="Since our inception, we've seen promising traction and are on a solid path toward sustainable growth. Our commitment to quality and convenience continues to drive our success.">
-			<div className='mt-6'>
-				<Link
-					variant='button'
-					href='/about#financials'>
-					View Our Financial Snapshot...
-				</Link>
-			</div>
-		</Section>
-	);
-};
-
-export default FinancialSnapshotTeaser;
-</file>
-
-<file path="client/src/app/home-components/TargetMarketCallout.tsx">
-import { BiBullseye } from 'react-icons/bi';
-import {
-	IoHomeOutline,
-	IoBriefcaseOutline,
-	IoCarSportOutline,
-	IoBusinessOutline,
-} from 'react-icons/io5';
-import Icon from '@/components/ui/Icon';
-import Section from '@/components/ui/layout/Section';
-
-const TargetMarketCallout: React.FC = () => {
-	const targetMarkets = [
-		{
-			id: 1,
-			title: 'Local Residents',
-			text: 'Families, students, and neighbours seeking a premium yet accessible spot for dining and memories.',
-			icon: IoHomeOutline,
-		},
-		{
-			id: 2,
-			title: 'Professionals',
-			text: 'Efficient, high-quality service for government officials and corporate teams on the go.',
-			icon: IoBriefcaseOutline,
-		},
-		{
-			id: 3,
-			title: 'Travellers',
-			text: 'A refreshing sanctuary for those passing through Evander, offering rest and rejuvenation.',
-			icon: IoCarSportOutline,
-		},
-		{
-			id: 4,
-			title: 'Local Business',
-			text: 'Strategic partnerships for corporate catering and exclusive event hosting.',
-			icon: IoBusinessOutline,
-		},
-	];
-
-	return (
-		<Section
-			Icon={BiBullseye}
-			tittle='Who We Serve'
-			id='target-market'
-			heading='Curated experiences for the diverse tapestry of the Evander community.'>
-			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
-				{targetMarkets.map((market) => (
-					<article
-						key={market.id}
-						className='group p-6 rounded-3xl bg-neutral-900/30 border border-white/5 hover:border-amber-500/30 hover:bg-white/5 transition-all duration-500 flex flex-col items-center text-center'>
-						<div className="w-16 h-16 rounded-full bg-gradient-to-br from-white/5 to-white/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 border border-white/5 group-hover:border-amber-500/30">
-							<market.icon className="text-3xl text-white/50 group-hover:text-amber-500 transition-colors" />
-						</div>
-						<h3 className="text-lg font-bold text-white mb-3 font-small-caps tracking-wide group-hover:text-amber-500 transition-colors">{market.title}</h3>
-						<p className='text-white/60 text-sm leading-relaxed font-light'>{market.text}</p>
-					</article>
-				))}
-			</div>
-		</Section>
-	);
-};
-
-export default TargetMarketCallout;
 </file>
 
 <file path="client/src/app/home-components/Testimonials.tsx">
@@ -9061,57 +8310,6 @@ const Testimonials: React.FC = () => {
 };
 
 export default Testimonials;
-</file>
-
-<file path="client/src/app/layout.tsx">
-import type { Metadata } from 'next';
-import './globals.css';
-
-
-import Navbar from '@/components/Navbar/Navbar';
-import { Analytics } from '@vercel/analytics/next';
-
-export const metadata: Metadata = {
-	title: 'DREAMHAIR CROWNS | Premium Wigs & Hair Extensions',
-	description: "Shop premium Brazilian hair, exclusive wigs, and electronic styling tools. Crown yourself in luxury with DREAMHAIR CROWNS.",
-	keywords: ['Brazilian Hair', 'Wigs', 'Hair Extensions', 'Styling Tools', 'Beauty', 'Dreamhair Crowns', 'Luxury'],
-	themeColor: '#D4AF37',
-	openGraph: {
-		title: 'DREAMHAIR CROWNS | Premium Wigs & Hair Extensions',
-		description: "Shop premium Brazilian hair, exclusive wigs, and electronic styling tools. Crown yourself in luxury.",
-		url: 'https://dreamhair-crowns.com',
-		siteName: 'DREAMHAIR CROWNS',
-		images: [
-			{
-				url: '/Logo.jpg', // We need to update this later when we have a logo
-				width: 800,
-				height: 600,
-			},
-		],
-		locale: 'en_US',
-		type: 'website',
-	},
-};
-
-
-import Footer from '@/components/Footer/Footer';
-
-export default function RootLayout({
-	children,
-}: Readonly<{
-	children: React.ReactNode;
-}>) {
-	return (
-		<html lang='en' className="scroll-smooth">
-			<body className={`antialiased min-h-screen bg-black text-white`}>
-				<Navbar />
-				{children}
-				<Footer />
-				<Analytics />
-			</body>
-		</html>
-	);
-}
 </file>
 
 <file path="client/src/app/loading.tsx">
@@ -9894,21 +9092,6 @@ const CustomerProfilePage: React.FC = async () => {
 };
 
 export default CustomerProfilePage;
-</file>
-
-<file path="client/src/app/services/page.tsx">
-import FeaturedItemsServices from '../home-components/FeaturedItemsServices';
-import Main from '@/components/ui/layout/Main';
-import { HiBriefcase } from 'react-icons/hi2';
-
-export default function ServicesPage() {
-    return (
-        <Main tittle="Our Services" Icon={HiBriefcase} heading="Experience the Royal Treatment">
-            <FeaturedItemsServices />
-        </Main>
-    );
-}    }
-}
 </file>
 
 <file path="client/src/app/shop/[Products]/[product]/comments/loading.tsx">
@@ -11644,201 +10827,6 @@ export default function LoadingPage() {
 }
 </file>
 
-<file path="client/src/app/shop/page.tsx">
-import { Suspense } from 'react';
-import ImageGallery from '@/app/gallery/components/ImageGallery';
-import Loading from '@/components/ui/Loading';
-// import PromotionsBanner from '@/app/shop/components/PromotionsBanner';
-import MenuSections from '@/app/shop/components/MenuSections';
-import Main from '@/components/ui/layout/Main';
-import { RiVipCrownFill } from 'react-icons/ri';
-import SearchBar from './components/SearchBar';
-import { createClient } from '@/lib/supabase/server';
-import { Database } from '@/lib/types/database.types';
-
-export default async function HomePage({
-	searchParams,
-}: {
-	searchParams: Promise<{ search?: string }>;
-}) {
-	const params = await searchParams;
-	const search = params.search || '';
-	const supabase = await createClient();
-
-	const [productsResult, categoriesResult] = await Promise.all([
-		supabase
-			.from('products')
-			.select('*')
-			.order('category_name', { ascending: true }),
-		supabase
-			.from('products_category')
-			.select('*')
-			.order('id', { ascending: true })
-	]);
-	// ... (skipping unchanged code for brevity in prompt, but tool needs exact context)
-	// Actually I'll just target the import and the component usage separately or include enough context.
-
-	// Wait, I can't skip lines in TargetContent. 
-	// I will do two separate replaces.
-
-
-	const { data: productsData, error: productsError } = productsResult;
-	const { data: categoriesData, error: categoriesError } = categoriesResult;
-
-	if (productsError) {
-		console.error('Error fetching products:', productsError);
-	}
-
-	if (categoriesError) {
-		console.error('Error fetching categories:', categoriesError);
-	}
-
-	const allProducts: Database['public']['Tables']['products']['Row'][] = productsData || [];
-	const allCategoriesData: Database['public']['Tables']['products_category']['Row'][] = categoriesData || [];
-
-	// Filter out hidden categories
-	const visibleCategories = allCategoriesData.filter(cat => !cat.is_hidden);
-	const visibleCategoryNames = new Set(visibleCategories.map(c => c.category_name));
-
-	// Filter products based on search
-	const filteredProducts = search
-		? allProducts.filter((p) =>
-			p.name.toLowerCase().includes(search.toLowerCase()) ||
-			p.category_name?.toLowerCase().includes(search.toLowerCase())
-		)
-		: allProducts;
-
-	// Group products by category
-	const groupedProducts: ProductsType = [];
-	const categoriesMap = new Map<string, ProductType[]>();
-
-	filteredProducts.forEach((product) => {
-		const category = product.category_name || 'Other';
-
-		// Only include products in visible categories (or 'Other' if we want to keep it, but user asked to use table)
-		// Let's strictly follow the visible categories from DB for now, unless it's a search result that might be relevant?
-		// Actually, if a category is hidden, its products should probably be hidden too in this context.
-		if (!visibleCategoryNames.has(category) && category !== 'Other') {
-			// If strict mode is desired: return; 
-			// But for now, let's allow 'Other' or maybe just check if it exists in the map later.
-		}
-
-		if (!categoriesMap.has(category)) {
-			categoriesMap.set(category, []);
-		}
-
-		// Map Supabase product to UI ProductType
-		const uiProduct: ProductType = {
-			ProductID: product.id,
-			Name: product.name,
-			Description: [product.description || ''],
-			Price: product.price || 0,
-			Image: product.image_url || '/Menus/placeholder.png',
-			badge: product.badge || undefined,
-			rating: product.likes ? 5 : undefined,
-		};
-
-		categoriesMap.get(category)?.push(uiProduct);
-	});
-
-	// When searching, only include categories that:
-	// 1. Have matching products, OR
-	// 2. Have a category name that matches the search term
-	const searchLower = search.toLowerCase();
-	const matchingCategoryNames = search
-		? visibleCategories
-			.filter(cat => cat.category_name.toLowerCase().includes(searchLower))
-			.map(cat => cat.category_name)
-		: [];
-
-	// Iterate over VISIBLE categories from DB to maintain order and metadata
-	visibleCategories.forEach((category) => {
-		const categoryName = category.category_name;
-		const products = categoriesMap.get(categoryName) || [];
-
-		// When searching, only show categories that have matching products or match by name
-		if (search && products.length === 0 && !matchingCategoryNames.includes(categoryName)) {
-			return;
-		}
-
-		// If not searching, and no products, maybe skip? 
-		// Usually menus show empty categories if they exist, or hide them. 
-		// Let's hide empty categories if not searching, to be clean, unless user wants them.
-		// But the original code showed them if they were in the map. 
-		// Let's show if it has products OR if we are searching and it matched.
-		if (!search && products.length === 0) {
-			return;
-		}
-
-		groupedProducts.push({
-			id: category.id,
-			Name: categoryName,
-			Image: category.image || '/Menus/placeholder.png',
-			Description: category.description || '',
-			Products: products,
-		});
-	});
-
-	// Handle 'Other' category if it has products and isn't in DB
-	if (categoriesMap.has('Other')) {
-		const otherProducts = categoriesMap.get('Other') || [];
-		if (otherProducts.length > 0) {
-			groupedProducts.push({
-				id: 999,
-				Name: 'Other',
-				Image: '/Menus/placeholder.png',
-				Description: 'Other items',
-				Products: otherProducts,
-			});
-		}
-	}
-
-	// Create a map of product ID to category slug for search results
-	const productCategoryMap = new Map<string, string>();
-	if (search) {
-		filteredProducts.forEach((product) => {
-			const category = product.category_name || 'Other';
-			// Convert category name to slug (e.g., "Kota Meals" -> "kota-meals")
-			const categorySlug = category.toLowerCase().replace(/\s+/g, '-');
-			productCategoryMap.set(product.id, categorySlug);
-		});
-	}
-
-	return (
-		<>
-			<Suspense fallback={<div className="h-12" />}>
-				<SearchBar />
-			</Suspense>
-			<Main
-				tittle='Shop'
-				Icon={RiVipCrownFill}
-				heading='Crown Yourself in Luxury'>
-				<Suspense fallback={<Loading message='Loading Products...' />}>
-					<MenuSections
-						categories={groupedProducts}
-						matchingProducts={search ? filteredProducts.map(p => ({
-							ProductID: p.id,
-							Name: p.name,
-							Description: [p.description || ''],
-							Price: p.price || 0,
-							Image: p.image_url || '/Menus/placeholder.png',
-							badge: p.badge || undefined,
-							rating: undefined
-						})) : []}
-						productCategoryMap={search ? productCategoryMap : undefined}
-						isSearching={!!search}
-					/>
-				</Suspense>
-				<Suspense fallback={<Loading message='Loading Image Gallery Sections...' />}>
-					<ImageGallery />
-				</Suspense>
-			</Main>
-			{/* <PromotionsBanner /> */}
-		</>
-	);
-}
-</file>
-
 <file path="client/src/components/components.css">
 .spinner {
   width: 48px;
@@ -11887,126 +10875,6 @@ const AuthButton: React.FC<{ setMenubar: (path: 'mobile' | 'profile') => void; u
 };
 
 export default AuthButton;
-</file>
-
-<file path="client/src/components/Navbar/DesktopNavbar.tsx">
-'use client';
-import AppLink from '@/components/ui/Link';
-import Image from 'next/image';
-import {
-	HiHome,
-	HiInformationCircle,
-	HiEnvelope,
-	HiPhoto,
-	HiBriefcase,
-	HiShoppingBag,
-} from 'react-icons/hi2';
-import React, { useState, useRef, useEffect } from 'react';
-import { useAuth } from '@/lib/supabase/auth/useAuth';
-import { usePathname } from 'next/navigation';
-
-const publicPaths = [
-	{ path: '/', icon: HiHome, label: 'Home' },
-	{ path: '/shop', icon: HiShoppingBag, label: 'Shop' },
-	{ path: '/services', icon: HiBriefcase, label: 'Services' },
-	{ path: '/gallery', icon: HiPhoto, label: 'Gallery' },
-	{ path: '/contact', icon: HiEnvelope, label: 'Contact' },
-];
-
-const DesktopNavbar: React.FC = () => {
-	// keeping hooks for future use if needed (e.g. profile menu)
-	const { user } = useAuth();
-	const pathname = usePathname();
-	const [profileOpen, setProfileOpen] = useState(false);
-	const profileRef = useRef<HTMLLIElement>(null);
-
-	return (
-		<nav className='hidden md:flex gap-4 justify-between items-center p-0 m-0 w-full'>
-			<AppLink href='/' className='shrink-0'>
-				{/* Placeholder logo until we have the real file, or text fallback */}
-				<Image
-					src='/Logo.jpg'
-					alt='Dreamhair Crowns Logo'
-					width={64}
-					height={64}
-					className='h-16 w-auto'
-					priority
-				/>
-			</AppLink>
-
-			<ul className='flex space-x-2 items-center'>
-				{publicPaths.map(({ path, icon: Icon, label }) => {
-					const isActive = pathname === path;
-					return (
-						<li key={path}>
-							<AppLink
-								href={path}
-								className={`group relative flex items-center gap-2 px-4 py-2 font-medium transition-colors duration-300 ${isActive
-									? 'text-gold'
-									: 'text-white/70 hover:text-white'
-									}`}>
-								<Icon className={`text-lg transition-transform duration-300 group-hover:scale-110 ${isActive ? 'text-gold' : 'group-hover:text-gold-light'}`} />
-								<span className="relative">
-									{label}
-									<span className={`absolute -bottom-1 left-0 w-full h-px bg-[var(--theme-gold)] origin-center transition-transform duration-500 ease-out ${isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} />
-								</span>
-							</AppLink>
-						</li>
-					);
-				})}
-			</ul>
-		</nav>
-	);
-};
-
-export default DesktopNavbar;
-</file>
-
-<file path="client/src/components/Navbar/MobileMenu.tsx">
-'use client';
-import AppLink from '../ui/Link';
-import { HiHome, HiInformationCircle, HiEnvelope, HiPhoto, HiBriefcase, HiShoppingBag } from 'react-icons/hi2';
-import { usePathname } from 'next/navigation';
-
-const publicPaths = [
-	{ path: '/', icon: HiHome, label: 'Home' },
-	{ path: '/shop', icon: HiShoppingBag, label: 'Shop' },
-	{ path: '/services', icon: HiBriefcase, label: 'Services' },
-	{ path: '/gallery', icon: HiPhoto, label: 'Gallery' },
-	{ path: '/contact', icon: HiEnvelope, label: 'Contact' },
-];
-
-const MobileMenu: React.FC<{
-	setMenubar: (path: 'mobile' | 'profile') => void;
-}> = ({ setMenubar }) => {
-	const pathname = usePathname();
-
-	return (
-		<nav className='md:hidden absolute top-full left-0 right-0 bg-neutral-900/98 backdrop-blur-xl border-b border-white/10 shadow-2xl transition-all duration-300 z-40 max-h-screen overflow-y-auto'>
-			<ul className='flex flex-col p-4 gap-2'>
-				{publicPaths.map(({ path, icon: Icon, label }) => {
-					const isActive = pathname === path;
-					return (
-						<li key={path}>
-							<AppLink
-								href={path}
-								onClick={() => setMenubar('mobile')}
-								className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all duration-200 w-full ${isActive
-									? 'bg-white/5 border border-[var(--theme-gold)] text-[var(--theme-gold)] shadow-md'
-									: 'text-white/80 hover:text-white hover:bg-white/5 border border-transparent hover:border-white/10'
-									}`}>
-								<Icon className={`text-xl ${isActive ? 'text-[var(--theme-gold)]' : ''}`} />
-								<span>{label}</span>
-							</AppLink>
-						</li>
-					);
-				})}
-			</ul>
-		</nav>
-	);
-};
-
-export default MobileMenu;
 </file>
 
 <file path="client/src/components/Navbar/MobileNavbar.tsx">
@@ -12210,90 +11078,6 @@ export const useMenubarToggle = () => {
     setMenubar,
   };
 };
-</file>
-
-<file path="client/src/components/ui/ActionFooter.tsx">
-'use client';
-
-import React from 'react';
-import { BiSolidComment, BiSolidShare } from 'react-icons/bi';
-import Button from '@/components/ui/Button';
-import LikesButton from '@/components/ui/LikesButton'; // Updated import path
-import { useAuth } from '@/lib/supabase/auth/useAuth';
-import { useRouter } from 'next/navigation';
-
-interface ActionFooterProps {
-    itemId: string;
-    table: string;
-    commentsCount?: number;
-    className?: string;
-}
-
-const ActionFooter: React.FC<ActionFooterProps> = ({ itemId, table, commentsCount = 0, className = '' }) => {
-    const { user } = useAuth();
-    const router = useRouter();
-
-    const handleComment = () => {
-        if (!user) {
-            router.push('/login');
-            return;
-        }
-        // Placeholder for comment functionality
-        console.log(`Comment on ${table} item ${itemId}`);
-        alert('Comment functionality coming soon!');
-    };
-
-    const handleShare = () => {
-        const shareData = {
-            title: 'Dreamhair Crowns',
-            text: 'Check this out!',
-            url: window.location.href,
-        };
-
-        if (navigator.share) {
-            navigator.share(shareData).catch((err) => console.error('Error sharing:', err));
-        } else {
-            // Fallback
-            navigator.clipboard.writeText(window.location.href);
-            alert('Link copied to clipboard!');
-        }
-    };
-
-    return (
-        <div className={`mt-auto flex items-center justify-between border-t border-white/10 pt-6 ${className}`}>
-            <div className="scale-90 origin-left">
-                <LikesButton itemId={itemId} table={table} />
-            </div>
-            <div className="flex gap-2">
-                <Button
-                    variant='icon'
-                    onClick={handleComment}
-                    className='p-2 hover:bg-white/10 rounded-full transition-colors group/btn flex items-center gap-1'
-                    aria-label={`Comment`}>
-                    <BiSolidComment
-                        size={18}
-                        className='text-white/40 group-hover/btn:text-amber-400 transition-colors'
-                    />
-                    {commentsCount > 0 && (
-                        <span className='text-xs text-amber-400 font-medium'>{commentsCount}</span>
-                    )}
-                </Button>
-                <Button
-                    variant='icon'
-                    onClick={handleShare}
-                    className='p-2 hover:bg-white/10 rounded-full transition-colors group/btn'
-                    aria-label={`Share`}>
-                    <BiSolidShare
-                        size={18}
-                        className='text-white/40 group-hover/btn:text-amber-400 transition-colors'
-                    />
-                </Button>
-            </div>
-        </div>
-    );
-};
-
-export default ActionFooter;
 </file>
 
 <file path="client/src/components/ui/Alert.tsx">
@@ -12876,34 +11660,6 @@ const AppLink: React.FC<LinkProps> = ({ children, className, variant = 'primary'
 };
 
 export default AppLink;
-</file>
-
-<file path="client/src/components/ui/Loading.tsx">
-import Image from 'next/image';
-import '../components.css'; // Optional: for custom styles
-import Main from './layout/Main';
-import Section from './layout/Section';
-
-const Loading = ({ message = 'Loading...' }: { message?: string }) => (
-	<Main className='flex flex-col justify-center items-center min-h-screen  p-4' tittle='DREAMHAIR CROWNS' heading='Crown Yourself in Luxury.'>
-		<Section className='flex flex-col items-center text-center max-w-md'>
-			<div className='mt-8 animate-pulse'>
-				<Image
-					src='/Logo.jpg'
-					alt='Dreamhair Crowns Logo'
-					width={220}
-					height={220}
-					className='w-48 h-48 mb-4'
-					priority
-				/>
-			</div>
-			<div className='spinner' />
-			<p className='text-white font-semibold'>{message}</p>
-		</Section>
-	</Main>
-);
-
-export default Loading;
 </file>
 
 <file path="client/src/components/ui/TextInput.tsx">
@@ -13937,64 +12693,6 @@ const EditProfileForm: React.FC = () => {
 export default EditProfileForm;
 </file>
 
-<file path="client/src/lib/forms/LoginForm.tsx">
-'use client';
-
-import { useActionState } from 'react';
-import { signInAction } from '@/lib/actions/auth';
-import Loading from '@/components/ui/Loading';
-
-import Button from '@/components/ui/Button';
-import TextInput from '@/components/ui/TextInput';
-import AppLink from '@/components/ui/Link';
-import Section from '@/components/ui/layout/Section';
-
-export default function LoginForm() {
-    const [state, formAction, isPending] = useActionState(signInAction, null);
-
-    if (isPending) {
-        return <Loading message="Signing in..." />;
-    }
-
-    return (
-        <Section >
-            {state?.error && (
-                <div className='text-red-300 mb-4 mt-4 bg-red-500/10 border border-red-500/30 p-3 rounded-lg'>{state.error}</div>
-            )}
-            <form
-                action={formAction}
-                className='space-y-6 mt-6'>
-                <TextInput
-                    label='Email:'
-                    type='email'
-                    id='email'
-                    name='email'
-                    required
-                />
-                <TextInput
-                    label='Password:'
-                    type='password'
-                    id='password'
-                    name='password'
-                    required
-                />
-                <Button
-                    type='submit'
-                    variant='primary'
-                    className='w-full'
-                    size='lg'
-                    loading={isPending}>
-                    Sign In
-                </Button>
-            </form>
-            <p className='mt-6 text-white/70'>
-                Don&apos;t have an account? <AppLink href='/register'>Sign Up</AppLink>
-            </p>
-        </Section>
-    );
-}
-</file>
-
 <file path="client/src/lib/forms/RegisterForm.tsx">
 'use client';
 
@@ -14380,18 +13078,6 @@ export const useAuth = () => {
 };
 </file>
 
-<file path="client/src/lib/supabase/client.ts">
-import { createBrowserClient } from '@supabase/ssr';
-import { Database } from '@/lib/types/database.types';
-
-export function createClient() {
-  return createBrowserClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
-  );
-}
-</file>
-
 <file path="client/src/lib/supabase/comments.ts">
 import { createClient } from './client';
 
@@ -14681,39 +13367,6 @@ export const getProductById = async (id: string) => {
 
   return (data as Product) || null;
 };
-</file>
-
-<file path="client/src/lib/supabase/server.ts">
-import { createServerClient } from '@supabase/ssr';
-import { cookies } from 'next/headers';
-import { Database } from '@/lib/types/database.types';
-
-import { SupabaseClient } from '@supabase/supabase-js';
-
-export async function createClient(): Promise<SupabaseClient<Database>> {
-  const cookieStore = await cookies();
-
-  return createServerClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return cookieStore.getAll();
-        },
-        setAll(cookiesToSet) {
-          try {
-            cookiesToSet.forEach(({ name, value }) => cookieStore.set(name, value));
-          } catch {
-            // The `setAll` method was called from a Server Component.
-            // This can be ignored if you have middleware refreshing
-            // user sessions.
-          }
-        },
-      },
-    }
-  );
-}
 </file>
 
 <file path="client/src/lib/supabase/storage.ts">
@@ -15688,6 +14341,222 @@ CREATE TABLE public.user_favorites (
 }
 </file>
 
+<file path="admin/package.json">
+{
+  "name": "admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "biome check",
+    "format": "biome format --write"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.81.1",
+    "date-fns": "^4.1.0",
+    "next": "16.0.10",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "react-icons": "^5.5.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.2.0",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
+</file>
+
+<file path="client/package.json">
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "analyze": "cross-env ANALYZE=true next build",
+    "start": "next start",
+    "lint": "biome check",
+    "format": "biome format --write"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.2.4",
+    "@supabase/auth-helpers-nextjs": "^0.10.0",
+    "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.81.1",
+    "@vercel/analytics": "^1.5.0",
+    "class-variance-authority": "^0.7.1",
+    "classnames": "^2.5.1",
+    "clsx": "^2.1.1",
+    "next": "16.0.10",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "react-hook-form": "^7.66.0",
+    "react-icons": "^5.5.0",
+    "tw-animate-css": "^1.4.0",
+    "tailwind-merge": "^3.4.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.2.0",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "babel-plugin-react-compiler": "1.0.0",
+    "cross-env": "^7.0.3",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
+</file>
+
+<file path="client/src/app/about/components/CompanyDescription.tsx">
+import React from 'react';
+import { IoBusinessSharp } from 'react-icons/io5';
+import { VscSymbolStructure } from 'react-icons/vsc';
+import { RxValue } from 'react-icons/rx';
+import Section from '@/components/ui/layout/Section';
+
+const CompanyDescription: React.FC = () => {
+	return (
+		<Section tittle='Corporate Profile' Icon={IoBusinessSharp}>
+			<div className="grid md:grid-cols-2 gap-8">
+				{/* Legal Structure Card */}
+				<div className="group p-8 rounded-3xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 transition-all duration-500 relative overflow-hidden">
+					<div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+						<VscSymbolStructure className="text-8xl text-white" />
+					</div>
+					<div className="relative z-10">
+						<div className="w-12 h-12 rounded-full bg-amber-500/10 flex items-center justify-center mb-6 text-amber-500">
+							<VscSymbolStructure className="text-2xl" />
+						</div>
+						<h3 className="text-xl font-bold text-white mb-4 font-small-caps tracking-widest">Brand Identity</h3>
+						<p className="text-white/60 leading-relaxed font-light">
+							DREAMHAIR CROWNS is more than a beauty brand; it is a movement empowering women to embrace their inner royalty.
+							Registered as a premier beauty retailer, we operate with full transparency and commitment to consumer protection.
+						</p>
+					</div>
+				</div>
+
+				{/* Value Prop Card */}
+				<div className="group p-8 rounded-3xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 transition-all duration-500 relative overflow-hidden">
+					<div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+						<RxValue className="text-8xl text-white" />
+					</div>
+					<div className="relative z-10">
+						<div className="w-12 h-12 rounded-full bg-amber-500/10 flex items-center justify-center mb-6 text-amber-500">
+							<RxValue className="text-2xl" />
+						</div>
+						<h3 className="text-xl font-bold text-white mb-4 font-small-caps tracking-widest">Value Proposition</h3>
+						<p className="text-white/80 leading-relaxed font-light italic text-lg">
+							&ldquo;Delivering unmatched quality in hair extensions and curated fashion items,
+							ensuring every customer crowns themselves in luxury and confidence.&rdquo;
+						</p>
+					</div>
+				</div>
+			</div>
+		</Section>
+	);
+};
+
+export default CompanyDescription;
+</file>
+
+<file path="client/src/app/about/components/CoreValues.tsx">
+import { IoBulbOutline, IoShieldCheckmarkOutline, IoPeopleOutline } from 'react-icons/io5';
+import Icon from '@/components/ui/Icon';
+import Section from '@/components/ui/layout/Section';
+
+const CoreValues: React.FC = () => {
+	return (
+		<Section tittle='Our Core Values' Icon={IoBulbOutline}>
+			<div className='mt-12 grid grid-cols-1 md:grid-cols-3 gap-8'>
+				{[
+					{ icon: IoBulbOutline, title: 'Innovation', desc: "Continuously sourcing the latest trends in hair and fashion technology." },
+					{ icon: IoShieldCheckmarkOutline, title: 'Quality', desc: "Uncompromising commitment to 100% Virgin Hair and premium materials." },
+					{ icon: IoPeopleOutline, title: 'Empowerment', desc: "Inspiring confidence and self-expression in every woman we serve." },
+				].map((item, idx) => (
+					<article key={idx} className="group p-8 rounded-3xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 hover:bg-white/5 transition-all duration-500 flex flex-col items-center text-center">
+						<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-600/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+							<item.icon className="text-3xl text-amber-500" />
+						</div>
+						<h3 className="text-xl font-bold text-white mb-4 font-small-caps tracking-widest">{item.title}</h3>
+						<p className="text-white/60 leading-relaxed font-light">{item.desc}</p>
+					</article>
+				))}
+			</div>
+		</Section>
+	);
+};
+
+export default CoreValues;
+</file>
+
+<file path="client/src/app/about/components/KeyHighlights.tsx">
+// components/KeyHighlights.tsx
+import React from 'react';
+import { IoBusiness, IoPricetag, IoCalendar } from 'react-icons/io5';
+import Icon from '@/components/ui/Icon';
+import Section from '@/components/ui/layout/Section';
+
+const KeyHighlights = () => {
+	return (
+		<Section tittle='Why Choose Us' Icon={IoBusiness}>
+			<div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+				{/* Highlight 1: Premium Quality */}
+				<article className="p-8 rounded-3xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 transition-all duration-500">
+					<div className="flex items-center gap-4 mb-6">
+						<div className="p-3 rounded-full bg-amber-500/10 text-amber-500">
+							<IoBusiness className="text-2xl" />
+						</div>
+						<h3 className="text-lg font-bold text-white font-small-caps tracking-wide">Premium Quality</h3>
+					</div>
+					<p className='text-white/60 leading-relaxed font-light'>
+						Dreamhair Crowns is your destination for 100% Virgin Hair, sourced to ensure longevity, volume, and natural shine.
+					</p>
+				</article>
+
+				{/* Highlight 2: Exclusive Collections */}
+				<article className="p-8 rounded-3xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 transition-all duration-500">
+					<div className="flex items-center gap-4 mb-6">
+						<div className="p-3 rounded-full bg-amber-500/10 text-amber-500">
+							<IoPricetag className="text-2xl" />
+						</div>
+						<h3 className="text-lg font-bold text-white font-small-caps tracking-wide">Exclusive Collections</h3>
+					</div>
+					<p className='text-white/60 leading-relaxed font-light'>
+						From high-end sandals to professional styling tools, our curated collections are designed for the modern queen.
+					</p>
+				</article>
+
+				{/* Highlight 3: Seamless Shopping */}
+				<article className="p-8 rounded-3xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 transition-all duration-500">
+					<div className="flex items-center gap-4 mb-6">
+						<div className="p-3 rounded-full bg-amber-500/10 text-amber-500">
+							<IoCalendar className="text-2xl" />
+						</div>
+						<h3 className="text-lg font-bold text-white font-small-caps tracking-wide">Royal Treatment</h3>
+					</div>
+					<p className='text-white/60 leading-relaxed font-light'>
+						Experience seamless online shopping with secure checkout and dedicated customer support fit for royalty.
+					</p>
+				</article>
+			</div>
+		</Section>
+	);
+};
+
+export default KeyHighlights;
+</file>
+
 <file path="client/src/app/about/components/KeyLeadership.tsx">
 import { IoPeopleOutline, IoCheckmarkCircleOutline } from 'react-icons/io5';
 import Icon from '@/components/ui/Icon';
@@ -15743,159 +14612,220 @@ const KeyLeadership: React.FC = () => {
 export default KeyLeadership;
 </file>
 
-<file path="client/src/app/about/components/OurJourney.tsx">
+<file path="client/src/app/about/components/OurVision.tsx">
 import Section from '@/components/ui/layout/Section';
-import Image from 'next/image';
+import { IoEye } from 'react-icons/io5';
 
-const OurJourney: React.FC = () => {
+const OurVision: React.FC = () => {
 	return (
-		<Section tittle='The Genesis' className='relative overflow-hidden'>
-			<div className="flex flex-col md:flex-row items-start gap-12">
-				<div className="w-full md:w-1/3 relative group">
-					<div className="absolute inset-0 bg-amber-500/20 blur-2xl transform group-hover:scale-110 transition-transform duration-700"></div>
-					<div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-						<Image
-							src='/Logo.jpg'
-							alt='Dreamhair Crowns Logo'
-							fill
-							className='object-contain bg-black p-8'
-						/>
+		<Section
+			Icon={IoEye}
+			tittle='Our Vision'
+			className="flex flex-col items-center justify-center text-center">
+			<article className="max-w-3xl mx-auto relative">
+				<div className="absolute -top-12 -left-12 text-9xl text-amber-500/10 font-serif leading-none">&ldquo;</div>
+				<p className='text-3xl md:text-4xl font-light leading-snug text-white'>
+					To become South Africa&apos;s <span className="text-amber-500 font-normal">premier destination</span> for
+					affordable luxury, driven by innovation, quality, and community trust.
+				</p>
+				<div className="absolute -bottom-12 -right-12 text-9xl text-amber-500/10 font-serif leading-none rotate-180">&ldquo;</div>
+			</article>
+		</Section>
+	);
+};
+
+export default OurVision;
+</file>
+
+<file path="client/src/app/about/components/WhatMakesUsSpecial.tsx">
+import { IoSparkles, IoCalendar, IoPeople, IoHeart } from 'react-icons/io5';
+import Icon from '@/components/ui/Icon';
+import Section from '@/components/ui/layout/Section';
+
+const WhatMakesUsSpecial: React.FC = () => {
+	return (
+		<Section tittle='Our Distinctive Edge' Icon={IoSparkles}>
+			<div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+				{
+					[
+						{ icon: IoSparkles, title: 'Premium Sourcing', desc: "Direct relationships with trusted suppliers ensuring consistent, high-grade bundles and lace." },
+						{ icon: IoCalendar, title: 'Seamless Shopping', desc: "An intuitive online store with secure checkout and reliable nationwide delivery." },
+						{ icon: IoPeople, title: 'Expert Curation', desc: "Every item is hand-selected by beauty experts to ensure it meets our rigorous standards." },
+						{ icon: IoHeart, title: 'Complete Care', desc: "From purchase to installation advice, we support your entire hair journey." },
+					].map((item, idx) => (
+						<article key={idx} className="group p-8 rounded-3xl bg-neutral-900/50 border border-white/5 hover:border-amber-500/30 hover:bg-white/5 transition-all duration-500">
+							<div className="w-12 h-12 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+								<item.icon className="text-2xl" />
+							</div>
+							<h3 className="text-xl font-bold text-white mb-4 font-small-caps tracking-wide">{item.title}</h3>
+							<p className="text-white/60 leading-relaxed font-light">{item.desc}</p>
+						</article>
+					))
+				}
+			</div>
+		</Section>
+	);
+};
+
+export default WhatMakesUsSpecial;
+</file>
+
+<file path="client/src/app/about/loading.tsx">
+import Loading from '@/components/ui/Loading';
+
+export default function LoadingPage() {
+	return <Loading message='Loading About Dreamhair Crowns...' />;
+}
+</file>
+
+<file path="client/src/app/blog/components/BlogPostList.tsx">
+import React from 'react';
+
+const posts = [
+	{
+		title: 'Maintenance 101: Caring for Your Virgin Hair',
+		date: 'July 24, 2025',
+		excerpt:
+			'Learn the secrets to keeping your bundles silky, shiny, and tangle-free for months...',
+	},
+	{
+		title: 'Wig Installation Tips for Beginners',
+		date: 'July 20, 2025',
+		excerpt: 'Achieve a flawless melt with our step-by-step guide to installing your HD lace wig at home...',
+	},
+	{
+		title: 'The Dreamhair Community Event',
+		date: 'July 15, 2025',
+		excerpt:
+			'A look back at our recent pop-up, celebrating beauty, confidence, and the launch of our sandal line...',
+	},
+];
+
+const BlogPostList: React.FC = () => {
+	return (
+		<div className='grid grid-cols-1 md:grid-cols-2  gap-6'>
+			{posts.map((post, index) => (
+				<div
+					key={index}
+					className='bg-black/50 p-6 rounded-md shadow-lg hover:shadow-yellow-500/50 transition-shadow duration-300'>
+					<h3 className='text-xl font-bold mb-2'>{post.title}</h3>
+					<p className='text-sm text-white mb-2'>{post.date}</p>
+					<p className='text-white'>{post.excerpt}</p>
+				</div>
+			))}
+		</div>
+	);
+};
+
+export default BlogPostList;
+</file>
+
+<file path="client/src/app/home-components/AboutUsSnippet.tsx">
+import Icon from '@/components/ui/Icon';
+import Section from '@/components/ui/layout/Section';
+import AppLink from '@/components/ui/Link';
+import { IoInformationCircleOutline } from 'react-icons/io5';
+
+const AboutUsSnippet: React.FC = () => {
+	return (
+		<Section
+			Icon={IoInformationCircleOutline}
+			tittle='Our Love for Luxury'
+			className="text-center"
+			heading=''>
+			<div className="flex flex-col items-center space-y-8">
+				<p className="max-w-3xl mx-auto text-lg md:text-xl text-white/90 leading-relaxed font-light">
+					Dreamhair Crowns is redefining the beauty industry by combining
+					<span className="text-amber-400 font-medium"> premium quality hair </span>
+					with
+					<span className="text-amber-400 font-medium"> exclusive fashion curation</span>.
+				</p>
+
+				<div className="grid md:grid-cols-2 gap-8 w-full max-w-4xl mt-12">
+					<div className="group bg-neutral-900/50 border border-white/5 rounded-3xl p-8 hover:border-amber-500/30 hover:bg-white/5 transition-all duration-500 relative overflow-hidden">
+						<div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+							<IoInformationCircleOutline className="text-8xl text-white" />
+						</div>
+						<h4 className="text-xl font-bold text-white mb-3 font-small-caps tracking-wide group-hover:text-amber-500 transition-colors">Premium Hair</h4>
+						<p className="text-white/70 font-light leading-relaxed">
+							Discover our collection of 100% Virgin Brazilian bundles and HD lace wigs, designed for volume, shine, and longevity.
+						</p>
+					</div>
+					<div className="group bg-neutral-900/50 border border-white/5 rounded-3xl p-8 hover:border-amber-500/30 hover:bg-white/5 transition-all duration-500 relative overflow-hidden">
+						<div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+							<IoInformationCircleOutline className="text-8xl text-white" />
+						</div>
+						<h4 className="text-xl font-bold text-white mb-3 font-small-caps tracking-wide group-hover:text-amber-500 transition-colors">Precision Styling</h4>
+						<p className="text-white/70 font-light leading-relaxed">
+							Maintain your crown at home with our professional-grade hot combs, straighteners, and dryers.
+						</p>
 					</div>
 				</div>
-				<div className="media-body w-full md:w-2/3">
-					<h2 className="text-4xl md:text-5xl font-bold text-white mb-8 font-small-caps tracking-wide">
-						From Vision to <span className="text-amber-500">Royalty</span>
-					</h2>
-					<p className='text-lg md:text-xl text-white/80 leading-relaxed font-light'>
-						<span className="text-6xl float-left mr-4 mt-[-1rem] text-amber-500 font-serif">D</span>
-						reamhair Crowns was established by <span className="text-amber-500 font-medium">Glenda Mahasha</span>, driven by a simple yet powerful belief: your hair is the crown you never take off.
-						Identifying a need for premium, accessible luxury in South Africa, we curated a collection that empowers women to express their unique beauty.
-					</p>
-					<p className='text-lg md:text-xl text-white/80 leading-relaxed font-light mt-6'>
-						Our journey is fueled by a relentless commitment to quality, elegance, and providing the confidence that comes with knowing you look your absolute best.
-					</p>
+
+				<div className='mt-8'>
+					<AppLink
+						variant='primary'
+						href='/about'
+						className="px-8 py-3 text-sm tracking-widest uppercase border border-amber-500/50 hover:bg-amber-500/10">
+						Read Our Full Story
+					</AppLink>
 				</div>
 			</div>
 		</Section>
 	);
 };
 
-export default OurJourney;
+export default AboutUsSnippet;
 </file>
 
-<file path="client/src/app/about/page.tsx">
-import OurJourney from './components/OurJourney';
-import OurCommitment from './components/OurCommitment';
-import WhatMakesUsSpecial from './components/WhatMakesUsSpecial';
-import CoreValues from './components/CoreValues';
-import OurVision from './components/OurVision';
-import KeyLeadership from './components/KeyLeadership';
-import CompanyDescription from './components/CompanyDescription';
-import KeyHighlights from './components/KeyHighlights';
-import StrengthsAndOpportunities from './components/StrengthsAndOpportunities';
-import WeaknessesAndThreats from './components/WeaknessesAndThreats';
-import MilestonesAndVision from './components/MilestonesAndVision';
-import Main from '@/components/ui/layout/Main';
-import { RiVipCrownFill } from 'react-icons/ri';
+<file path="client/src/app/home-components/ContactSection.tsx">
+import MapEmbed from '@/app/contact/components/MapEmbed';
+import { IoLocationSharp, IoCall, IoChatbubblesOutline } from 'react-icons/io5';
+import Icon from '@/components/ui/Icon';
+import ContactInfo from '@/app/contact/components/ContactInfo';
 import Section from '@/components/ui/layout/Section';
 
-const AboutPage = () => {
+const ContactSection: React.FC = () => {
 	return (
-
-		<Main
-			tittle='Our Story'
-			Icon={RiVipCrownFill}
-			className="space-y-32">
-
-			{/* Intro Section - Journey */}
-			<div className="max-w-4xl mx-auto">
-				<OurJourney />
-			</div>
-
-			{/* Strategic Pillars Grid */}
-			<div className="grid md:grid-cols-2 gap-12 lg:gap-24 relative">
-				<div className="absolute inset-y-0 left-1/2 w-px bg-gradient-to-b from-transparent via-amber-500/30 to-transparent hidden md:block"></div>
-
-				<div className="space-y-24">
-					<OurVision />
-					<OurCommitment />
-					<WhatMakesUsSpecial />
-				</div>
-				<div className="space-y-24 pt-0 md:pt-32">
-					<CompanyDescription />
-					<MilestonesAndVision />
-					<CoreValues />
-				</div>
-			</div>
-
-			{/* SWOT Analysis Section */}
-			<Section tittle="Strategic Overview" className="bg-white/5 border border-white/5 rounded-3xl p-8 md:p-12">
-				<div className="grid md:grid-cols-2 gap-12">
-					<StrengthsAndOpportunities />
-					<WeaknessesAndThreats />
+		<>
+			<ContactInfo />
+			<Section
+				Icon={IoChatbubblesOutline}
+				tittle='Get in Touch'>
+				<div className='mt-8'>
+					<MapEmbed />
 				</div>
 			</Section>
-
-			{/* Highlights & Leadership */}
-			<div className="space-y-24">
-				<KeyHighlights />
-				<KeyLeadership />
-			</div>
-		</Main>
+		</>
 	);
 };
 
-export default AboutPage;
+export default ContactSection;
 </file>
 
-<file path="client/src/app/home-components/HeroSection.tsx">
-import Image from 'next/image';
+<file path="client/src/app/home-components/FinancialSnapshotTeaser.tsx">
+import Section from '@/components/ui/layout/Section';
 import Link from '@/components/ui/Link';
-import { FaShoppingCart } from 'react-icons/fa';
+import { IoTrendingUpOutline } from 'react-icons/io5';
 
-const HeroSection: React.FC = () => {
+const FinancialSnapshotTeaser: React.FC = () => {
 	return (
-		<section className='relative min-h-[85vh] flex flex-col items-center justify-center text-center overflow-hidden -mt-20 pt-20 group'>
-			{/* Minimalist Background - Pure Black/Gradient defined in global css, here we just add subtle overlay if needed */}
-			<div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-neutral-900/20 via-black/60 to-black"></div>
-
-			<div className="relative z-10 flex flex-col items-center max-w-5xl mx-auto px-4 animate-in fade-in zoom-in duration-1000">
-				<div className="mb-8 p-6 bg-black/40 backdrop-blur-xl rounded-full border border-white/10 shadow-[0_0_50px_-12px_rgba(212,175,55,0.2)]">
-					{/* Placeholder for Logo */}
-					<Image
-						src='/Logo.jpg'
-						alt='Dreamhair Crowns Logo'
-						width={200}
-						height={200}
-						priority
-						className='w-32 md:w-48 h-auto drop-shadow-2xl'
-					/>
-				</div>
-
-				<h1 className="mb-6 text-5xl md:text-7xl lg:text-8xl font-bold tracking-widest text-white drop-shadow-sm font-small-caps">
-					Wear Your <span className="text-[var(--theme-gold)]">Crown.</span>
-				</h1>
-
-				<p className='mt-4 text-xl md:text-2xl text-white/80 font-light max-w-3xl leading-relaxed tracking-wide'>
-					Experience the finest Brazilian hair extensions, precision styling tools, and designer footwear curated for the modern queen.
-					<span className="block mt-2 font-medium text-[var(--theme-gold)]">Crown Yourself in Luxury.</span>
-				</p>
-
-				<div className='flex flex-col sm:flex-row w-full justify-center gap-6 mt-12'>
-					<Link
-						variant='button'
-						href='/shop'
-						className='group flex items-center justify-center gap-3 px-8 py-4 bg-[var(--theme-gold)] hover:bg-[var(--theme-gold-light)] text-black rounded-full font-bold uppercase tracking-widest shadow-lg shadow-orange-900/20 transition-all duration-300 hover:-translate-y-1'>
-						<FaShoppingCart className="group-hover:animate-bounce" />
-						<span>Shop Collection</span>
-					</Link>
-				</div>
+		<Section
+			Icon={IoTrendingUpOutline}
+			tittle='Building a Sustainable Future'
+			heading="Since our inception, we've seen promising traction and are on a solid path toward sustainable growth. Our commitment to quality and elegance continues to drive our success.">
+			<div className='mt-6'>
+				<Link
+					variant='button'
+					href='/about'>
+					Discover Our Story...
+				</Link>
 			</div>
-		</section>
+		</Section>
 	);
 };
 
-export default HeroSection;
+export default FinancialSnapshotTeaser;
 </file>
 
 <file path="client/src/app/home-components/KeyDifferentiators.tsx">
@@ -15988,6 +14918,976 @@ const KeyHighlights: React.FC = () => {
 export default KeyHighlights;
 </file>
 
+<file path="client/src/app/layout.tsx">
+import type { Metadata } from 'next';
+import './globals.css';
+
+
+import Navbar from '@/components/Navbar/Navbar';
+import { Analytics } from '@vercel/analytics/next';
+
+export const metadata: Metadata = {
+	title: 'DREAMHAIR CROWNS | Premium Wigs & Hair Extensions',
+	description: "Shop premium Brazilian hair, exclusive wigs, and electronic styling tools. Crown yourself in luxury with DREAMHAIR CROWNS.",
+	keywords: ['Brazilian Hair', 'Wigs', 'Hair Extensions', 'Styling Tools', 'Beauty', 'Dreamhair Crowns', 'Luxury'],
+	themeColor: '#D4AF37',
+	openGraph: {
+		title: 'DREAMHAIR CROWNS | Premium Wigs & Hair Extensions',
+		description: "Shop premium Brazilian hair, exclusive wigs, and electronic styling tools. Crown yourself in luxury.",
+		url: 'https://dreamhair-crowns.com',
+		siteName: 'DREAMHAIR CROWNS',
+		images: [
+			{
+				url: '/Logo.jpg', // We need to update this later when we have a logo
+				width: 800,
+				height: 600,
+			},
+		],
+		locale: 'en_US',
+		type: 'website',
+	},
+};
+
+
+import Footer from '@/components/Footer/Footer';
+
+export default function RootLayout({
+	children,
+}: Readonly<{
+	children: React.ReactNode;
+}>) {
+	return (
+		<html lang='en' className="scroll-smooth">
+			<body className={`antialiased min-h-screen bg-black text-white`}>
+				<Navbar />
+				{children}
+				<Footer />
+				<Analytics />
+			</body>
+		</html>
+	);
+}
+</file>
+
+<file path="client/src/app/services/page.tsx">
+import FeaturedItemsServices from '../home-components/FeaturedItemsServices';
+import Main from '@/components/ui/layout/Main';
+import { HiBriefcase } from 'react-icons/hi2';
+
+export default function ServicesPage() {
+    return (
+        <Main tittle="Our Services" Icon={HiBriefcase} heading="Experience the Royal Treatment">
+            <FeaturedItemsServices />
+        </Main>
+    );
+}
+</file>
+
+<file path="client/src/app/shop/page.tsx">
+import { Suspense } from 'react';
+import ImageGallery from '@/app/gallery/components/ImageGallery';
+import Loading from '@/components/ui/Loading';
+// import PromotionsBanner from '@/app/shop/components/PromotionsBanner';
+import MenuSections from '@/app/shop/components/MenuSections';
+import Main from '@/components/ui/layout/Main';
+import { RiVipCrownFill } from 'react-icons/ri';
+import SearchBar from './components/SearchBar';
+import { createClient } from '@/lib/supabase/server';
+import { Database } from '@/lib/types/database.types';
+
+export default async function HomePage({
+	searchParams,
+}: {
+	searchParams: Promise<{ search?: string }>;
+}) {
+	const params = await searchParams;
+	const search = params.search || '';
+	const supabase = await createClient();
+
+	const [productsResult, categoriesResult] = await Promise.all([
+		supabase
+			.from('products')
+			.select('*')
+			.order('category_name', { ascending: true }),
+		supabase
+			.from('products_category')
+			.select('*')
+			.order('id', { ascending: true })
+	]);
+	// ... (skipping unchanged code for brevity in prompt, but tool needs exact context)
+	// Actually I'll just target the import and the component usage separately or include enough context.
+
+	// Wait, I can't skip lines in TargetContent. 
+	// I will do two separate replaces.
+
+
+	const { data: productsData, error: productsError } = productsResult;
+	const { data: categoriesData, error: categoriesError } = categoriesResult;
+
+	if (productsError) {
+		console.error('Error fetching products:', productsError);
+	}
+
+	if (categoriesError) {
+		console.error('Error fetching categories:', categoriesError);
+	}
+
+	const allProducts: Database['public']['Tables']['products']['Row'][] = productsData || [];
+	const allCategoriesData: Database['public']['Tables']['products_category']['Row'][] = categoriesData || [];
+
+	// Filter out hidden categories
+	const visibleCategories = allCategoriesData.filter(cat => !cat.is_hidden);
+	const visibleCategoryNames = new Set(visibleCategories.map(c => c.category_name));
+
+	// Filter products based on search
+	const filteredProducts = search
+		? allProducts.filter((p) =>
+			p.name.toLowerCase().includes(search.toLowerCase()) ||
+			p.category_name?.toLowerCase().includes(search.toLowerCase())
+		)
+		: allProducts;
+
+	// Group products by category
+	const groupedProducts: ProductsType = [];
+	const categoriesMap = new Map<string, ProductType[]>();
+
+	filteredProducts.forEach((product) => {
+		const category = product.category_name || 'Other';
+
+		// Only include products in visible categories (or 'Other' if we want to keep it, but user asked to use table)
+		// Let's strictly follow the visible categories from DB for now, unless it's a search result that might be relevant?
+		// Actually, if a category is hidden, its products should probably be hidden too in this context.
+		if (!visibleCategoryNames.has(category) && category !== 'Other') {
+			// If strict mode is desired: return; 
+			// But for now, let's allow 'Other' or maybe just check if it exists in the map later.
+		}
+
+		if (!categoriesMap.has(category)) {
+			categoriesMap.set(category, []);
+		}
+
+		// Map Supabase product to UI ProductType
+		const uiProduct: ProductType = {
+			ProductID: product.id,
+			Name: product.name,
+			Description: [product.description || ''],
+			Price: product.price || 0,
+			Image: product.image_url || '/Menus/placeholder.png',
+			badge: product.badge || undefined,
+			rating: product.likes ? 5 : undefined,
+		};
+
+		categoriesMap.get(category)?.push(uiProduct);
+	});
+
+	// When searching, only include categories that:
+	// 1. Have matching products, OR
+	// 2. Have a category name that matches the search term
+	const searchLower = search.toLowerCase();
+	const matchingCategoryNames = search
+		? visibleCategories
+			.filter(cat => cat.category_name.toLowerCase().includes(searchLower))
+			.map(cat => cat.category_name)
+		: [];
+
+	// Iterate over VISIBLE categories from DB to maintain order and metadata
+	visibleCategories.forEach((category) => {
+		const categoryName = category.category_name;
+		const products = categoriesMap.get(categoryName) || [];
+
+		// When searching, only show categories that have matching products or match by name
+		if (search && products.length === 0 && !matchingCategoryNames.includes(categoryName)) {
+			return;
+		}
+
+		// If not searching, and no products, maybe skip? 
+		// Usually menus show empty categories if they exist, or hide them. 
+		// Let's hide empty categories if not searching, to be clean, unless user wants them.
+		// But the original code showed them if they were in the map. 
+		// Let's show if it has products OR if we are searching and it matched.
+		if (!search && products.length === 0) {
+			return;
+		}
+
+		groupedProducts.push({
+			id: category.id,
+			Name: categoryName,
+			Image: category.image || '/Menus/placeholder.png',
+			Description: category.description || '',
+			Products: products,
+		});
+	});
+
+	// Handle 'Other' category if it has products and isn't in DB
+	if (categoriesMap.has('Other')) {
+		const otherProducts = categoriesMap.get('Other') || [];
+		if (otherProducts.length > 0) {
+			groupedProducts.push({
+				id: 999,
+				Name: 'Other',
+				Image: '/Menus/placeholder.png',
+				Description: 'Other items',
+				Products: otherProducts,
+			});
+		}
+	}
+
+	// Create a map of product ID to category slug for search results
+	const productCategoryMap = new Map<string, string>();
+	if (search) {
+		filteredProducts.forEach((product) => {
+			const category = product.category_name || 'Other';
+			// Convert category name to slug (e.g., "Kota Meals" -> "kota-meals")
+			const categorySlug = category.toLowerCase().replace(/\s+/g, '-');
+			productCategoryMap.set(product.id, categorySlug);
+		});
+	}
+
+	return (
+		<>
+			<Suspense fallback={<div className="h-12" />}>
+				<SearchBar />
+			</Suspense>
+			<Main
+				tittle='Shop'
+				Icon={RiVipCrownFill}
+				heading='Crown Yourself in Luxury'>
+				<Suspense fallback={<Loading message='Loading Products...' />}>
+					<MenuSections
+						categories={groupedProducts}
+						matchingProducts={search ? filteredProducts.map(p => ({
+							ProductID: p.id,
+							Name: p.name,
+							Description: [p.description || ''],
+							Price: p.price || 0,
+							Image: p.image_url || '/Menus/placeholder.png',
+							badge: p.badge || undefined,
+							rating: undefined
+						})) : []}
+						productCategoryMap={search ? productCategoryMap : undefined}
+						isSearching={!!search}
+					/>
+				</Suspense>
+				<Suspense fallback={<Loading message='Loading Image Gallery Sections...' />}>
+					<ImageGallery />
+				</Suspense>
+			</Main>
+			{/* <PromotionsBanner /> */}
+		</>
+	);
+}
+</file>
+
+<file path="client/src/components/Navbar/MobileMenu.tsx">
+'use client';
+import AppLink from '../ui/Link';
+import { HiHome, HiInformationCircle, HiEnvelope, HiPhoto, HiBriefcase, HiShoppingBag } from 'react-icons/hi2';
+import { usePathname } from 'next/navigation';
+
+const publicPaths = [
+	{ path: '/', icon: HiHome, label: 'Home' },
+	{ path: '/shop', icon: HiShoppingBag, label: 'Shop' },
+	{ path: '/services', icon: HiBriefcase, label: 'Services' },
+	{ path: '/gallery', icon: HiPhoto, label: 'Gallery' },
+	{ path: '/about', icon: HiInformationCircle, label: 'About' },
+	{ path: '/contact', icon: HiEnvelope, label: 'Contact' },
+];
+
+const MobileMenu: React.FC<{
+	setMenubar: (path: 'mobile' | 'profile') => void;
+}> = ({ setMenubar }) => {
+	const pathname = usePathname();
+
+	return (
+		<nav className='md:hidden absolute top-full left-0 right-0 bg-neutral-900/98 backdrop-blur-xl border-b border-white/10 shadow-2xl transition-all duration-300 z-40 max-h-screen overflow-y-auto'>
+			<ul className='flex flex-col p-4 gap-2'>
+				{publicPaths.map(({ path, icon: Icon, label }) => {
+					const isActive = pathname === path;
+					return (
+						<li key={path}>
+							<AppLink
+								href={path}
+								onClick={() => setMenubar('mobile')}
+								className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all duration-200 w-full ${isActive
+									? 'bg-white/5 border border-[var(--theme-gold)] text-[var(--theme-gold)] shadow-md'
+									: 'text-white/80 hover:text-white hover:bg-white/5 border border-transparent hover:border-white/10'
+									}`}>
+								<Icon className={`text-xl ${isActive ? 'text-[var(--theme-gold)]' : ''}`} />
+								<span>{label}</span>
+							</AppLink>
+						</li>
+					);
+				})}
+			</ul>
+		</nav>
+	);
+};
+
+export default MobileMenu;
+</file>
+
+<file path="client/src/components/ui/ActionFooter.tsx">
+'use client';
+
+import React from 'react';
+import { BiSolidComment, BiSolidShare } from 'react-icons/bi';
+import Button from '@/components/ui/Button';
+import LikesButton from '@/components/ui/LikesButton'; // Updated import path
+import { useAuth } from '@/lib/supabase/auth/useAuth';
+import { useRouter } from 'next/navigation';
+
+interface ActionFooterProps {
+    itemId: string;
+    table: string;
+    commentsCount?: number;
+    className?: string;
+}
+
+const ActionFooter: React.FC<ActionFooterProps> = ({ itemId, table, commentsCount = 0, className = '' }) => {
+    const { user } = useAuth();
+    const router = useRouter();
+
+    const handleComment = () => {
+        if (!user) {
+            router.push('/login');
+            return;
+        }
+        // Placeholder for comment functionality
+        console.log(`Comment on ${table} item ${itemId}`);
+        alert('Comment functionality coming soon!');
+    };
+
+    const handleShare = () => {
+        const shareData = {
+            title: 'Dreamhair Crowns',
+            text: 'Check this out!',
+            url: window.location.href,
+        };
+
+        if (navigator.share) {
+            navigator.share(shareData).catch((err) => console.error('Error sharing:', err));
+        } else {
+            // Fallback
+            navigator.clipboard.writeText(window.location.href);
+            alert('Link copied to clipboard!');
+        }
+    };
+
+    return (
+        <div className={`mt-auto flex items-center justify-between border-t border-white/10 pt-6 ${className}`}>
+            <div className="scale-90 origin-left">
+                <LikesButton itemId={itemId} table={table} />
+            </div>
+            <div className="flex gap-2">
+                <Button
+                    variant='icon'
+                    onClick={handleComment}
+                    className='p-2 hover:bg-white/10 rounded-full transition-colors group/btn flex items-center gap-1'
+                    aria-label={`Comment`}>
+                    <BiSolidComment
+                        size={18}
+                        className='text-white/40 group-hover/btn:text-amber-400 transition-colors'
+                    />
+                    {commentsCount > 0 && (
+                        <span className='text-xs text-amber-400 font-medium'>{commentsCount}</span>
+                    )}
+                </Button>
+                <Button
+                    variant='icon'
+                    onClick={handleShare}
+                    className='p-2 hover:bg-white/10 rounded-full transition-colors group/btn'
+                    aria-label={`Share`}>
+                    <BiSolidShare
+                        size={18}
+                        className='text-white/40 group-hover/btn:text-amber-400 transition-colors'
+                    />
+                </Button>
+            </div>
+        </div>
+    );
+};
+
+export default ActionFooter;
+</file>
+
+<file path="client/src/lib/forms/LoginForm.tsx">
+'use client';
+
+import { useActionState } from 'react';
+import { signInAction } from '@/lib/actions/auth';
+import Loading from '@/components/ui/Loading';
+
+import Button from '@/components/ui/Button';
+import TextInput from '@/components/ui/TextInput';
+import Link from 'next/link';
+import Section from '@/components/ui/layout/Section';
+
+export default function LoginForm() {
+    const [state, formAction, isPending] = useActionState(signInAction, null);
+
+    if (isPending) {
+        return <Loading message="Signing in..." />;
+    }
+
+    return (
+        <Section >
+            {state?.error && (
+                <div className='text-red-300 mb-4 mt-4 bg-red-500/10 border border-red-500/30 p-3 rounded-lg'>{state.error}</div>
+            )}
+            <form
+                action={formAction}
+                className='space-y-6 mt-6'>
+                <TextInput
+                    label='Email:'
+                    type='email'
+                    id='email'
+                    name='email'
+                    required
+                />
+                <TextInput
+                    label='Password:'
+                    type='password'
+                    id='password'
+                    name='password'
+                    required
+                />
+                <Button
+                    type='submit'
+                    variant='primary'
+                    className='w-full'
+                    size='lg'
+                    loading={isPending}>
+                    Sign In
+                </Button>
+            </form>
+            <p className='mt-6 text-white/70 text-center'>
+                Don&apos;t have an account? <Link  href='/register' className="text-amber-500 hover:text-amber-400 font-bold transition-colors duration-200">Sign Up</Link>
+            </p>
+        </Section>
+    );
+}
+</file>
+
+<file path="client/src/app/about/components/MilestonesAndVision.tsx">
+import Icon from '@/components/ui/Icon';
+import Section from '@/components/ui/layout/Section';
+import { IoFlag, IoRocketOutline } from 'react-icons/io5';
+
+const MilestonesAndVision: React.FC = () => {
+	const milestones = [
+		{ year: '2024', title: 'Inception', desc: 'Dreamhair Crowns established by Glenda Mahasha, introducing premium hair solutions to South Africa.' },
+		{ year: '2025', title: 'Expansion', desc: 'Launched full e-commerce platform and expanded product line to include designer footwear.' },
+	];
+
+	return (
+		<Section
+			heading='Our journey began with a vision to redefine beauty standards online. Here are some key moments and our aspirations for the future.'
+			tittle='Milestones & Future Vision'>
+
+			<div className="flex flex-col md:flex-row gap-16 md:gap-24">
+				{/* Timeline Column */}
+				<div className="w-full md:w-1/2 relative">
+					<div className="absolute left-8 top-0 bottom-0 w-px bg-white/10 md:left-1/2"></div>
+					<div className="space-y-12">
+						{milestones.map((m, i) => (
+							<div key={i} className={`relative flex items-center md:justify-between w-full ${i % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+								<div className="absolute left-8 -translate-x-1/2 w-4 h-4 rounded-full bg-amber-500 shadow-[0_0_20px_rgba(245,158,11,0.5)] md:left-1/2"></div>
+								<div className="pl-20 md:pl-0 md:w-[42%]">
+									<span className="text-amber-500 font-bold font-mono text-lg mb-1 block">{m.year}</span>
+									<h3 className="text-white text-xl font-bold font-small-caps">{m.title}</h3>
+									<p className="text-white/60 text-sm mt-2">{m.desc}</p>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+
+				{/* Vision Column */}
+				<div className="w-full md:w-1/2 flex items-center">
+					<div className='p-8 rounded-3xl bg-amber-500/5 border border-amber-500/20 backdrop-blur-sm relative overflow-hidden group'>
+						<div className="absolute -right-8 -bottom-8 text-9xl text-amber-500/5 group-hover:text-amber-500/10 transition-colors">
+							<IoRocketOutline />
+						</div>
+						<IoRocketOutline className="text-4xl text-amber-500 mb-6" />
+						<h3 className="text-2xl font-bold text-white font-small-caps mb-4">Our Future Horizon</h3>
+						<p className='text-white/80 leading-relaxed font-light'>
+							Our vision is to become South Africa&apos;s leading provider of luxury beauty essentials,
+							driven by innovation, quality, and style. We aim to continuously expand our curated collections,
+							ensuring every woman has access to the crown she deserves.
+						</p>
+					</div>
+				</div>
+			</div>
+		</Section>
+	);
+};
+
+export default MilestonesAndVision;
+</file>
+
+<file path="client/src/app/about/components/OurJourney.tsx">
+import Section from '@/components/ui/layout/Section';
+import Image from 'next/image';
+
+const OurJourney: React.FC = () => {
+	return (
+		<Section tittle='The Genesis' className='relative overflow-hidden'>
+			<div className="flex flex-col md:flex-row items-start gap-12">
+				<div className="w-full md:w-1/3 relative group">
+					<div className="absolute inset-0 bg-amber-500/20 blur-2xl transform group-hover:scale-110 transition-transform duration-700"></div>
+					<div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+						<Image
+							src='/Logo.jpg'
+							alt='Dreamhair Crowns Logo'
+							fill
+							className='object-contain bg-black p-8'
+						/>
+					</div>
+				</div>
+				<div className="media-body w-full md:w-2/3">
+					<h2 className="text-4xl md:text-5xl font-bold text-white mb-8 font-small-caps tracking-wide">
+						From Vision to <span className="text-amber-500">Royalty</span>
+					</h2>
+					<p className='text-lg md:text-xl text-white/80 leading-relaxed font-light'>
+						<span className="text-6xl float-left mr-4 mt-[-1rem] text-amber-500 font-serif">D</span>
+						reamhair Crowns was established by <span className="text-amber-500 font-medium">Glenda Mahasha</span>, driven by a simple yet powerful belief: your hair is the crown you never take off.
+						Identifying a need for premium, accessible luxury in South Africa, we curated a collection that empowers women to express their unique beauty.
+					</p>
+					<p className='text-lg md:text-xl text-white/80 leading-relaxed font-light mt-6'>
+						Our journey is fueled by a relentless commitment to quality, elegance, and providing the confidence that comes with knowing you look your absolute best.
+					</p>
+				</div>
+			</div>
+		</Section>
+	);
+};
+
+export default OurJourney;
+</file>
+
+<file path="client/src/app/about/page.tsx">
+import OurJourney from './components/OurJourney';
+import OurCommitment from './components/OurCommitment';
+import WhatMakesUsSpecial from './components/WhatMakesUsSpecial';
+import CoreValues from './components/CoreValues';
+import OurVision from './components/OurVision';
+import KeyLeadership from './components/KeyLeadership';
+import CompanyDescription from './components/CompanyDescription';
+import KeyHighlights from './components/KeyHighlights';
+import MilestonesAndVision from './components/MilestonesAndVision';
+import Main from '@/components/ui/layout/Main';
+import { RiVipCrownFill } from 'react-icons/ri';
+import Section from '@/components/ui/layout/Section';
+
+const AboutPage = () => {
+	return (
+
+		<Main
+			tittle='Our Story'
+			Icon={RiVipCrownFill}
+			className="space-y-32">
+
+			{/* Intro Section - Journey */}
+			<div className="max-w-4xl mx-auto">
+				<OurJourney />
+			</div>
+
+			{/* Strategic Pillars Grid */}
+			<div className="grid md:grid-cols-2 gap-12 lg:gap-24 relative">
+				<div className="absolute inset-y-0 left-1/2 w-px bg-gradient-to-b from-transparent via-amber-500/30 to-transparent hidden md:block"></div>
+
+				<div className="space-y-24">
+					<OurVision />
+					<OurCommitment />
+					<WhatMakesUsSpecial />
+				</div>
+				<div className="space-y-24 pt-0 md:pt-32">
+					<CompanyDescription />
+					<MilestonesAndVision />
+					<CoreValues />
+				</div>
+			</div>
+
+
+
+			{/* Highlights & Leadership */}
+			<div className="space-y-24">
+				<KeyHighlights />
+				<KeyLeadership />
+			</div>
+		</Main>
+	);
+};
+
+export default AboutPage;
+</file>
+
+<file path="client/src/app/contact/components/ContactInfo.tsx">
+import Section from '@/components/ui/layout/Section';
+import { IoLocationSharp, IoCall, IoMail } from 'react-icons/io5';
+
+const ContactInfo: React.FC = () => {
+	return (
+		<Section tittle='Contact Information' >
+			<div className='md:flex md:flex-wrap md:gap-4'>
+
+				<article className='flex items-center  gap-2 p-4 '>
+
+					<IoLocationSharp className='text-white w-10 h-10  ' />
+					<p>
+						<strong>Location:</strong> 03 Aloe Crescent, Marlboro Gardens, Alexandra (Online Store SA)
+					</p>
+				</article>
+				<article className='flex items-center  gap-2 p-2'>
+					<IoCall className='text-white w-10 h-10  ' />
+					<p>
+						<strong>Phone Number:</strong> 083 588 7070
+					</p>
+				</article>
+				<article className='flex items-center  gap-2 p-2'>
+					<IoMail className='text-white w-10 h-10  ' />
+					<p>
+						<strong>Email Address:</strong> glendamahasha@icloud.com
+					</p>
+				</article>
+			</div>
+		</Section>
+	);
+};
+
+export default ContactInfo;
+</file>
+
+<file path="client/src/app/contact/components/MapEmbed.tsx">
+const MapEmbed = () => (
+  <div className="w-full h-96 rounded-lg overflow-hidden mt-8">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14332.61331718817!2d28.0886617!3d-26.0945785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9572d2c14041d7%3A0x6b49e630800684f!2sMarlboro%20Gardens%2C%20Sandton%2C%202063!5e0!3m2!1sen!2sza!4v1700000000000!5m2!1sen!2sza"
+      width="100%"
+      height="100%"
+      style={{ border: 0 }}
+      allowFullScreen
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+      className="rounded-lg"
+    />
+  </div>
+);
+
+export default MapEmbed;
+</file>
+
+<file path="client/src/app/home-components/TargetMarketCallout.tsx">
+import { BiBullseye } from 'react-icons/bi';
+import {
+	IoHomeOutline,
+	IoBriefcaseOutline,
+	IoCarSportOutline,
+	IoBusinessOutline,
+} from 'react-icons/io5';
+import Icon from '@/components/ui/Icon';
+import Section from '@/components/ui/layout/Section';
+
+const TargetMarketCallout: React.FC = () => {
+	const targetMarkets = [
+		{
+			id: 1,
+			title: 'Beauty Enthusiasts',
+			text: 'Women who appreciate high-quality hair and want to invest in their confidence.',
+			icon: IoHomeOutline,
+		},
+		{
+			id: 2,
+			title: 'Professional Stylists',
+			text: 'Salon owners and stylists seeking premium bundles and tools for their clients.',
+			icon: IoBriefcaseOutline,
+		},
+		{
+			id: 3,
+			title: 'Trendsetters',
+			text: 'Fashion-forward individuals looking for the latest styles in wigs and footwear.',
+			icon: IoCarSportOutline,
+		},
+		{
+			id: 4,
+			title: 'Global Queens',
+			text: 'International customers seeking reliable, luxury products shipped worldwide.',
+			icon: IoBusinessOutline,
+		},
+	];
+
+	return (
+		<Section
+			Icon={BiBullseye}
+			tittle='Who We Serve'
+			id='target-market'
+			heading='Curated experiences for the diverse tapestry of our beauty community.'>
+			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
+				{targetMarkets.map((market) => (
+					<article
+						key={market.id}
+						className='group p-6 rounded-3xl bg-neutral-900/30 border border-white/5 hover:border-amber-500/30 hover:bg-white/5 transition-all duration-500 flex flex-col items-center text-center'>
+						<div className="w-16 h-16 rounded-full bg-gradient-to-br from-white/5 to-white/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 border border-white/5 group-hover:border-amber-500/30">
+							<market.icon className="text-3xl text-white/50 group-hover:text-amber-500 transition-colors" />
+						</div>
+						<h3 className="text-lg font-bold text-white mb-3 font-small-caps tracking-wide group-hover:text-amber-500 transition-colors">{market.title}</h3>
+						<p className='text-white/60 text-sm leading-relaxed font-light'>{market.text}</p>
+					</article>
+				))}
+			</div>
+		</Section>
+	);
+};
+
+export default TargetMarketCallout;
+</file>
+
+<file path="client/src/components/Navbar/DesktopNavbar.tsx">
+'use client';
+import AppLink from '@/components/ui/Link';
+import Image from 'next/image';
+import {
+	HiHome,
+	HiInformationCircle,
+	HiEnvelope,
+	HiPhoto,
+	HiBriefcase,
+	HiShoppingBag,
+} from 'react-icons/hi2';
+import React, { useState, useRef, useEffect } from 'react';
+import { useAuth } from '@/lib/supabase/auth/useAuth';
+import { usePathname } from 'next/navigation';
+
+const publicPaths = [
+	{ path: '/', icon: HiHome, label: 'Home' },
+	{ path: '/shop', icon: HiShoppingBag, label: 'Shop' },
+	{ path: '/services', icon: HiBriefcase, label: 'Services' },
+	{ path: '/gallery', icon: HiPhoto, label: 'Gallery' },
+	{ path: '/about', icon: HiInformationCircle, label: 'About' },
+	{ path: '/contact', icon: HiEnvelope, label: 'Contact' },
+];
+
+const DesktopNavbar: React.FC = () => {
+	// keeping hooks for future use if needed (e.g. profile menu)
+	const { user } = useAuth();
+	const pathname = usePathname();
+	const [profileOpen, setProfileOpen] = useState(false);
+	const profileRef = useRef<HTMLLIElement>(null);
+
+	return (
+		<nav className='hidden md:flex gap-4 justify-between items-center p-0 m-0 w-full'>
+			<AppLink href='/' className='shrink-0'>
+				{/* Placeholder logo until we have the real file, or text fallback */}
+				<Image
+					src='/Logo.jpg'
+					alt='Dreamhair Crowns Logo'
+					width={64}
+					height={64}
+					className='h-16 w-auto'
+					priority
+				/>
+			</AppLink>
+
+			<ul className='flex space-x-2 items-center'>
+				{publicPaths.map(({ path, icon: Icon, label }) => {
+					const isActive = pathname === path;
+					return (
+						<li key={path}>
+							<AppLink
+								href={path}
+								className={`group relative flex items-center gap-2 px-4 py-2 font-medium transition-colors duration-300 ${isActive
+									? 'text-gold'
+									: 'text-white/70 hover:text-white'
+									}`}>
+								<Icon className={`text-lg transition-transform duration-300 group-hover:scale-110 ${isActive ? 'text-gold' : 'group-hover:text-gold-light'}`} />
+								<span className="relative">
+									{label}
+									<span className={`absolute -bottom-1 left-0 w-full h-px bg-[var(--theme-gold)] origin-center transition-transform duration-500 ease-out ${isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} />
+								</span>
+							</AppLink>
+						</li>
+					);
+				})}
+			</ul>
+		</nav>
+	);
+};
+
+export default DesktopNavbar;
+</file>
+
+<file path="client/src/components/ui/Loading.tsx">
+import Image from 'next/image';
+import '../components.css'; // Optional: for custom styles
+import Main from './layout/Main';
+import Section from './layout/Section';
+
+const Loading = ({ message = 'Loading...' }: { message?: string }) => (
+	<Main className='flex flex-col justify-center items-center min-h-screen  p-4' tittle='DREAMHAIR CROWNS' heading='Crown Yourself in Luxury.'>
+		<Section className='flex flex-col items-center text-center max-w-md'>
+			<div className='mt-8 animate-pulse'>
+				<Image
+					src='/Logo.jpg'
+					alt='Dreamhair Crowns Logo'
+					width={220}
+					height={220}
+					className='w-48 h-48 mb-4'
+					priority
+				/>
+			</div>
+			<div className='spinner' />
+			<p className='text-white font-semibold'>{message}</p>
+		</Section>
+	</Main>
+);
+
+export default Loading;
+</file>
+
+<file path="client/src/lib/supabase/client.ts">
+import { createBrowserClient } from '@supabase/ssr';
+import { Database } from '@/lib/types/database.types';
+
+export function createClient() {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    console.log("no process.env.NEXT_PUBLIC_SUPABASE_URL")
+  }
+  if (!process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) {
+    console.log("no process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY")
+  }
+  return createBrowserClient<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
+  );
+}
+</file>
+
+<file path="client/src/lib/supabase/server.ts">
+import { createServerClient } from '@supabase/ssr';
+import { cookies } from 'next/headers';
+import { Database } from '@/lib/types/database.types';
+
+import { SupabaseClient } from '@supabase/supabase-js';
+
+export async function createClient(): Promise<SupabaseClient<Database>> {
+  const cookieStore = await cookies();
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    console.log("no process.env.NEXT_PUBLIC_SUPABASE_URL")
+  }
+  if (!process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) {
+    console.log("no process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY")
+  }
+  return createServerClient<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return cookieStore.getAll();
+        },
+        setAll(cookiesToSet) {
+          try {
+            cookiesToSet.forEach(({ name, value }) => cookieStore.set(name, value));
+          } catch {
+            // The `setAll` method was called from a Server Component.
+            // This can be ignored if you have middleware refreshing
+            // user sessions.
+          }
+        },
+      },
+    }
+  );
+}
+</file>
+
+<file path="client/src/app/about/components/OurCommitment.tsx">
+import Section from '@/components/ui/layout/Section';
+import Image from 'next/image';
+import { IoShieldCheckmark } from 'react-icons/io5';
+
+const OurCommitment: React.FC = () => {
+	return (
+		<Section
+			Icon={IoShieldCheckmark}
+			tittle='Our Commitment'>
+
+			<div className="flex flex-col md:flex-row items-center gap-12 bg-white/5 border border-white/5 rounded-3xl p-8 backdrop-blur-sm">
+				<div className="w-full md:w-1/3 flex justify-center">
+					<div className="relative w-48 h-48 md:w-full md:h-64 opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-500">
+						<Image
+							alt='PA Logo'
+							fill
+							src='/Logo.jpg'
+							className="object-contain"
+						/>
+					</div>
+				</div>
+				<div className="w-full md:w-2/3 space-y-6">
+					<h3 className="text-2xl font-bold text-white font-small-caps tracking-wide">Excellence in Every Detail</h3>
+					<p className='text-white/80 leading-relaxed font-light text-lg'>
+						At Dreamhair Crowns, we are committed to providing a premium experience in every interaction.
+						We strive to be your trusted destination for luxury hair and fashion, delivering quality products that empower you to shine.
+						Our goal is to build community trust through consistency and exceptional service across South Africa.
+					</p>
+				</div>
+			</div>
+		</Section>
+	);
+};
+
+export default OurCommitment;
+</file>
+
+<file path="client/src/app/home-components/HeroSection.tsx">
+import Image from 'next/image';
+import Link from '@/components/ui/Link';
+import { FaShoppingCart } from 'react-icons/fa';
+
+const HeroSection: React.FC = () => {
+	return (
+		<section className='relative min-h-[85vh] flex flex-col items-center justify-center text-center overflow-hidden -mt-20 pt-20 group'>
+			{/* Minimalist Background - Pure Black/Gradient defined in global css, here we just add subtle overlay if needed */}
+			<div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-neutral-900/20 via-black/60 to-black"></div>
+
+			<div className="relative z-10 flex flex-col items-center max-w-5xl mx-auto px-4 animate-in fade-in zoom-in duration-1000">
+				<div className="mb-8 p-6 bg-black/40 backdrop-blur-xl rounded-full border border-white/10 shadow-[0_0_50px_-12px_rgba(212,175,55,0.2)]">
+					{/* Placeholder for Logo */}
+					<Image
+						src='/Logo.png'
+						alt='Dreamhair Crowns Logo'
+						width={200}
+						height={200}
+						priority
+						className='w-32 md:w-48 h-auto drop-shadow-2xl'
+					/>
+				</div>
+
+				<h1 className="mb-6 text-5xl md:text-7xl lg:text-8xl font-bold tracking-widest text-white drop-shadow-sm font-small-caps">
+					Wear Your <span className="text-[var(--theme-gold)]">Crown.</span>
+				</h1>
+
+				<p className='mt-4 text-xl md:text-2xl text-white/80 font-light max-w-3xl leading-relaxed tracking-wide'>
+					Experience the finest Brazilian hair extensions, precision styling tools, and designer footwear curated for the modern queen.
+					<span className="block mt-2 font-medium text-[var(--theme-gold)]">Crown Yourself in Luxury.</span>
+				</p>
+
+				<div className='flex flex-col sm:flex-row w-full justify-center gap-6 mt-12'>
+					<Link
+						variant='button'
+						href='/shop'
+						className='group flex items-center justify-center gap-3 px-8 py-4 bg-[var(--theme-gold)] hover:bg-[var(--theme-gold-light)] text-black rounded-full font-bold uppercase tracking-widest shadow-lg shadow-orange-900/20 transition-all duration-300 hover:-translate-y-1'>
+						<FaShoppingCart className="group-hover:animate-bounce" />
+						<span>Shop Collection</span>
+					</Link>
+				</div>
+			</div>
+		</section>
+	);
+};
+
+export default HeroSection;
+</file>
+
 <file path="client/src/components/Footer/Footer.tsx">
 'use client';
 
@@ -16016,11 +15916,11 @@ const Footer: React.FC = () => {
                                 />
                             </div>
                             <span className="text-2xl font-bold text-white tracking-widest font-small-caps">
-                                PA <span className="text-amber-500">Luxe</span>
+                                DREAMHAIR <span className="text-amber-500">CROWNS</span>
                             </span>
                         </div>
                         <p className="text-white/60 leading-relaxed">
-                            Elevating dining and event experiences in Evander. From exquisite culinary creations to immersive 360° photo memories.
+                            Your premier destination for luxury hair extensions, wigs, and fashion accessories. Crown yourself in quality and style.
                         </p>
                         <div className="flex gap-4">
                             {[FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn].map((Icon, i) => (
@@ -16052,7 +15952,7 @@ const Footer: React.FC = () => {
                         <ul className="space-y-6">
                             <li className="flex items-start gap-3 text-white/60">
                                 <HiLocationMarker className="text-amber-500 text-xl flex-shrink-0" />
-                                <span>Evander, Mpumalanga</span>
+                                <span>03 Aloe Crescent, Marlboro Gardens, Alexandra (Online Store SA)</span>
                             </li>
                             <li className="flex items-center gap-3 text-white/60">
                                 <HiPhone className="text-amber-500 text-xl flex-shrink-0" />

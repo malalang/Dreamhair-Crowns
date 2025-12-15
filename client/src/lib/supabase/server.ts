@@ -6,15 +6,15 @@ import { SupabaseClient } from '@supabase/supabase-js';
 
 export async function createClient(): Promise<SupabaseClient<Database>> {
   const cookieStore = await cookies();
-  if (!process.env.NEXT_PUBLIC_dreamhair_crowns_SUPABASE_URL) {
-    console.log("no process.env.NEXT_PUBLIC_dreamhair_crowns_SUPABASE_URL")
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    console.log("no process.env.NEXT_PUBLIC_SUPABASE_URL")
   }
-  if (!process.env.NEXT_PUBLIC_dreamhair_crowns_SUPABASE_PUBLISHABLE_KEY) {
-    console.log("no process.env.NEXT_PUBLIC_dreamhair_crowns_SUPABASE_PUBLISHABLE_KEY")
+  if (!process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) {
+    console.log("no process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY")
   }
   return createServerClient<Database>(
-    process.env.NEXT_PUBLIC_dreamhair_crowns_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_dreamhair_crowns_SUPABASE_PUBLISHABLE_KEY!,
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
     {
       cookies: {
         getAll() {
