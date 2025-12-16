@@ -15,7 +15,8 @@ export const addOrder = async (
   userId: string,
   items: CartItem[],
   totalPrice: number,
-  totalQuantity: number
+  totalQuantity: number,
+  status: Order['status'] = 'pending'
 ) => {
   const supabase = createClient();
 
@@ -26,7 +27,7 @@ export const addOrder = async (
       items,
       total_price: totalPrice,
       total_quantity: totalQuantity,
-      status: 'pending',
+      status: status,
     } as any)
     .select()
     .single();
