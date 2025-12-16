@@ -7,7 +7,7 @@ declare global {
     shippingAddress: string;
     paymentMethod: paymentMethod;
   }
- 
+
   interface OrderItem {
     name: string;
     quantity: number;
@@ -24,7 +24,7 @@ declare global {
     products: CartItem[];
     quantity: number;
     totalAmount: number;
-    status: 'pending' | 'processing' | 'completed' | 'cancelled';
+    status: 'pending' | 'processing' | 'completed' | 'cancelled' | 'waiting_for_payment';
     type: 'Takeaway' | 'Photo boot' | 'Laundry';
     location?: string;
     paymentMethod?: paymentMethod;

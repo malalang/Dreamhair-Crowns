@@ -6,7 +6,7 @@ export interface Order {
   items: CartItem[];
   total_price: number;
   total_quantity: number;
-  status: 'pending' | 'processing' | 'completed' | 'cancelled';
+  status: 'pending' | 'processing' | 'completed' | 'cancelled' | 'waiting_for_payment';
   created_at: string;
   updated_at: string;
 }
