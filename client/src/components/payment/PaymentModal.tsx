@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { IoClose, IoCard, IoWallet, IoCopy } from 'react-icons/io5';
 import { HiBuildingLibrary } from 'react-icons/hi2';
+import Button from '../ui/Button';
 
 interface PaymentModalProps {
     totalAmount: number;
