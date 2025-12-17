@@ -91,22 +91,74 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ totalAmount, onClose, onPay
                         </div>
                     )}
 
-                    {/* Card Flow (Simulated) */}
+                    {/* Card Flow */}
                     {method === 'card' && (
-                        <div className="space-y-6 animate-in slide-in-from-right-4 duration-300">
-                            <div className="p-4 bg-indigo-500/10 border border-indigo-500/30 rounded-xl text-center">
-                                <p className="text-indigo-300 text-sm mb-2">Secure Payment Gateway</p>
-                                <div className="animate-pulse bg-white/5 h-48 rounded-lg flex items-center justify-center mb-4">
-                                    <span className="text-white/30 text-sm">[Simulated Payment Widget]</span>
+                        <div className="animate-in slide-in-from-right-4 duration-300 space-y-6">
+                            <form
+                                className="flex flex-col gap-5 p-6 rounded-2xl bg-[#0c0f14] shadow-[0px_187px_75px_rgba(0,0,0,0.01),0px_105px_63px_rgba(0,0,0,0.05)] relative"
+                                onSubmit={(e) => { e.preventDefault(); onPaymentSelected('card'); }}
+                            >
+                                {/* Card Holder */}
+                                <div className="flex flex-col gap-1 relative group">
+                                    <label className="text-xs text-[#8b8e98] font-semibold absolute -top-[10px] left-[15px] bg-[#0c0f14] px-2 transition-all group-focus-within:text-[#d17842] group-focus-within:top-0 group-focus-within:left-0 z-10">
+                                        Card holder full name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        placeholder="Enter your full name"
+                                        title="Input title"
+                                        className="w-full h-[50px] indent-[15px] rounded-[15px] outline-none bg-transparent border border-[#21262e] text-[#aeaeae] transition-all focus:border-[#d17842] hover:border-[#d1794280] caret-[#d17842]"
+                                    />
                                 </div>
-                                <Button
-                                    onClick={() => onPaymentSelected('card')}
+
+                                {/* Card Number */}
+                                <div className="flex flex-col gap-1 relative group">
+                                    <label className="text-xs text-[#8b8e98] font-semibold absolute -top-[10px] left-[15px] bg-[#0c0f14] px-2 transition-all group-focus-within:text-[#d17842] group-focus-within:top-0 group-focus-within:left-0 z-10">
+                                        Card Number
+                                    </label>
+                                    <input
+                                        type="number"
+                                        placeholder="0000 0000 0000 0000"
+                                        title="Input title"
+                                        className="w-full h-[50px] indent-[15px] rounded-[15px] outline-none bg-transparent border border-[#21262e] text-[#aeaeae] transition-all focus:border-[#d17842] hover:border-[#d1794280] caret-[#d17842]"
+                                    />
+                                </div>
+
+                                {/* Split: Expiry & CVV */}
+                                <div className="flex flex-row justify-between w-full gap-[15px]">
+                                    <div className="flex flex-col gap-1 relative group w-full">
+                                        <label className="text-xs text-[#8b8e98] font-semibold absolute -top-[10px] left-[15px] bg-[#0c0f14] px-2 transition-all group-focus-within:text-[#d17842] group-focus-within:top-0 group-focus-within:left-0 z-10">
+                                            Expiry Date
+                                        </label>
+                                        <input
+                                            type="text"
+                                            placeholder="01/23"
+                                            title="Expiry Date"
+                                            className="w-full h-[50px] indent-[15px] rounded-[15px] outline-none bg-transparent border border-[#21262e] text-[#aeaeae] transition-all focus:border-[#d17842] hover:border-[#d1794280] caret-[#d17842]"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col gap-1 relative group w-full">
+                                        <label className="text-xs text-[#8b8e98] font-semibold absolute -top-[10px] left-[15px] bg-[#0c0f14] px-2 transition-all group-focus-within:text-[#d17842] group-focus-within:top-0 group-focus-within:left-0 z-10">
+                                            CVV
+                                        </label>
+                                        <input
+                                            type="number"
+                                            placeholder="CVV"
+                                            title="CVV"
+                                            className="w-full h-[50px] indent-[15px] rounded-[15px] outline-none bg-transparent border border-[#21262e] text-[#aeaeae] transition-all focus:border-[#d17842] hover:border-[#d1794280] caret-[#d17842]"
+                                        />
+                                    </div>
+                                </div>
+
+                                <button
+                                    type="submit"
                                     disabled={isProcessing}
-                                    className="w-full bg-indigo-600 hover:bg-indigo-700"
+                                    className="mt-5 py-5 rounded-[25px] font-medium text-xl flex items-center justify-center border-2 border-transparent bg-[#d17842] text-white hover:bg-transparent hover:border-[#d17842] hover:text-[#d17842] active:scale-95 transition-all duration-200 cursor-pointer w-full"
                                 >
-                                    {isProcessing ? 'Processing...' : 'Pay Now'}
-                                </Button>
-                            </div>
+                                    {isProcessing ? 'Processing...' : 'Checkout'}
+                                </button>
+                            </form>
+
                             <button
                                 onClick={() => setMethod(null)}
                                 className="w-full text-center text-sm text-white/40 hover:text-white"
