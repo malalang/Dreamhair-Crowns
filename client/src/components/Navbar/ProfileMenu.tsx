@@ -3,7 +3,7 @@ import AppLink from '../ui/Link';
 import { HiUser, HiClipboardList, HiShoppingBag, HiLogout, HiCamera } from 'react-icons/hi';
 import Button from '../ui/Button';
 import { User } from '@supabase/supabase-js';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const protectedPaths = [
 	{ path: '/profile', icon: HiUser, label: 'Profile' },
@@ -17,6 +17,7 @@ const ProfileMenu: React.FC<{ setMenubar: (path: 'mobile' | 'profile') => void; 
 	user,
 }) => {
 	const pathname = usePathname();
+	const router = useRouter();
 
 	if (!user) return null;
 
@@ -57,6 +58,8 @@ const ProfileMenu: React.FC<{ setMenubar: (path: 'mobile' | 'profile') => void; 
 						const { createClient } = await import('@/lib/supabase/client');
 						const supabase = createClient();
 						await supabase.auth.signOut();
+						router.refresh();
+						router.push('/login');
 						setMenubar('profile');
 					}}
 					className='flex items-center justify-center gap-2 px-4 py-2.5 w-full bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 hover:border-red-500/50 text-red-300 hover:text-red-200 rounded-lg font-semibold transition-all duration-200'>
