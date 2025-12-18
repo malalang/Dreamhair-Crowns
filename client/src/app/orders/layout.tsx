@@ -3,7 +3,7 @@
 import { CartProvider } from '@/lib/context/CartContext';
 import React, { ReactNode } from 'react';
 import Link from 'next/link';
-import { HiShoppingBag, HiClock, HiCog, HiCheckCircle, HiArrowLeft, HiXCircle } from 'react-icons/hi2';
+import { HiShoppingBag, HiClock, HiCog, HiCheckCircle, HiArrowLeft, HiXCircle, HiCreditCard, HiTruck, HiClipboardDocumentCheck } from 'react-icons/hi2';
 import { usePathname } from 'next/navigation';
 
 interface LayoutProps {
@@ -14,9 +14,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 	const pathname = usePathname();
 
 	const navItems = [
-		{ href: '/orders/pending', label: 'Pending', icon: HiClock },
+		{ href: '/orders/waiting_for_payment', label: 'To Pay', icon: HiCreditCard },
+		{ href: '/orders/payment_review', label: 'Reviewing', icon: HiClipboardDocumentCheck },
 		{ href: '/orders/processing', label: 'Processing', icon: HiCog },
-		{ href: '/orders/completed', label: 'Completed', icon: HiCheckCircle },
+		{ href: '/orders/shipped', label: 'Shipped', icon: HiTruck },
+		{ href: '/orders/delivered', label: 'Delivered', icon: HiCheckCircle },
 		{ href: '/orders/cancelled', label: 'Cancelled', icon: HiXCircle },
 	];
 
