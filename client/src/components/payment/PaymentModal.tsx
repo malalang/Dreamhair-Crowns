@@ -93,75 +93,88 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ totalAmount, onClose, onPay
 
                     {/* Card Flow */}
                     {method === 'card' && (
-                        <div className="animate-in slide-in-from-right-4 duration-300 space-y-6">
+                        <div className="animate-in slide-in-from-right-4 duration-300 space-y-6 relative">
+                            {/* Disabled Overlay */}
+                            <div className="absolute inset-0 z-10 bg-black/60 backdrop-blur-[2px] rounded-2xl flex flex-col items-center justify-center text-center p-6">
+                                <h3 className="text-2xl font-bold text-red-500 mb-2 uppercase tracking-wider">Coming Soon</h3>
+                                <p className="text-white/80 mb-6 max-w-[200px]">
+                                    Card payments are currently disabled. Please use EFT.
+                                </p>
+                                <Button
+                                    onClick={() => setMethod('eft')}
+                                    className="bg-amber-500 hover:bg-amber-400 text-black font-bold px-8 shadow-lg shadow-amber-500/20"
+                                >
+                                    Switch to EFT Payment
+                                </Button>
+                            </div>
+
                             <form
-                                className="flex flex-col gap-5 p-6 rounded-2xl bg-[#0c0f14] shadow-[0px_187px_75px_rgba(0,0,0,0.01),0px_105px_63px_rgba(0,0,0,0.05)] relative"
-                                onSubmit={(e) => { e.preventDefault(); onPaymentSelected('card'); }}
+                                className="flex flex-col gap-5 p-6 rounded-2xl bg-[#0c0f14] shadow-[0px_187px_75px_rgba(0,0,0,0.01),0px_105px_63px_rgba(0,0,0,0.05)] relative opacity-50 pointer-events-none"
                             >
                                 {/* Card Holder */}
                                 <div className="flex flex-col gap-1 relative group">
-                                    <label className="text-xs text-[#8b8e98] font-semibold absolute -top-[10px] left-[15px] bg-[#0c0f14] px-2 transition-all group-focus-within:text-[#d17842] group-focus-within:top-0 group-focus-within:left-0 z-10">
+                                    <label className="text-xs text-[#8b8e98] font-semibold absolute -top-[10px] left-[15px] bg-[#0c0f14] px-2 z-10">
                                         Card holder full name
                                     </label>
                                     <input
                                         type="text"
+                                        disabled
                                         placeholder="Enter your full name"
-                                        title="Input title"
-                                        className="w-full h-[50px] indent-[15px] rounded-[15px] outline-none bg-transparent border border-[#21262e] text-[#aeaeae] transition-all focus:border-[#d17842] hover:border-[#d1794280] caret-[#d17842]"
+                                        className="w-full h-[50px] indent-[15px] rounded-[15px] outline-none bg-transparent border border-[#21262e] text-[#aeaeae]"
                                     />
                                 </div>
 
                                 {/* Card Number */}
                                 <div className="flex flex-col gap-1 relative group">
-                                    <label className="text-xs text-[#8b8e98] font-semibold absolute -top-[10px] left-[15px] bg-[#0c0f14] px-2 transition-all group-focus-within:text-[#d17842] group-focus-within:top-0 group-focus-within:left-0 z-10">
+                                    <label className="text-xs text-[#8b8e98] font-semibold absolute -top-[10px] left-[15px] bg-[#0c0f14] px-2 z-10">
                                         Card Number
                                     </label>
                                     <input
                                         type="number"
+                                        disabled
                                         placeholder="0000 0000 0000 0000"
-                                        title="Input title"
-                                        className="w-full h-[50px] indent-[15px] rounded-[15px] outline-none bg-transparent border border-[#21262e] text-[#aeaeae] transition-all focus:border-[#d17842] hover:border-[#d1794280] caret-[#d17842]"
+                                        className="w-full h-[50px] indent-[15px] rounded-[15px] outline-none bg-transparent border border-[#21262e] text-[#aeaeae]"
                                     />
                                 </div>
 
                                 {/* Split: Expiry & CVV */}
                                 <div className="flex flex-row justify-between w-full gap-[15px]">
                                     <div className="flex flex-col gap-1 relative group w-full">
-                                        <label className="text-xs text-[#8b8e98] font-semibold absolute -top-[10px] left-[15px] bg-[#0c0f14] px-2 transition-all group-focus-within:text-[#d17842] group-focus-within:top-0 group-focus-within:left-0 z-10">
+                                        <label className="text-xs text-[#8b8e98] font-semibold absolute -top-[10px] left-[15px] bg-[#0c0f14] px-2 z-10">
                                             Expiry Date
                                         </label>
                                         <input
                                             type="text"
+                                            disabled
                                             placeholder="01/23"
-                                            title="Expiry Date"
-                                            className="w-full h-[50px] indent-[15px] rounded-[15px] outline-none bg-transparent border border-[#21262e] text-[#aeaeae] transition-all focus:border-[#d17842] hover:border-[#d1794280] caret-[#d17842]"
+                                            className="w-full h-[50px] indent-[15px] rounded-[15px] outline-none bg-transparent border border-[#21262e] text-[#aeaeae]"
                                         />
                                     </div>
                                     <div className="flex flex-col gap-1 relative group w-full">
-                                        <label className="text-xs text-[#8b8e98] font-semibold absolute -top-[10px] left-[15px] bg-[#0c0f14] px-2 transition-all group-focus-within:text-[#d17842] group-focus-within:top-0 group-focus-within:left-0 z-10">
+                                        <label className="text-xs text-[#8b8e98] font-semibold absolute -top-[10px] left-[15px] bg-[#0c0f14] px-2 z-10">
                                             CVV
                                         </label>
                                         <input
                                             type="number"
+                                            disabled
                                             placeholder="CVV"
-                                            title="CVV"
-                                            className="w-full h-[50px] indent-[15px] rounded-[15px] outline-none bg-transparent border border-[#21262e] text-[#aeaeae] transition-all focus:border-[#d17842] hover:border-[#d1794280] caret-[#d17842]"
+                                            className="w-full h-[50px] indent-[15px] rounded-[15px] outline-none bg-transparent border border-[#21262e] text-[#aeaeae]"
                                         />
                                     </div>
                                 </div>
 
                                 <button
-                                    type="submit"
-                                    disabled={isProcessing}
-                                    className="mt-5 py-5 rounded-[25px] font-medium text-xl flex items-center justify-center border-2 border-transparent bg-[#d17842] text-white hover:bg-transparent hover:border-[#d17842] hover:text-[#d17842] active:scale-95 transition-all duration-200 cursor-pointer w-full"
+                                    type="button"
+                                    disabled
+                                    className="mt-5 py-5 rounded-[25px] font-medium text-xl flex items-center justify-center border-2 border-transparent bg-[#21262e] text-white/50 cursor-not-allowed w-full"
                                 >
-                                    {isProcessing ? 'Processing...' : 'Checkout'}
+                                    Checkout
                                 </button>
                             </form>
 
                             <button
                                 onClick={() => setMethod(null)}
-                                className="w-full text-center text-sm text-white/40 hover:text-white"
+                                className="w-full text-center text-sm text-white/40 hover:text-white mt-4 relative z-20"
                             >
                                 Select a different method
                             </button>
