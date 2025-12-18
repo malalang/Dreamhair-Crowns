@@ -60,10 +60,9 @@ admin/src/app/(dashboard)/contact/page.tsx
 admin/src/app/(dashboard)/dashboard/page.tsx
 admin/src/app/(dashboard)/featured-items/page.tsx
 admin/src/app/(dashboard)/layout.tsx
-admin/src/app/(dashboard)/menu/page.tsx
-admin/src/app/(dashboard)/menu/products/[id]/edit/page.tsx
 admin/src/app/(dashboard)/orders/page.tsx
-admin/src/app/(dashboard)/photo-bookings/page.tsx
+admin/src/app/(dashboard)/Products/page.tsx
+admin/src/app/(dashboard)/Products/products/[id]/edit/page.tsx
 admin/src/app/(dashboard)/profiles/page.tsx
 admin/src/app/(dashboard)/settings/page.tsx
 admin/src/app/(dashboard)/support/page.tsx
@@ -87,17 +86,16 @@ admin/src/components/layout/AdminTopbar.tsx
 admin/src/components/layout/DashboardShell.tsx
 admin/src/components/layout/nav-items.tsx
 admin/src/components/layout/SidebarNav.tsx
-admin/src/components/menu/CategoriesBoard.tsx
-admin/src/components/menu/comments/CommentsBoard.tsx
-admin/src/components/menu/favorites/FavoritesBoard.tsx
-admin/src/components/menu/products/AddProductForm.tsx
-admin/src/components/menu/products/AddProductPanel.tsx
-admin/src/components/menu/products/ProductBoard.tsx
-admin/src/components/menu/products/ProductEditForm.tsx
-admin/src/components/menu/QuickEditForm.tsx
 admin/src/components/orders/OrdersBoard.tsx
 admin/src/components/orders/UpdateOrderStatusForm.tsx
-admin/src/components/photo-bookings/PhotoBookingsBoard.tsx
+admin/src/components/Products/CategoriesBoard.tsx
+admin/src/components/Products/comments/CommentsBoard.tsx
+admin/src/components/Products/favorites/FavoritesBoard.tsx
+admin/src/components/Products/products/AddProductForm.tsx
+admin/src/components/Products/products/AddProductPanel.tsx
+admin/src/components/Products/products/ProductBoard.tsx
+admin/src/components/Products/products/ProductEditForm.tsx
+admin/src/components/Products/QuickEditForm.tsx
 admin/src/components/profiles/ProfileDetailModal.tsx
 admin/src/components/profiles/ProfilesBoard.tsx
 admin/src/components/shared/DeleteConfirmDialog.tsx
@@ -115,8 +113,6 @@ admin/src/lib/data/dashboard.ts
 admin/src/lib/data/favorites.ts
 admin/src/lib/data/orders-actions.ts
 admin/src/lib/data/orders.ts
-admin/src/lib/data/photo-bookings-actions.ts
-admin/src/lib/data/photo-bookings.ts
 admin/src/lib/data/products-actions.ts
 admin/src/lib/data/products.ts
 admin/src/lib/data/profile-details.ts
@@ -245,6 +241,7 @@ client/src/components/Navbar/Navbar.tsx
 client/src/components/Navbar/NavbarClient.tsx
 client/src/components/Navbar/ProfileMenu.tsx
 client/src/components/Navbar/useMenubarToggle.ts
+client/src/components/payment/PaymentModal.tsx
 client/src/components/ui/ActionFooter.tsx
 client/src/components/ui/Alert.tsx
 client/src/components/ui/Avatar.tsx
@@ -385,23 +382,6 @@ next-env.d.ts
 }
 </file>
 
-<file path="admin/next.config.ts">
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "qiksfxnjdfpncpsmzvko.supabase.co",
-      },
-    ],
-  },
-};
-
-export default nextConfig;
-</file>
-
 <file path="admin/postcss.config.mjs">
 const config = {
   plugins: {
@@ -520,26 +500,6 @@ npm run format  # Biome format with write
 ## Deployment
 
 Deploy like any other Next.js project (Vercel, Render, Docker, etc.). Ensure the Supabase environment variables are provided in the hosting platform.
-</file>
-
-<file path="admin/src/app/(auth)/layout.tsx">
-import type { ReactNode } from "react";
-
-export default function AuthLayout({ children }: { children: ReactNode }) {
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-950 via-yellow-900 to-yellow-950 px-4 py-10">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-center gap-8">
-        <div className="text-center text-white">
-          <p className="text-sm uppercase tracking-[0.3em] text-indigo-300">
-            PA Catering
-          </p>
-          <h1 className="text-3xl font-semibold">Operations Console</h1>
-        </div>
-        {children}
-      </div>
-    </div>
-  );
-}
 </file>
 
 <file path="admin/src/app/(auth)/login/page.tsx">
@@ -727,10 +687,29 @@ export default async function DashboardLayout({
 }
 </file>
 
-<file path="admin/src/app/(dashboard)/menu/page.tsx">
-import { AddProductPanel } from "@/components/menu/products/AddProductPanel";
-import { ProductBoard } from "@/components/menu/products/ProductBoard";
-import { CategoriesBoard } from "@/components/menu/CategoriesBoard";
+<file path="admin/src/app/(dashboard)/orders/page.tsx">
+import { DashboardShell } from "@/components/layout/DashboardShell";
+import { OrdersBoard } from "@/components/orders/OrdersBoard";
+import { fetchOrdersBoard } from "@/lib/data/orders";
+
+export default async function OrdersPage() {
+  const { orders } = await fetchOrdersBoard();
+
+  return (
+    <DashboardShell
+      title="Fulfilment queue"
+      description="Assign, track, and complete customer orders in real time."
+    >
+      <OrdersBoard orders={orders} />
+    </DashboardShell>
+  );
+}
+</file>
+
+<file path="admin/src/app/(dashboard)/Products/page.tsx">
+import { AddProductPanel } from "@/components/Products/products/AddProductPanel";
+import { ProductBoard } from "@/components/Products/products/ProductBoard";
+import { CategoriesBoard } from "@/components/Products/CategoriesBoard";
 import { fetchProductCatalog } from "@/lib/data/products";
 import { fetchCategories } from "@/lib/data/categories";
 import { fetchComments } from "@/lib/data/comments";
@@ -765,10 +744,10 @@ export default async function MenuPage() {
 }
 </file>
 
-<file path="admin/src/app/(dashboard)/menu/products/[id]/edit/page.tsx">
+<file path="admin/src/app/(dashboard)/Products/products/[id]/edit/page.tsx">
 import { notFound, redirect } from "next/navigation";
 import { DashboardShell } from "@/components/layout/DashboardShell";
-import { ProductEditForm } from "@/components/menu/products/ProductEditForm";
+import { ProductEditForm } from "@/components/Products/products/ProductEditForm";
 import { fetchProductCatalog } from "@/lib/data/products";
 
 type Props = {
@@ -796,44 +775,6 @@ export default async function EditProductPage({ params }: Props) {
             <div className="mx-auto max-w-2xl">
                 <ProductEditForm product={product} categories={categories} />
             </div>
-        </DashboardShell>
-    );
-}
-</file>
-
-<file path="admin/src/app/(dashboard)/orders/page.tsx">
-import { DashboardShell } from "@/components/layout/DashboardShell";
-import { OrdersBoard } from "@/components/orders/OrdersBoard";
-import { fetchOrdersBoard } from "@/lib/data/orders";
-
-export default async function OrdersPage() {
-  const { orders } = await fetchOrdersBoard();
-
-  return (
-    <DashboardShell
-      title="Fulfilment queue"
-      description="Assign, track, and complete customer orders in real time."
-    >
-      <OrdersBoard orders={orders} />
-    </DashboardShell>
-  );
-}
-</file>
-
-<file path="admin/src/app/(dashboard)/photo-bookings/page.tsx">
-import { DashboardShell } from "@/components/layout/DashboardShell";
-import { PhotoBookingsBoard } from "@/components/photo-bookings/PhotoBookingsBoard";
-import { fetchPhotoBookings } from "@/lib/data/photo-bookings";
-
-export default async function PhotoBookingsPage() {
-    const bookings = await fetchPhotoBookings();
-
-    return (
-        <DashboardShell
-            title="360 Photo Booth Bookings"
-            description="Manage all photo booth booking requests and reservations."
-        >
-            <PhotoBookingsBoard bookings={bookings} />
         </DashboardShell>
     );
 }
@@ -975,43 +916,6 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-}
-</file>
-
-<file path="admin/src/app/layout.tsx">
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "PA Catering Admin",
-  description: "Operations console for menu, orders, and logistics",
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-yellow-950 text-white`}
-      >
-        {children}
-      </body>
-    </html>
-  );
 }
 </file>
 
@@ -2004,143 +1908,6 @@ export const SubmitButton = ({
 };
 </file>
 
-<file path="admin/src/components/layout/AdminSidebar.tsx">
-"use client";
-
-import Link from "next/link";
-import { useState } from "react";
-import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
-import { NAV_ITEMS } from "./nav-items";
-import { SidebarNav } from "./SidebarNav";
-
-export const AdminSidebar = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  return (
-    <>
-      {/* Mobile header with burger menu */}
-      <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-yellow-950/95 backdrop-blur-sm lg:hidden">
-        <div className="flex items-center justify-between px-4 py-3">
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="rounded-lg bg-yellow-900/90 p-2 text-white hover:bg-yellow-800"
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? (
-              <HiOutlineX className="h-6 w-6" />
-            ) : (
-              <HiOutlineMenu className="h-6 w-6" />
-            )}
-          </button>
-
-          <div className="text-center">
-            <div className="text-xs uppercase tracking-[0.3em] text-indigo-400">
-              PA Catering
-            </div>
-            <p className="text-sm font-semibold text-white">Admin</p>
-          </div>
-
-          <div className="w-10" /> {/* Spacer for centering */}
-        </div>
-      </header>
-
-      {/* Mobile overlay */}
-      {mobileMenuOpen && (
-        <div
-          className="fixed inset-0 z-30 bg-black/60 backdrop-blur-sm lg:hidden"
-          onClick={() => setMobileMenuOpen(false)}
-        />
-      )}
-
-      {/* Sidebar */}
-      <aside
-        className={`fixed inset-y-0 left-0 z-40 w-72 flex-col border-r border-white/10 bg-yellow-950/95 px-6 py-8 backdrop-blur-sm transition-transform duration-300 lg:static lg:flex ${mobileMenuOpen ? "flex translate-x-0" : "-translate-x-full lg:translate-x-0"
-          }`}
-      >
-        <Link
-          href="/dashboard"
-          className="mb-10 block"
-          onClick={() => setMobileMenuOpen(false)}
-        >
-          <div className="text-xs uppercase tracking-[0.4em] text-indigo-400">
-            PA Catering
-          </div>
-          <p className="text-xl font-semibold text-white">Admin Console</p>
-        </Link>
-
-        <div onClick={() => setMobileMenuOpen(false)}>
-          <SidebarNav items={NAV_ITEMS} />
-        </div>
-
-        <div className="mt-auto rounded-xl border border-white/10 bg-yellow-900/80 p-4 text-sm text-yellow-300">
-          <p className="font-semibold text-white">Daily Ops Checklist</p>
-          <ul className="mt-2 space-y-1 text-xs text-yellow-400">
-            <li>• Confirm menu availability</li>
-            <li>• Assign pending orders</li>
-            <li>• Update stock counts</li>
-          </ul>
-        </div>
-      </aside>
-    </>
-  );
-};
-</file>
-
-<file path="admin/src/components/layout/AdminTopbar.tsx">
-import Link from "next/link";
-import { HiOutlineBell, HiOutlineQuestionMarkCircle } from "react-icons/hi2";
-import { logoutAction } from "@/lib/auth";
-import type { AdminProfileSummary } from "@/lib/types";
-import { NAV_ITEMS } from "./nav-items";
-
-type Props = {
-  profile: AdminProfileSummary;
-};
-
-export const AdminTopbar = ({ profile }: Props) => (
-  <header className="flex flex-col gap-4 border-b border-white/5 bg-yellow-950/60 px-4 py-4 backdrop-blur">
-    <div>
-      <p className="text-sm uppercase tracking-[0.35em] text-indigo-300">
-        Operations
-      </p>
-      <h1 className="text-xl font-semibold text-white">
-        Welcome back, {profile.display_name ?? "Admin"}
-      </h1>
-    </div>
-
-    <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-
-
-      <div className="flex items-center gap-3">
-        <Link
-          href="/support"
-          className="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-2 text-sm text-yellow-200 transition hover:border-indigo-400 hover:text-white"
-        >
-          <HiOutlineQuestionMarkCircle />
-          Support
-        </Link>
-        <button
-          type="button"
-          className="rounded-full border border-white/10 p-2 text-yellow-200 transition hover:border-indigo-400 hover:text-white"
-          aria-label="Notifications"
-        >
-          <HiOutlineBell className="text-lg" />
-        </button>
-        <form action={logoutAction}>
-          <button
-            type="submit"
-            className="rounded-full border border-white/10 px-4 py-2 text-sm text-yellow-200 transition hover:border-rose-500 hover:text-white"
-          >
-            Sign out
-          </button>
-        </form>
-      </div>
-    </div>
-  </header>
-);
-</file>
-
 <file path="admin/src/components/layout/DashboardShell.tsx">
 import type { ReactNode } from "react";
 
@@ -2173,64 +1940,6 @@ export const DashboardShell = ({
     <div>{children}</div>
   </section>
 );
-</file>
-
-<file path="admin/src/components/layout/nav-items.tsx">
-export type NavItem = {
-  label: string;
-  href: string;
-  icon: string;
-  badge?: string;
-};
-
-export const NAV_ITEMS: NavItem[] = [
-  {
-    label: "Dashboard",
-    href: "/dashboard",
-    icon: "HiOutlineChartBar",
-  },
-  {
-    label: "Menu",
-    href: "/menu",
-    icon: "PiBowlFoodBold",
-  },
-  {
-    label: "Orders",
-    href: "/orders",
-    icon: "HiOutlineClipboardDocumentList",
-    badge: "Live",
-  },
-  {
-    label: "Contact",
-    href: "/contact",
-    icon: "HiOutlineEnvelope",
-  },
-  {
-    label: "Profiles",
-    href: "/profiles",
-    icon: "HiOutlineUsers",
-  },
-  {
-    label: "Photo Bookings",
-    href: "/photo-bookings",
-    icon: "HiOutlineCamera",
-  },
-  {
-    label: "Testimonials",
-    href: "/testimonials",
-    icon: "HiOutlineStar",
-  },
-  {
-    label: "Featured Items",
-    href: "/featured-items",
-    icon: "HiOutlineSparkles",
-  },
-  {
-    label: "Settings",
-    href: "/settings",
-    icon: "HiOutlineCog",
-  },
-];
 </file>
 
 <file path="admin/src/components/layout/SidebarNav.tsx">
@@ -2304,7 +2013,238 @@ export const SidebarNav = ({ items }: Props) => {
 };
 </file>
 
-<file path="admin/src/components/menu/CategoriesBoard.tsx">
+<file path="admin/src/components/orders/OrdersBoard.tsx">
+"use client";
+
+import { formatDistanceToNow } from "date-fns";
+import { useMemo, useState } from "react";
+import type { CartItem, SupabaseOrderRecord } from "@/lib/types";
+import { UpdateOrderStatusForm } from "./UpdateOrderStatusForm";
+
+type Props = {
+  orders: SupabaseOrderRecord[];
+};
+
+const STATUS_COLUMNS: SupabaseOrderRecord["status"][] = [
+  "pending",
+  "processing",
+  "completed",
+  "cancelled",
+];
+
+type DisplayOrderItem = CartItem & {
+  name?: string;
+  Quantity?: number;
+  ProductID?: string;
+};
+
+const resolveItemName = (item: DisplayOrderItem) =>
+  item.Name ?? item.name ?? "Menu item";
+
+const resolveItemQuantity = (item: DisplayOrderItem) =>
+  item.quantity ?? item.Quantity ?? 1;
+
+export const OrdersBoard = ({ orders }: Props) => {
+  const [search, setSearch] = useState("");
+
+  const filtered = useMemo(() => {
+    return orders.filter((order) => {
+      if (!search) return true;
+      const term = search.toLowerCase();
+      const idMatch = order.id.toLowerCase().includes(term);
+      const userMatch = (order.user_id ?? "").toLowerCase().includes(term);
+      const itemMatch = (order.items ?? []).some((item) =>
+        resolveItemName(item as DisplayOrderItem)
+          .toLowerCase()
+          .includes(term),
+      );
+      return idMatch || userMatch || itemMatch;
+    });
+  }, [orders, search]);
+
+  const grouped = STATUS_COLUMNS.map((status) => ({
+    status,
+    items: filtered.filter((order) => order.status === status),
+  }));
+
+  return (
+    <div className="space-y-4">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <label className="w-full max-w-md text-sm text-yellow-300">
+          <span className="sr-only">Search orders</span>
+          <input
+            type="search"
+            placeholder="Search by order ID, customer, or item"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            className="w-full rounded-full border border-white/10 bg-yellow-900/60 px-4 py-3 text-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/40"
+          />
+        </label>
+        <p className="text-xs uppercase tracking-[0.3em] text-yellow-500">
+          Showing {filtered.length} of {orders.length} orders
+        </p>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {grouped.map(({ status, items }) => (
+          <section
+            key={status}
+            className="rounded-2xl border border-white/10 bg-yellow-900/40 p-4"
+          >
+            <header className="flex items-center justify-between">
+              <p className="text-xs uppercase tracking-[0.3em] text-yellow-500">
+                {status}
+              </p>
+              <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-white">
+                {items.length}
+              </span>
+            </header>
+
+            <div className="mt-4 space-y-3">
+              {items.length === 0 ? (
+                <p className="text-xs text-yellow-500">
+                  No orders in this lane.
+                </p>
+              ) : (
+                items.map((order) => (
+                  <article
+                    key={order.id}
+                    className="rounded-xl border border-white/10 bg-yellow-950/40 p-3 text-sm text-yellow-200"
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.3em] text-yellow-500">
+                          #{order.id.slice(0, 8)}
+                        </p>
+                        <p className="font-semibold text-white">
+                          R{order.total_price?.toFixed(2) ?? "0.00"}
+                        </p>
+                        <p className="text-xs text-yellow-500">
+                          {formatDistanceToNow(new Date(order.created_at), {
+                            addSuffix: true,
+                          })}
+                        </p>
+                      </div>
+                      <div className="text-right text-xs text-yellow-500">
+                        <p>{order.total_quantity} items</p>
+                        <p>{order.user_id ?? "Guest"}</p>
+                      </div>
+                    </div>
+
+                    <div className="mt-3 rounded-lg bg-yellow-900/60 p-2 text-xs text-yellow-400">
+                      <p className="text-[10px] uppercase tracking-[0.4em] text-yellow-500">
+                        Items
+                      </p>
+                      <ul className="mt-1 space-y-1">
+                        {(order.items ?? []).slice(0, 4).map((item, index) => {
+                          const displayItem = item as DisplayOrderItem;
+                          const name = resolveItemName(displayItem);
+                          const quantity = resolveItemQuantity(displayItem);
+                          return (
+                            <li
+                              key={`${order.id}-${displayItem.ProductID ?? name}-${index}`}
+                              className="flex justify-between text-white"
+                            >
+                              <span>{name}</span>
+                              <span className="text-yellow-400">
+                                x{quantity}
+                              </span>
+                            </li>
+                          );
+                        })}
+                        {(order.items ?? []).length > 4 ? (
+                          <li className="text-[10px] uppercase tracking-[0.3em] text-yellow-500">
+                            + more
+                          </li>
+                        ) : null}
+                      </ul>
+                    </div>
+
+                    <div className="mt-3">
+                      <UpdateOrderStatusForm
+                        orderId={order.id}
+                        currentStatus={order.status}
+                      />
+                    </div>
+                  </article>
+                ))
+              )}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  );
+};
+</file>
+
+<file path="admin/src/components/orders/UpdateOrderStatusForm.tsx">
+"use client";
+
+import { useFormState } from "react-dom";
+import { SubmitButton } from "@/components/forms/SubmitButton";
+import {
+  type OrderActionState,
+  updateOrderStatusAction,
+} from "@/lib/data/orders-actions";
+import type { OrderStatus } from "@/lib/types";
+
+type Props = {
+  orderId: string;
+  currentStatus: OrderStatus;
+};
+
+const initialState: OrderActionState = {};
+const STATUSES: OrderStatus[] = [
+  "pending",
+  "processing",
+  "completed",
+  "cancelled",
+  "deleted",
+];
+
+export const UpdateOrderStatusForm = ({ orderId, currentStatus }: Props) => {
+  const [state, formAction] = useFormState(
+    updateOrderStatusAction,
+    initialState,
+  );
+
+  return (
+    <form action={formAction} className="space-y-2 text-sm text-yellow-200">
+      <input type="hidden" name="orderId" value={orderId} />
+      <label className="space-y-1 text-xs uppercase tracking-[0.3em] text-yellow-500">
+        Status
+        <select
+          name="status"
+          defaultValue={currentStatus}
+          className="mt-1 w-full rounded-lg border border-white/10 bg-yellow-900/60 px-3 py-2 text-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/40"
+        >
+          {STATUSES.map((status) => (
+            <option key={status} value={status}>
+              {status}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      {state.error ? (
+        <p className="text-xs text-rose-400">{state.error}</p>
+      ) : null}
+      {state.success ? (
+        <p className="text-xs text-emerald-400">{state.success}</p>
+      ) : null}
+
+      <SubmitButton
+        label="Update status"
+        loadingLabel="Updating..."
+        className="bg-yellow-800 px-3 py-2 text-xs"
+      />
+    </form>
+  );
+};
+</file>
+
+<file path="admin/src/components/Products/CategoriesBoard.tsx">
 "use client";
 
 import { useState } from "react";
@@ -2660,7 +2600,7 @@ const CategoryCard = ({
 };
 </file>
 
-<file path="admin/src/components/menu/comments/CommentsBoard.tsx">
+<file path="admin/src/components/Products/comments/CommentsBoard.tsx">
 "use client";
 
 import { useState } from "react";
@@ -2836,7 +2776,7 @@ const CommentCard = ({
 };
 </file>
 
-<file path="admin/src/components/menu/favorites/FavoritesBoard.tsx">
+<file path="admin/src/components/Products/favorites/FavoritesBoard.tsx">
 "use client";
 
 import { useState } from "react";
@@ -2911,7 +2851,7 @@ export const FavoritesBoard = ({ favorites }: Props) => {
 };
 </file>
 
-<file path="admin/src/components/menu/products/AddProductForm.tsx">
+<file path="admin/src/components/Products/products/AddProductForm.tsx">
 "use client";
 
 import { useFormState } from "react-dom";
@@ -3027,7 +2967,7 @@ export const AddProductForm = ({ categories }: Props) => {
 };
 </file>
 
-<file path="admin/src/components/menu/products/AddProductPanel.tsx">
+<file path="admin/src/components/Products/products/AddProductPanel.tsx">
 import { DashboardShell } from "@/components/layout/DashboardShell";
 import { AddProductForm } from "./AddProductForm";
 
@@ -3045,7 +2985,7 @@ export const AddProductPanel = ({ categories }: Props) => (
 );
 </file>
 
-<file path="admin/src/components/menu/products/ProductBoard.tsx">
+<file path="admin/src/components/Products/products/ProductBoard.tsx">
 "use client";
 
 import { useMemo, useState } from "react";
@@ -3402,7 +3342,7 @@ export const ProductBoard = ({ products, comments, favorites, onAddProduct }: Pr
 };
 </file>
 
-<file path="admin/src/components/menu/products/ProductEditForm.tsx">
+<file path="admin/src/components/Products/products/ProductEditForm.tsx">
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -3596,7 +3536,7 @@ export const ProductEditForm = ({ product, categories }: Props) => {
 };
 </file>
 
-<file path="admin/src/components/menu/QuickEditForm.tsx">
+<file path="admin/src/components/Products/QuickEditForm.tsx">
 "use client";
 
 import { useFormState } from "react-dom";
@@ -3724,483 +3664,6 @@ export const QuickEditForm = ({ product, categories = [] }: Props) => {
       />
     </form>
   );
-};
-</file>
-
-<file path="admin/src/components/orders/OrdersBoard.tsx">
-"use client";
-
-import { formatDistanceToNow } from "date-fns";
-import { useMemo, useState } from "react";
-import type { CartItem, SupabaseOrderRecord } from "@/lib/types";
-import { UpdateOrderStatusForm } from "./UpdateOrderStatusForm";
-
-type Props = {
-  orders: SupabaseOrderRecord[];
-};
-
-const STATUS_COLUMNS: SupabaseOrderRecord["status"][] = [
-  "pending",
-  "processing",
-  "completed",
-  "cancelled",
-];
-
-type DisplayOrderItem = CartItem & {
-  name?: string;
-  Quantity?: number;
-  ProductID?: string;
-};
-
-const resolveItemName = (item: DisplayOrderItem) =>
-  item.Name ?? item.name ?? "Menu item";
-
-const resolveItemQuantity = (item: DisplayOrderItem) =>
-  item.quantity ?? item.Quantity ?? 1;
-
-export const OrdersBoard = ({ orders }: Props) => {
-  const [search, setSearch] = useState("");
-
-  const filtered = useMemo(() => {
-    return orders.filter((order) => {
-      if (!search) return true;
-      const term = search.toLowerCase();
-      const idMatch = order.id.toLowerCase().includes(term);
-      const userMatch = (order.user_id ?? "").toLowerCase().includes(term);
-      const itemMatch = (order.items ?? []).some((item) =>
-        resolveItemName(item as DisplayOrderItem)
-          .toLowerCase()
-          .includes(term),
-      );
-      return idMatch || userMatch || itemMatch;
-    });
-  }, [orders, search]);
-
-  const grouped = STATUS_COLUMNS.map((status) => ({
-    status,
-    items: filtered.filter((order) => order.status === status),
-  }));
-
-  return (
-    <div className="space-y-4">
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-        <label className="w-full max-w-md text-sm text-yellow-300">
-          <span className="sr-only">Search orders</span>
-          <input
-            type="search"
-            placeholder="Search by order ID, customer, or item"
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-            className="w-full rounded-full border border-white/10 bg-yellow-900/60 px-4 py-3 text-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/40"
-          />
-        </label>
-        <p className="text-xs uppercase tracking-[0.3em] text-yellow-500">
-          Showing {filtered.length} of {orders.length} orders
-        </p>
-      </div>
-
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {grouped.map(({ status, items }) => (
-          <section
-            key={status}
-            className="rounded-2xl border border-white/10 bg-yellow-900/40 p-4"
-          >
-            <header className="flex items-center justify-between">
-              <p className="text-xs uppercase tracking-[0.3em] text-yellow-500">
-                {status}
-              </p>
-              <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-white">
-                {items.length}
-              </span>
-            </header>
-
-            <div className="mt-4 space-y-3">
-              {items.length === 0 ? (
-                <p className="text-xs text-yellow-500">
-                  No orders in this lane.
-                </p>
-              ) : (
-                items.map((order) => (
-                  <article
-                    key={order.id}
-                    className="rounded-xl border border-white/10 bg-yellow-950/40 p-3 text-sm text-yellow-200"
-                  >
-                    <div className="flex items-start justify-between gap-2">
-                      <div>
-                        <p className="text-xs uppercase tracking-[0.3em] text-yellow-500">
-                          #{order.id.slice(0, 8)}
-                        </p>
-                        <p className="font-semibold text-white">
-                          R{order.total_price?.toFixed(2) ?? "0.00"}
-                        </p>
-                        <p className="text-xs text-yellow-500">
-                          {formatDistanceToNow(new Date(order.created_at), {
-                            addSuffix: true,
-                          })}
-                        </p>
-                      </div>
-                      <div className="text-right text-xs text-yellow-500">
-                        <p>{order.total_quantity} items</p>
-                        <p>{order.user_id ?? "Guest"}</p>
-                      </div>
-                    </div>
-
-                    <div className="mt-3 rounded-lg bg-yellow-900/60 p-2 text-xs text-yellow-400">
-                      <p className="text-[10px] uppercase tracking-[0.4em] text-yellow-500">
-                        Items
-                      </p>
-                      <ul className="mt-1 space-y-1">
-                        {(order.items ?? []).slice(0, 4).map((item, index) => {
-                          const displayItem = item as DisplayOrderItem;
-                          const name = resolveItemName(displayItem);
-                          const quantity = resolveItemQuantity(displayItem);
-                          return (
-                            <li
-                              key={`${order.id}-${displayItem.ProductID ?? name}-${index}`}
-                              className="flex justify-between text-white"
-                            >
-                              <span>{name}</span>
-                              <span className="text-yellow-400">
-                                x{quantity}
-                              </span>
-                            </li>
-                          );
-                        })}
-                        {(order.items ?? []).length > 4 ? (
-                          <li className="text-[10px] uppercase tracking-[0.3em] text-yellow-500">
-                            + more
-                          </li>
-                        ) : null}
-                      </ul>
-                    </div>
-
-                    <div className="mt-3">
-                      <UpdateOrderStatusForm
-                        orderId={order.id}
-                        currentStatus={order.status}
-                      />
-                    </div>
-                  </article>
-                ))
-              )}
-            </div>
-          </section>
-        ))}
-      </div>
-    </div>
-  );
-};
-</file>
-
-<file path="admin/src/components/orders/UpdateOrderStatusForm.tsx">
-"use client";
-
-import { useFormState } from "react-dom";
-import { SubmitButton } from "@/components/forms/SubmitButton";
-import {
-  type OrderActionState,
-  updateOrderStatusAction,
-} from "@/lib/data/orders-actions";
-import type { OrderStatus } from "@/lib/types";
-
-type Props = {
-  orderId: string;
-  currentStatus: OrderStatus;
-};
-
-const initialState: OrderActionState = {};
-const STATUSES: OrderStatus[] = [
-  "pending",
-  "processing",
-  "completed",
-  "cancelled",
-  "deleted",
-];
-
-export const UpdateOrderStatusForm = ({ orderId, currentStatus }: Props) => {
-  const [state, formAction] = useFormState(
-    updateOrderStatusAction,
-    initialState,
-  );
-
-  return (
-    <form action={formAction} className="space-y-2 text-sm text-yellow-200">
-      <input type="hidden" name="orderId" value={orderId} />
-      <label className="space-y-1 text-xs uppercase tracking-[0.3em] text-yellow-500">
-        Status
-        <select
-          name="status"
-          defaultValue={currentStatus}
-          className="mt-1 w-full rounded-lg border border-white/10 bg-yellow-900/60 px-3 py-2 text-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/40"
-        >
-          {STATUSES.map((status) => (
-            <option key={status} value={status}>
-              {status}
-            </option>
-          ))}
-        </select>
-      </label>
-
-      {state.error ? (
-        <p className="text-xs text-rose-400">{state.error}</p>
-      ) : null}
-      {state.success ? (
-        <p className="text-xs text-emerald-400">{state.success}</p>
-      ) : null}
-
-      <SubmitButton
-        label="Update status"
-        loadingLabel="Updating..."
-        className="bg-yellow-800 px-3 py-2 text-xs"
-      />
-    </form>
-  );
-};
-</file>
-
-<file path="admin/src/components/photo-bookings/PhotoBookingsBoard.tsx">
-"use client";
-
-import { useState } from "react";
-import { useFormState } from "react-dom";
-import { SubmitButton } from "@/components/forms/SubmitButton";
-import {
-    type PhotoBookingActionState,
-    updatePhotoBookingAction,
-} from "@/lib/data/photo-bookings-actions";
-import type { PhotoBookingRecord } from "@/lib/types";
-import { format } from "date-fns";
-
-type Props = {
-    bookings: PhotoBookingRecord[];
-};
-
-const initialState: PhotoBookingActionState = {};
-
-export const PhotoBookingsBoard = ({ bookings }: Props) => {
-    const [search, setSearch] = useState("");
-    const [editingId, setEditingId] = useState<string | null>(null);
-
-    const filtered = bookings.filter(
-        (booking) =>
-            !search ||
-            booking.name.toLowerCase().includes(search.toLowerCase()) ||
-            booking.email.toLowerCase().includes(search.toLowerCase()) ||
-            booking.package.toLowerCase().includes(search.toLowerCase()),
-    );
-
-    return (
-        <div className="space-y-4">
-            <div className="flex items-center justify-between gap-3">
-                <input
-                    type="search"
-                    placeholder="Search bookings..."
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    className="w-full max-w-md rounded-full border border-white/10 bg-yellow-900/60 px-4 py-3 text-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/40"
-                />
-                <p className="text-xs uppercase tracking-[0.3em] text-yellow-500">
-                    {filtered.length} bookings
-                </p>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2">
-                {filtered.map((booking) => (
-                    <BookingCard
-                        key={booking.id}
-                        booking={booking}
-                        isEditing={editingId === booking.id}
-                        onEdit={() => setEditingId(booking.id)}
-                        onCancelEdit={() => setEditingId(null)}
-                    />
-                ))}
-            </div>
-        </div>
-    );
-};
-
-type BookingCardProps = {
-    booking: PhotoBookingRecord;
-    isEditing: boolean;
-    onEdit: () => void;
-    onCancelEdit: () => void;
-};
-
-const BookingCard = ({
-    booking,
-    isEditing,
-    onEdit,
-    onCancelEdit,
-}: BookingCardProps) => {
-    const [state, formAction] = useFormState(
-        updatePhotoBookingAction,
-        initialState,
-    );
-
-    return (
-        <div className="rounded-2xl border border-white/10 bg-yellow-900/40 p-4">
-            {isEditing ? (
-                <form action={formAction} className="space-y-3">
-                    <input type="hidden" name="id" value={booking.id} />
-
-                    <div className="grid gap-3 md:grid-cols-2">
-                        <label className="space-y-2 text-sm">
-                            <span className="text-yellow-300">Name</span>
-                            <input
-                                name="name"
-                                defaultValue={booking.name}
-                                required
-                                className="w-full rounded-lg border border-white/10 bg-yellow-900/60 px-3 py-2 text-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/40"
-                            />
-                        </label>
-                        <label className="space-y-2 text-sm">
-                            <span className="text-yellow-300">Email</span>
-                            <input
-                                name="email"
-                                type="email"
-                                defaultValue={booking.email}
-                                required
-                                className="w-full rounded-lg border border-white/10 bg-yellow-900/60 px-3 py-2 text-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/40"
-                            />
-                        </label>
-                    </div>
-
-                    <div className="grid gap-3 md:grid-cols-2">
-                        <label className="space-y-2 text-sm">
-                            <span className="text-yellow-300">Phone</span>
-                            <input
-                                name="phone"
-                                defaultValue={booking.phone || ""}
-                                className="w-full rounded-lg border border-white/10 bg-yellow-900/60 px-3 py-2 text-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/40"
-                            />
-                        </label>
-                        <label className="space-y-2 text-sm">
-                            <span className="text-yellow-300">Package</span>
-                            <input
-                                name="package"
-                                defaultValue={booking.package}
-                                required
-                                className="w-full rounded-lg border border-white/10 bg-yellow-900/60 px-3 py-2 text-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/40"
-                            />
-                        </label>
-                    </div>
-
-                    <div className="grid gap-3 md:grid-cols-3">
-                        <label className="space-y-2 text-sm">
-                            <span className="text-yellow-300">Date</span>
-                            <input
-                                name="date"
-                                type="date"
-                                defaultValue={booking.date}
-                                required
-                                className="w-full rounded-lg border border-white/10 bg-yellow-900/60 px-3 py-2 text-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/40"
-                            />
-                        </label>
-                        <label className="space-y-2 text-sm">
-                            <span className="text-yellow-300">Time</span>
-                            <input
-                                name="time"
-                                type="time"
-                                defaultValue={booking.time}
-                                required
-                                className="w-full rounded-lg border border-white/10 bg-yellow-900/60 px-3 py-2 text-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/40"
-                            />
-                        </label>
-                        <label className="space-y-2 text-sm">
-                            <span className="text-yellow-300">People</span>
-                            <input
-                                name="people"
-                                type="number"
-                                min="1"
-                                defaultValue={booking.people}
-                                required
-                                className="w-full rounded-lg border border-white/10 bg-yellow-900/60 px-3 py-2 text-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/40"
-                            />
-                        </label>
-                    </div>
-
-                    <label className="block space-y-2 text-sm">
-                        <span className="text-yellow-300">Message</span>
-                        <textarea
-                            name="message"
-                            rows={2}
-                            defaultValue={booking.message || ""}
-                            className="w-full rounded-lg border border-white/10 bg-yellow-900/60 px-3 py-2 text-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/40"
-                        />
-                    </label>
-
-                    {state.error && <p className="text-sm text-rose-400">{state.error}</p>}
-                    {state.success && (
-                        <p className="text-sm text-emerald-400">{state.success}</p>
-                    )}
-
-                    <div className="flex gap-2">
-                        <SubmitButton
-                            label="Save"
-                            loadingLabel="Saving..."
-                            className="bg-indigo-600 px-4 py-2 text-sm"
-                        />
-                        <button
-                            type="button"
-                            onClick={onCancelEdit}
-                            className="rounded-lg bg-yellow-800 px-4 py-2 text-sm text-white hover:bg-yellow-700"
-                        >
-                            Cancel
-                        </button>
-                    </div>
-                </form>
-            ) : (
-                <>
-                    <div className="flex items-start justify-between">
-                        <div>
-                            <h3 className="font-semibold text-white">{booking.name}</h3>
-                            <p className="text-sm text-yellow-400">{booking.email}</p>
-                            {booking.phone && (
-                                <p className="text-sm text-yellow-500">{booking.phone}</p>
-                            )}
-                        </div>
-                        <button
-                            type="button"
-                            onClick={onEdit}
-                            className="rounded-lg bg-yellow-800 px-3 py-1 text-xs text-white hover:bg-yellow-700"
-                        >
-                            Edit
-                        </button>
-                    </div>
-
-                    <div className="mt-4 grid gap-2 text-sm">
-                        <div className="flex justify-between">
-                            <span className="text-yellow-500">Package:</span>
-                            <span className="font-medium text-white">{booking.package}</span>
-                        </div>
-                        <div className="flex justify-between">
-                            <span className="text-yellow-500">Date:</span>
-                            <span className="text-white">
-                                {format(new Date(booking.date), "PPP")}
-                            </span>
-                        </div>
-                        <div className="flex justify-between">
-                            <span className="text-yellow-500">Time:</span>
-                            <span className="text-white">{booking.time}</span>
-                        </div>
-                        <div className="flex justify-between">
-                            <span className="text-yellow-500">People:</span>
-                            <span className="text-white">{booking.people}</span>
-                        </div>
-                    </div>
-
-                    {booking.message && (
-                        <div className="mt-3 rounded-lg bg-yellow-950/40 p-3">
-                            <p className="text-xs uppercase tracking-[0.3em] text-yellow-500">
-                                Message
-                            </p>
-                            <p className="mt-1 text-sm text-yellow-300">{booking.message}</p>
-                        </div>
-                    )}
-                </>
-            )}
-        </div>
-    );
 };
 </file>
 
@@ -5777,131 +5240,6 @@ export const fetchOrdersBoard = async (): Promise<OrdersBoardData> => {
 };
 </file>
 
-<file path="admin/src/lib/data/photo-bookings-actions.ts">
-"use server";
-
-import { revalidatePath } from "next/cache";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
-
-export type PhotoBookingActionState = {
-    error?: string;
-    success?: string;
-};
-
-const sanitize = (value: FormDataEntryValue | null) =>
-    String(value ?? "").trim();
-
-export const createPhotoBookingAction = async (
-    _prev: PhotoBookingActionState,
-    formData: FormData,
-): Promise<PhotoBookingActionState> => {
-    const name = sanitize(formData.get("name"));
-    const email = sanitize(formData.get("email"));
-    const phone = sanitize(formData.get("phone")) || null;
-    const date = sanitize(formData.get("date"));
-    const time = sanitize(formData.get("time"));
-    const packageType = sanitize(formData.get("package"));
-    const people = Number(formData.get("people") ?? 1);
-    const message = sanitize(formData.get("message")) || null;
-
-    if (!name || !email || !date || !time || !packageType) {
-        return { error: "Name, email, date, time, and package are required." };
-    }
-
-    if (Number.isNaN(people) || people <= 0) {
-        return { error: "Number of people must be greater than zero." };
-    }
-
-    const supabase = await createSupabaseServerClient();
-    const bookingData = {
-        name,
-        email,
-        phone,
-        date,
-        time,
-        package: packageType,
-        people,
-        message,
-    };
-
-    const { error } = await supabase
-        .from("photo_boot_bookings")
-        .insert(bookingData as never);
-
-    if (error) {
-        console.error("Failed to create photo booking", error);
-        return { error: error.message };
-    }
-
-    revalidatePath("/photo-bookings");
-    return { success: "Photo booth booking created successfully." };
-};
-
-export const updatePhotoBookingAction = async (
-    _prev: PhotoBookingActionState,
-    formData: FormData,
-): Promise<PhotoBookingActionState> => {
-    const id = sanitize(formData.get("id"));
-    const name = sanitize(formData.get("name"));
-    const email = sanitize(formData.get("email"));
-    const phone = sanitize(formData.get("phone")) || null;
-    const date = sanitize(formData.get("date"));
-    const time = sanitize(formData.get("time"));
-    const packageType = sanitize(formData.get("package"));
-    const people = Number(formData.get("people") ?? 1);
-    const message = sanitize(formData.get("message")) || null;
-
-    if (!id || !name || !email || !date || !time || !packageType) {
-        return { error: "All required fields must be provided." };
-    }
-
-    const supabase = await createSupabaseServerClient();
-    const updateData = {
-        name,
-        email,
-        phone,
-        date,
-        time,
-        package: packageType,
-        people,
-        message,
-    };
-
-    const { error } = await supabase
-        .from("photo_boot_bookings")
-        .update(updateData as never)
-        .eq("id", id);
-
-    if (error) {
-        console.error("Failed to update photo booking", error);
-        return { error: error.message };
-    }
-
-    revalidatePath("/photo-bookings");
-    return { success: "Photo booth booking updated successfully." };
-};
-</file>
-
-<file path="admin/src/lib/data/photo-bookings.ts">
-import { createSupabaseServerClient } from "@/lib/supabase/server";
-import type { PhotoBookingRecord } from "@/lib/types/database-records";
-
-export const fetchPhotoBookings = async (): Promise<PhotoBookingRecord[]> => {
-    const supabase = await createSupabaseServerClient();
-    const { data, error } = await supabase
-        .from("photo_boot_bookings")
-        .select("*")
-        .order("created_at", { ascending: false });
-
-    if (error) {
-        console.error("Failed to fetch photo bookings", error);
-        return [];
-    }
-
-    return (data ?? []) as PhotoBookingRecord[];
-};
-</file>
-
 <file path="admin/src/lib/data/products-actions.ts">
 "use server";
 
@@ -6911,57 +6249,6 @@ export type SupabaseServerClient = Awaited<
 >;
 </file>
 
-<file path="admin/src/lib/supabase/storage.ts">
-import { createSupabaseBrowserClient } from "./client";
-
-export const STORAGE_BUCKET = "dreamhair_crowns";
-
-export const uploadImage = async (file: File, path: string) => {
-    const supabase = createSupabaseBrowserClient();
-    const fileExt = file.name.split(".").pop();
-    const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`;
-    const filePath = `${path}/${fileName}`;
-
-    console.log("Uploading file to path:", filePath);
-    const { error: uploadError } = await supabase.storage
-        .from(STORAGE_BUCKET)
-        .upload(filePath, file);
-
-    if (uploadError) {
-        console.error("Upload error:", uploadError);
-        throw uploadError;
-    }
-
-    const { data } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(filePath);
-    console.log("Uploaded file public URL:", data.publicUrl);
-
-    return data.publicUrl;
-};
-
-export const deleteImage = async (urlOrPath: string) => {
-    console.log("Deleting image:", urlOrPath);
-    const supabase = createSupabaseBrowserClient();
-
-    // Extract path from URL if a full URL was provided
-    let filePath = urlOrPath;
-    if (urlOrPath.includes(STORAGE_BUCKET)) {
-        const parts = urlOrPath.split(`${STORAGE_BUCKET}/`);
-        filePath = parts[parts.length - 1];
-    }
-    console.log("Parsed file path for deletion:", filePath);
-
-    const { error } = await supabase.storage
-        .from(STORAGE_BUCKET)
-        .remove([filePath]);
-
-    if (error) {
-        console.error("Failed to delete image:", error);
-        throw error;
-    }
-    console.log("Image deleted successfully");
-};
-</file>
-
 <file path="admin/src/lib/types/base.ts">
 export interface Reward {
   name: string;
@@ -7359,41 +6646,6 @@ next-env.d.ts
     }
   }
 }
-</file>
-
-<file path="client/next.config.ts">
-import type { NextConfig } from 'next';
-
-const nextConfig: NextConfig = {
-  reactCompiler: true,
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'placehold.co',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'picsum.photos',
-        port: '',
-        pathname: '/**',
-      }, {
-        protocol: "https",
-        hostname: "qiksfxnjdfpncpsmzvko.supabase.co",
-      },
-    ],
-  },
-};
-
-module.exports = nextConfig;
 </file>
 
 <file path="client/postcss.config.mjs">
@@ -9318,103 +8570,6 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ product }) => {
 export default FavoriteButton;
 </file>
 
-<file path="client/src/app/shop/[Products]/[product]/components/ProductInfo.tsx">
-import React from 'react';
-import { FaExclamationTriangle, FaLeaf, FaFire } from 'react-icons/fa';
-
-interface ProductInfoProps {
-	product: ProductType;
-}
-
-const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
-	// Mock nutritional data - can be replaced with real data from product
-	const nutritionalInfo = {
-		calories: product?.nutritional?.calories || 450,
-		protein: product?.nutritional?.protein || '12g',
-		carbs: product?.nutritional?.carbs || '45g',
-		fat: product?.nutritional?.fat || '18g',
-		fiber: product?.nutritional?.fiber || '3g',
-		sugar: product?.nutritional?.sugar || '8g',
-	};
-
-	// Mock allergen info - can be replaced with real data from product
-	const allergens = product?.allergens || ['Gluten', 'Dairy', 'Eggs'];
-	const isVegetarian = product?.isVegetarian || true;
-	const isSpicy = product?.isSpicy || true;
-
-	return (
-		<div className=' p-2 rounded-md text-white space-y-8'>
-			{/* Product Name and Price */}
-			<article>
-				<h1 className='text-4xl font-extrabold'>{product.Name}</h1>
-				<p className='text-3xl text-center text-yellow-500 font-bold text-white mt-2'>
-					R{product.Price.toFixed(2)}
-				</p>
-			</article>
-
-			{/* Description & Dietary Tags */}
-			<article>
-				<h2 className='text-2xl font-bold text-white mb-3'>Description</h2>
-				<ul className='list-disc list-inside space-y-1.5 text-white'>
-					{product.Description.map((d: string, index: number) => (
-						<li key={index}>{d}</li>
-					))}
-				</ul>
-				<div className='flex flex-wrap gap-3 mt-4'>
-					{isVegetarian && (
-						<span className='flex items-center gap-2 px-3 py-1 bg-yellow-600 text-white rounded-full text-sm font-semibold'>
-							<FaLeaf /> Vegetarian
-						</span>
-					)}
-					{isSpicy && (
-						<span className='flex items-center gap-2 px-3 py-1 bg-yellow-600 text-white rounded-full text-sm font-semibold'>
-							<FaFire /> Spicy
-						</span>
-					)}
-				</div>
-			</article>
-
-			{/* Allergen Warnings Card */}
-			{allergens.length > 0 && (
-				<article className='bg-yellow-500/20 border border-yellow-500/50 rounded-md p-4'>
-					<div className='flex items-center gap-3 mb-3'>
-						<FaExclamationTriangle className='text-yellow-400 text-xl' />
-						<h3 className='text-xl font-bold text-white'>Allergen Information</h3>
-					</div>
-					<p className='text-white text-sm mb-3'>This product contains the following allergens:</p>
-					<div className='flex flex-wrap gap-2'>
-						{allergens.map((allergen: string, index: number) => (
-							<span
-								key={index}
-								className='px-2.5 py-1 bg-yellow-600 text-white rounded-md text-xs font-medium'>
-								{allergen}
-							</span>
-						))}
-					</div>
-				</article>
-			)}
-
-			{/* Nutritional Information Card */}
-			<div className='bg-black/20 rounded-md p-4'>
-				<h3 className='text-xl font-bold text-white mb-4 text-center'>Nutritional Information</h3>
-				<div className='grid grid-cols-2 sm:grid-cols-3 gap-4'>
-					{Object.entries(nutritionalInfo).map(([key, value]) => (
-						<div
-							key={key}
-							className='text-center bg-yellow-500/20 p-3 rounded-md'>
-							<div className='text-2xl font-bold text-white'>{value}</div>
-							<div className='text-sm text-white capitalize'>{key}</div>
-						</div>
-					))}
-				</div>
-			</div>
-		</div>
-	);
-};
-
-export default ProductInfo;
-</file>
-
 <file path="client/src/app/shop/[Products]/[product]/components/RelatedProducts.tsx">
 import React from 'react';
 import Image from 'next/image';
@@ -10134,126 +9289,6 @@ export const fetchAllProductLikes = async (productKeys: string[]): Promise<Produ
     return likesData;
   }
 };
-</file>
-
-<file path="client/src/app/shop/cart/components/CartFooter.tsx">
-'use client';
-import Button from '@/components/ui/Button';
-import { useCart } from '@/lib/context/CartContext';
-import { addOrder } from '@/lib/supabase/orders/orders';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { IoAddCircle, IoCheckmarkCircleSharp } from 'react-icons/io5';
-import { TbCancel } from 'react-icons/tb';
-import { HiShoppingCart } from 'react-icons/hi2';
-
-function CartFooter() {
-	const router = useRouter();
-	const { cartItems, clearCart, totalPrice, totalQuantity } = useCart();
-	const [isPlacingOrder, setIsPlacingOrder] = useState(false);
-
-	const handlePlaceOrder = async () => {
-		if (isPlacingOrder) return;
-		setIsPlacingOrder(true);
-		try {
-			// Get the authenticated user from Supabase
-			const { createClient } = await import('@/lib/supabase/client');
-			const supabase = createClient();
-			const { data: { user } } = await supabase.auth.getUser();
-
-			// Only authenticated users can place orders
-			if (!user) {
-				alert('Please log in to place an order.');
-				router.push('/login');
-				return;
-			}
-
-			await addOrder(user.id, cartItems, totalPrice, totalQuantity);
-			router.push('/orders');
-			clearCart();
-		} catch (error) {
-			console.error('Failed to place order: ', error);
-			alert('There was an issue placing your order. Please try again.');
-		} finally {
-			setIsPlacingOrder(false);
-		}
-	};
-
-	const handleCancelOrder = () => {
-		clearCart();
-		router.back();
-	};
-
-	return (
-		<footer className='fixed bottom-0 left-0 right-0 z-50'>
-			{/* Gradient Fade Top */}
-			<div className="absolute -top-24 left-0 w-full h-24 bg-gradient-to-t from-black to-transparent pointer-events-none" />
-
-			<div className="bg-black/80 backdrop-blur-xl border-t border-white/10 pb-safe">
-				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6'>
-					<div className='flex flex-col gap-6'>
-
-						{/* Receipt Summary */}
-						<div className="flex items-end justify-between border-b border-dashed border-white/20 pb-6">
-							<div className="flex flex-col gap-1">
-								<span className="text-white/50 text-sm uppercase tracking-widest">Total Items</span>
-								<span className="text-xl font-mono text-white">{totalQuantity}</span>
-							</div>
-							<div className="flex flex-col gap-1 text-right">
-								<span className="text-amber-500 text-sm uppercase tracking-widest font-bold">Total Amount</span>
-								<span className="text-4xl font-mono text-white tracking-tighter">
-									R{totalPrice.toFixed(2)}
-								</span>
-							</div>
-						</div>
-
-						{/* Action Buttons */}
-						<nav className='grid grid-cols-2 lg:flex gap-4'>
-							{/* Cancel */}
-							<button
-								onClick={handleCancelOrder}
-								className='col-span-1 lg:flex-none px-6 py-4 rounded-xl text-sm font-bold uppercase tracking-widest text-white/50 hover:text-white hover:bg-white/5 transition-colors'
-							>
-								Cancel
-							</button>
-
-							{/* Add More */}
-							<button
-								onClick={() => router.back()}
-								className='col-span-1 lg:flex-none px-6 py-4 rounded-xl text-sm font-bold uppercase tracking-widest text-amber-500 hover:text-amber-400 hover:bg-amber-500/10 transition-colors'
-							>
-								Add More
-							</button>
-
-							{/* Place Order - Massive Button */}
-							{cartItems.length > 0 && (
-								<button
-									onClick={handlePlaceOrder}
-									disabled={isPlacingOrder}
-									className='col-span-2 lg:flex-1 bg-amber-500 text-black text-lg md:text-xl font-bold uppercase tracking-[0.2em] py-5 rounded-xl hover:bg-amber-400 hover:shadow-[0_0_40px_-10px_rgba(245,158,11,0.5)] transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1'
-								>
-									{isPlacingOrder ? (
-										<div className="flex items-center justify-center gap-3">
-											<div className='w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin'></div>
-											<span>Processing...</span>
-										</div>
-									) : (
-										<div className="flex items-center justify-center gap-3">
-											<span>Confirm Order</span>
-											<IoCheckmarkCircleSharp size={24} />
-										</div>
-									)}
-								</button>
-							)}
-						</nav>
-					</div>
-				</div>
-			</div>
-		</footer>
-	);
-}
-
-export default CartFooter;
 </file>
 
 <file path="client/src/app/shop/cart/loading.tsx">
@@ -11482,50 +10517,6 @@ export default function Main({ children, Icon, heading, tittle, className = '' }
 			</header>
 			{children}
 		</main>
-	);
-}
-</file>
-
-<file path="client/src/components/ui/layout/Section.tsx">
-import { Suspense } from 'react';
-import Loading from '../Loading';
-
-interface SectionProps extends React.HTMLProps<HTMLElement> {
-	Icon?: React.ElementType;
-	heading?: string;
-	tittle?: string;
-	className?: string;
-	children: React.ReactNode;
-}
-export default function Section({
-	children,
-	Icon,
-	heading,
-	tittle,
-	className,
-	...props
-}: SectionProps) {
-	return (
-		<section
-			{...props}
-			className={`${className} relative overflow-hidden bg-gradient-to-br from-yellow-950/30 to-black/40 backdrop-blur-3xl border border-white/5 rounded-2xl p-8 md:p-12 transition-all duration-700 w-full group
-            before:absolute before:inset-0 before:bg-gradient-to-br before:from-amber-500/5 before:to-transparent before:opacity-0 before:animate-[pulse_8s_ease-in-out_infinite]
-            ring-1 ring-inset ring-amber-500/10 hover:ring-amber-500/30 hover:shadow-2xl hover:shadow-amber-900/10`}>
-			<header className="mb-10 md:mb-14">
-				{Icon ? (
-					<div className='flex flex-col items-center text-center space-y-4'>
-						<span className='bg-gradient-to-br from-amber-500/10 to-yellow-500/5 p-4 rounded-xl border border-amber-500/20 shadow-inner shadow-amber-500/5'>
-							<Icon className='text-amber-400 text-3xl md:text-4xl' />
-						</span>
-						{tittle && <h3 className='mt-2 text-2xl md:text-3xl tracking-tight text-white/95'>{tittle}</h3>}
-					</div>
-				) : (
-					tittle && <h2 className='text-3xl md:text-4xl tracking-tight mb-4'>{tittle}</h2>
-				)}
-				{heading && <p className='text-white/60 text-center text-base md:text-lg max-w-xl mx-auto leading-relaxed mt-4 font-light'>{heading}</p>}
-			</header>
-			{children}
-		</section>
 	);
 }
 </file>
@@ -13216,102 +12207,6 @@ export const getOrdersByUser = async (userId: string) => {
 };
 </file>
 
-<file path="client/src/lib/supabase/orders/orders.ts">
-import { createClient } from '@/lib/supabase/client';
-
-export interface Order {
-  id: string;
-  user_id: string;
-  items: CartItem[];
-  total_price: number;
-  total_quantity: number;
-  status: 'pending' | 'processing' | 'completed' | 'cancelled';
-  created_at: string;
-  updated_at: string;
-}
-
-export const addOrder = async (
-  userId: string,
-  items: CartItem[],
-  totalPrice: number,
-  totalQuantity: number
-) => {
-  const supabase = createClient();
-
-  const { data, error } = await supabase
-    .from('orders')
-    .insert({
-      user_id: userId,
-      items,
-      total_price: totalPrice,
-      total_quantity: totalQuantity,
-      status: 'pending',
-    } as any)
-    .select()
-    .single();
-
-  if (error) {
-    console.error('Error creating order:', error);
-    throw new Error(error.message);
-  }
-
-  return data as Order;
-};
-
-export const getOrdersByUser = async (userId: string) => {
-  const supabase = createClient();
-
-  const { data, error } = await supabase
-    .from('orders')
-    .select('*')
-    .eq('user_id', userId)
-    .order('created_at', { ascending: false });
-
-  if (error) {
-    console.error('Error fetching orders:', error);
-    return [];
-  }
-
-  return (data as Order[]) || [];
-};
-
-export const getOrdersByStatus = async (userId: string, status: string) => {
-  const supabase = createClient();
-
-  const { data, error } = await supabase
-    .from('orders')
-    .select('*')
-    .eq('user_id', userId)
-    .eq('status', status)
-    .order('created_at', { ascending: false });
-
-  if (error) {
-    console.error('Error fetching orders:', error);
-    return [];
-  }
-
-  return (data as Order[]) || [];
-};
-
-export const updateOrderStatus = async (orderId: string, status: string) => {
-  const supabase = createClient();
-
-  const { data, error } = await supabase
-    .from('orders')
-    .update({ status, updated_at: new Date().toISOString() } as never)
-    .eq('id', orderId)
-    .select()
-    .single();
-
-  if (error) {
-    console.error('Error updating order:', error);
-    throw new Error(error.message);
-  }
-
-  return data as Order;
-};
-</file>
-
 <file path="client/src/lib/supabase/products/products.ts">
 import { createClient } from '@/lib/supabase/client';
 
@@ -13366,31 +12261,6 @@ export const getProductById = async (id: string) => {
   }
 
   return (data as Product) || null;
-};
-</file>
-
-<file path="client/src/lib/supabase/storage.ts">
-import { createClient } from "./client";
-
-export const STORAGE_BUCKET = "dreamhair_crowns";
-
-export const uploadImage = async (file: File, path: string) => {
-    const supabase = createClient();
-    const fileExt = file.name.split(".").pop();
-    const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`;
-    const filePath = `${path}/${fileName}`;
-
-    const { error: uploadError } = await supabase.storage
-        .from(STORAGE_BUCKET)
-        .upload(filePath, file);
-
-    if (uploadError) {
-        throw uploadError;
-    }
-
-    const { data } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(filePath);
-
-    return data.publicUrl;
 };
 </file>
 
@@ -13807,44 +12677,6 @@ export interface yellowemption {
 }
 </file>
 
-<file path="client/src/lib/types/OrderTypes.d.ts">
-declare global {
-
-  interface OrderDetails {
-    userId: string;
-    items: CartItem[];
-    totalAmount: number;
-    shippingAddress: string;
-    paymentMethod: paymentMethod;
-  }
- 
-  interface OrderItem {
-    name: string;
-    quantity: number;
-  }
-
-  type CartItem = ProductType & {
-    quantity: number;
-  };
-
-  interface Order {
-    orderId: string;
-    userId?: string;
-    orderDate: Date;
-    products: CartItem[];
-    quantity: number;
-    totalAmount: number;
-    status: 'pending' | 'processing' | 'completed' | 'cancelled';
-    type: 'Takeaway' | 'Photo boot' | 'Laundry';
-    location?: string;
-    paymentMethod?: paymentMethod;
-    deliveryAddress?: string;
-    shippingAddress?: string;
-  }
-}
-export { };
-</file>
-
 <file path="client/src/lib/types/ProductTypes.d.ts">
 declare global {
   interface nutritionalInfo {
@@ -14161,140 +12993,6 @@ CREATE TRIGGER on_auth_user_created
   EXECUTE FUNCTION public.handle_new_user();
 </file>
 
-<file path="client/supabase_migrations/create_tables.sql">
--- WARNING: This schema is for context only and is not meant to be run.
--- Table order and constraints may not be valid for execution.
-
-CREATE TABLE public.admins (
-  user_id uuid NOT NULL,
-  created_at timestamp with time zone DEFAULT now(),
-  CONSTRAINT admins_pkey PRIMARY KEY (user_id)
-);
-CREATE TABLE public.comments (
-  id uuid NOT NULL DEFAULT gen_random_uuid(),
-  product_id uuid,
-  user_id uuid,
-  user_name text,
-  body text NOT NULL,
-  created_at timestamp with time zone DEFAULT now(),
-  CONSTRAINT comments_pkey PRIMARY KEY (id),
-  CONSTRAINT comments_product_id_fkey FOREIGN KEY (product_id) REFERENCES public.products(id),
-  CONSTRAINT fk_comments_user_id_profiles FOREIGN KEY (user_id) REFERENCES public.profiles(id)
-);
-CREATE TABLE public.contact (
-  id uuid NOT NULL DEFAULT gen_random_uuid(),
-  name text NOT NULL,
-  email text NOT NULL,
-  phone text,
-  message text NOT NULL,
-  created_at timestamp with time zone DEFAULT now(),
-  CONSTRAINT contact_pkey PRIMARY KEY (id)
-);
-CREATE TABLE public.featured_items (
-  id uuid NOT NULL DEFAULT gen_random_uuid(),
-  name text NOT NULL,
-  description text NOT NULL,
-  image_url text,
-  likes ARRAY DEFAULT '{}'::uuid[],
-  comments jsonb DEFAULT '[]'::jsonb,
-  created_at timestamp with time zone DEFAULT now(),
-  CONSTRAINT featured_items_pkey PRIMARY KEY (id)
-);
-CREATE TABLE public.orders (
-  id uuid NOT NULL DEFAULT gen_random_uuid(),
-  user_id uuid,
-  items jsonb NOT NULL,
-  total_price numeric NOT NULL,
-  total_quantity integer NOT NULL,
-  status text DEFAULT 'pending'::text,
-  created_at timestamp with time zone DEFAULT now(),
-  updated_at timestamp with time zone DEFAULT now(),
-  CONSTRAINT orders_pkey PRIMARY KEY (id),
-  CONSTRAINT fk_orders_user_id_profiles FOREIGN KEY (user_id) REFERENCES public.profiles(id)
-);
-CREATE TABLE public.photo_boot_bookings (
-  id uuid NOT NULL DEFAULT gen_random_uuid(),
-  name text NOT NULL,
-  email text NOT NULL,
-  phone text,
-  date date NOT NULL,
-  time time without time zone NOT NULL,
-  package text NOT NULL,
-  people integer NOT NULL,
-  message text,
-  created_at timestamp with time zone DEFAULT now(),
-  CONSTRAINT photo_boot_bookings_pkey PRIMARY KEY (id)
-);
-CREATE TABLE public.products (
-  id uuid NOT NULL DEFAULT gen_random_uuid(),
-  name text NOT NULL,
-  slug text UNIQUE,
-  description text,
-  price numeric DEFAULT 0,
-  image_url text,
-  stock integer DEFAULT 0,
-  created_at timestamp with time zone DEFAULT now(),
-  badge text,
-  likes ARRAY DEFAULT '{}'::uuid[],
-  category_name text,
-  is_hidden boolean NOT NULL DEFAULT false,
-  CONSTRAINT products_pkey PRIMARY KEY (id),
-  CONSTRAINT products_category_name_fkey FOREIGN KEY (category_name) REFERENCES public.products_category(category_name)
-);
-CREATE TABLE public.products_category (
-  id uuid NOT NULL DEFAULT gen_random_uuid(),
-  category_name text NOT NULL UNIQUE,
-  image text,
-  description text,
-  created_at timestamp with time zone DEFAULT now(),
-  is_hidden boolean NOT NULL DEFAULT false,
-  CONSTRAINT products_category_pkey PRIMARY KEY (id)
-);
-CREATE TABLE public.profiles (
-  id uuid NOT NULL DEFAULT gen_random_uuid(),
-  email text,
-  display_name text,
-  phone text,
-  metadata jsonb,
-  created_at timestamp with time zone DEFAULT now(),
-  role text DEFAULT 'customer'::text,
-  uid text,
-  email_verified boolean DEFAULT false,
-  photo_url text,
-  address text,
-  city text,
-  state text,
-  zip_code text,
-  country text,
-  theme text DEFAULT 'system'::text,
-  tier_status text DEFAULT 'Bronze'::text,
-  referral_code text,
-  preferences jsonb DEFAULT '{}'::jsonb,
-  saved_payment_methods jsonb DEFAULT '[]'::jsonb,
-  updated_at timestamp with time zone DEFAULT now(),
-  last_login timestamp with time zone DEFAULT now(),
-  CONSTRAINT profiles_pkey PRIMARY KEY (id)
-);
-CREATE TABLE public.testimonials (
-  id uuid NOT NULL DEFAULT gen_random_uuid(),
-  text text NOT NULL,
-  author text NOT NULL,
-  rating integer DEFAULT 5,
-  likes ARRAY DEFAULT '{}'::uuid[],
-  comments jsonb DEFAULT '[]'::jsonb,
-  created_at timestamp with time zone DEFAULT now(),
-  CONSTRAINT testimonials_pkey PRIMARY KEY (id)
-);
-CREATE TABLE public.user_favorites (
-  user_id uuid NOT NULL,
-  product_id uuid NOT NULL,
-  created_at timestamp with time zone DEFAULT now(),
-  CONSTRAINT user_favorites_pkey PRIMARY KEY (user_id, product_id),
-  CONSTRAINT user_favorites_product_id_fkey FOREIGN KEY (product_id) REFERENCES public.products(id),
-  CONSTRAINT fk_user_favorites_user_id_profiles FOREIGN KEY (user_id) REFERENCES public.profiles(id)
-);
-</file>
-
 <file path="client/tsconfig.json">
 {
   "compilerOptions": {
@@ -14341,6 +13039,39 @@ CREATE TABLE public.user_favorites (
 }
 </file>
 
+<file path="admin/next.config.ts">
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "jsmrqzrdciskbiyxzshl.supabase.co",
+      },
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'plus.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+      },
+    ],
+  },
+};
+
+export default nextConfig;
+</file>
+
 <file path="admin/package.json">
 {
   "name": "admin",
@@ -14372,6 +13103,346 @@ CREATE TABLE public.user_favorites (
     "typescript": "^5"
   }
 }
+</file>
+
+<file path="admin/src/app/(auth)/layout.tsx">
+import type { ReactNode } from "react";
+
+export default function AuthLayout({ children }: { children: ReactNode }) {
+  return (
+    <div className="min-h-screen bg-black bg-gradient-to-br from-black via-neutral-900 to-yellow-950/20 px-4 py-10">
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-center gap-8">
+        <div className="text-center text-white">
+          <p className="text-sm uppercase tracking-[0.3em] text-[var(--theme-gold)]">
+            Dreamhair Crowns
+          </p>
+          <h1 className="text-3xl font-semibold">Admin Console</h1>
+        </div>
+        {children}
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="admin/src/app/layout.tsx">
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Dreamhair Crowns Admin",
+  description: "Operations console for products, orders, and logistics",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-yellow-950 text-white`}
+      >
+        {children}
+      </body>
+    </html>
+  );
+}
+</file>
+
+<file path="admin/src/components/layout/AdminSidebar.tsx">
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
+import { NAV_ITEMS } from "./nav-items";
+import { SidebarNav } from "./SidebarNav";
+
+export const AdminSidebar = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  return (
+    <>
+      {/* Mobile header with burger menu */}
+      <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-yellow-950/95 backdrop-blur-sm lg:hidden">
+        <div className="flex items-center justify-between px-4 py-3">
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="rounded-lg bg-yellow-900/90 p-2 text-white hover:bg-yellow-800"
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? (
+              <HiOutlineX className="h-6 w-6" />
+            ) : (
+              <HiOutlineMenu className="h-6 w-6" />
+            )}
+          </button>
+
+          <div className="text-center">
+            <div className="text-xs uppercase tracking-[0.3em] text-[var(--theme-gold)]">
+              DREAMHAIR
+            </div>
+            <p className="text-sm font-semibold text-white">CROWNS Admin</p>
+          </div>
+
+          <div className="w-10" /> {/* Spacer for centering */}
+        </div>
+      </header>
+
+      {/* Mobile overlay */}
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 z-30 bg-black/60 backdrop-blur-sm lg:hidden"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside
+        className={`fixed inset-y-0 left-0 z-40 w-72 flex-col border-r border-white/10 bg-yellow-950/95 px-6 py-8 backdrop-blur-sm transition-transform duration-300 lg:static lg:flex ${mobileMenuOpen ? "flex translate-x-0" : "-translate-x-full lg:translate-x-0"
+          }`}
+      >
+        <Link
+          href="/dashboard"
+          className="mb-10 block"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          <div className="text-xs uppercase tracking-[0.4em] text-[var(--theme-gold)]">
+            DREAMHAIR
+          </div>
+          <p className="text-xl font-semibold text-white">Crowns Admin</p>
+        </Link>
+
+        <div onClick={() => setMobileMenuOpen(false)}>
+          <SidebarNav items={NAV_ITEMS} />
+        </div>
+
+        <div className="mt-auto rounded-xl border border-white/10 bg-yellow-900/80 p-4 text-sm text-yellow-300">
+          <p className="font-semibold text-white">Daily Ops Checklist</p>
+          <ul className="mt-2 space-y-1 text-xs text-yellow-400">
+            <li>• Check new orders</li>
+            <li>• Update stock levels</li>
+            <li>• Review customer messages</li>
+          </ul>
+        </div>
+      </aside>
+    </>
+  );
+};
+</file>
+
+<file path="admin/src/components/layout/AdminTopbar.tsx">
+import Link from "next/link";
+import { HiOutlineBell, HiOutlineQuestionMarkCircle } from "react-icons/hi2";
+import { logoutAction } from "@/lib/auth";
+import type { AdminProfileSummary } from "@/lib/types";
+import { NAV_ITEMS } from "./nav-items";
+
+type Props = {
+  profile: AdminProfileSummary;
+};
+
+export const AdminTopbar = ({ profile }: Props) => (
+  <header className="flex flex-col gap-4 border-b border-white/5 bg-yellow-950/60 px-4 py-4 backdrop-blur">
+    <div>
+      <p className="text-sm uppercase tracking-[0.35em] text-[var(--theme-gold)]">
+        Dreamhair Admin
+      </p>
+      <h1 className="text-xl font-semibold text-white">
+        Welcome back, {profile.display_name ?? "Admin"}
+      </h1>
+    </div>
+
+    <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+
+
+      <div className="flex items-center gap-3">
+        <Link
+          href="/support"
+          className="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-2 text-sm text-yellow-200 transition hover:border-indigo-400 hover:text-white"
+        >
+          <HiOutlineQuestionMarkCircle />
+          Support
+        </Link>
+        <button
+          type="button"
+          className="rounded-full border border-white/10 p-2 text-yellow-200 transition hover:border-indigo-400 hover:text-white"
+          aria-label="Notifications"
+        >
+          <HiOutlineBell className="text-lg" />
+        </button>
+        <form action={logoutAction}>
+          <button
+            type="submit"
+            className="rounded-full border border-white/10 px-4 py-2 text-sm text-yellow-200 transition hover:border-rose-500 hover:text-white"
+          >
+            Sign out
+          </button>
+        </form>
+      </div>
+    </div>
+  </header>
+);
+</file>
+
+<file path="admin/src/components/layout/nav-items.tsx">
+export type NavItem = {
+  label: string;
+  href: string;
+  icon: string;
+  badge?: string;
+};
+
+export const NAV_ITEMS: NavItem[] = [
+  {
+    label: "Dashboard",
+    href: "/dashboard",
+    icon: "HiOutlineChartBar",
+  },
+  {
+    label: "Products",
+    href: "/Products",
+    icon: "PiBowlFoodBold",
+  },
+  {
+    label: "Orders",
+    href: "/orders",
+    icon: "HiOutlineClipboardDocumentList",
+    badge: "Live",
+  },
+  {
+    label: "Contact",
+    href: "/contact",
+    icon: "HiOutlineEnvelope",
+  },
+  {
+    label: "Profiles",
+    href: "/profiles",
+    icon: "HiOutlineUsers",
+  },
+  {
+    label: "Testimonials",
+    href: "/testimonials",
+    icon: "HiOutlineStar",
+  },
+  {
+    label: "Featured Items",
+    href: "/featured-items",
+    icon: "HiOutlineSparkles",
+  },
+  {
+    label: "Settings",
+    href: "/settings",
+    icon: "HiOutlineCog",
+  },
+];
+</file>
+
+<file path="admin/src/lib/supabase/storage.ts">
+import { createSupabaseBrowserClient } from "./client";
+
+export const STORAGE_BUCKET = "dreamhair_crowns";
+
+export const uploadImage = async (file: File, path: string) => {
+    const supabase = createSupabaseBrowserClient();
+    const fileExt = file.name.split(".").pop();
+    const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`;
+    const filePath = `${path}/${fileName}`;
+
+    console.log("Uploading file to path:", filePath);
+    const { error: uploadError } = await supabase.storage
+        .from(STORAGE_BUCKET)
+        .upload(filePath, file);
+
+    if (uploadError) {
+        console.error("Upload error:", uploadError);
+        throw uploadError;
+    }
+
+    const { data } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(filePath);
+    console.log("Uploaded file public URL:", data.publicUrl);
+
+    return data.publicUrl;
+};
+
+export const deleteImage = async (urlOrPath: string) => {
+    console.log("Deleting image:", urlOrPath);
+    const supabase = createSupabaseBrowserClient();
+
+    // Extract path from URL if a full URL was provided
+    let filePath = urlOrPath;
+    if (urlOrPath.includes(STORAGE_BUCKET)) {
+        const parts = urlOrPath.split(`${STORAGE_BUCKET}/`);
+        filePath = parts[parts.length - 1];
+    }
+    console.log("Parsed file path for deletion:", filePath);
+
+    const { error } = await supabase.storage
+        .from(STORAGE_BUCKET)
+        .remove([filePath]);
+
+    if (error) {
+        console.error("Failed to delete image:", error);
+        throw error;
+    }
+    console.log("Image deleted successfully");
+};
+</file>
+
+<file path="client/next.config.ts">
+import type { NextConfig } from 'next';
+
+const nextConfig: NextConfig = {
+  reactCompiler: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: "https",
+        hostname: "jsmrqzrdciskbiyxzshl.supabase.co",
+      },
+      {
+        protocol: 'https',
+        hostname: 'plus.unsplash.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
+};
+
+module.exports = nextConfig;
 </file>
 
 <file path="client/package.json">
@@ -14983,6 +14054,41 @@ export default function ServicesPage() {
 }
 </file>
 
+<file path="client/src/app/shop/[Products]/[product]/components/ProductInfo.tsx">
+import React from 'react';
+
+interface ProductInfoProps {
+	product: ProductType;
+}
+
+const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
+
+	return (
+		<div className=' p-2 rounded-md text-white space-y-8'>
+			{/* Product Name and Price */}
+			<article>
+				<h1 className='text-4xl font-extrabold'>{product.Name}</h1>
+				<p className='text-3xl text-center text-yellow-500 font-bold text-white mt-2'>
+					R{product.Price.toFixed(2)}
+				</p>
+			</article>
+
+			{/* Description */}
+			<article>
+				<h2 className='text-2xl font-bold text-white mb-3'>Description</h2>
+				<ul className='list-disc list-inside space-y-1.5 text-white'>
+					{product.Description.map((d: string, index: number) => (
+						<li key={index}>{d}</li>
+					))}
+				</ul>
+			</article>
+		</div>
+	);
+};
+
+export default ProductInfo;
+</file>
+
 <file path="client/src/app/shop/page.tsx">
 import { Suspense } from 'react';
 import ImageGallery from '@/app/gallery/components/ImageGallery';
@@ -15310,62 +14416,396 @@ const ActionFooter: React.FC<ActionFooterProps> = ({ itemId, table, commentsCoun
 export default ActionFooter;
 </file>
 
-<file path="client/src/lib/forms/LoginForm.tsx">
-'use client';
+<file path="client/src/components/ui/layout/Section.tsx">
+import { Suspense } from 'react';
+import Loading from '../Loading';
 
-import { useActionState } from 'react';
-import { signInAction } from '@/lib/actions/auth';
-import Loading from '@/components/ui/Loading';
+interface SectionProps extends React.HTMLProps<HTMLElement> {
+	Icon?: React.ElementType;
+	heading?: string;
+	tittle?: string;
+	className?: string;
+	children: React.ReactNode;
+}
+export default function Section({
+	children,
+	Icon,
+	heading,
+	tittle,
+	className,
+	...props
+}: SectionProps) {
+	return (
+		<section
+			{...props}
+			className={`${className} relative overflow-hidden bg-gradient-to-br from-yellow-950/30 to-black/40 backdrop-blur-3xl border border-white/5 rounded-2xl p-8 md:p-12 transition-all duration-700 w-full group
+					before:absolute before:inset-0 before:bg-gradient-to-br before:from-amber-500/5 before:to-transparent before:opacity-0 before:animate-[pulse_8s_ease-in-out_infinite] before:pointer-events-none
+					ring-1 ring-inset ring-amber-500/10 hover:ring-amber-500/30 hover:shadow-2xl hover:shadow-amber-900/10`}>
+			<header className="mb-10 md:mb-14">
+				{Icon ? (
+					<div className='flex flex-col items-center text-center space-y-4'>
+						<span className='bg-gradient-to-br from-amber-500/10 to-yellow-500/5 p-4 rounded-xl border border-amber-500/20 shadow-inner shadow-amber-500/5'>
+							<Icon className='text-amber-400 text-3xl md:text-4xl' />
+						</span>
+						{tittle && <h3 className='mt-2 text-2xl md:text-3xl tracking-tight text-white/95'>{tittle}</h3>}
+					</div>
+				) : (
+					tittle && <h2 className='text-3xl md:text-4xl tracking-tight mb-4'>{tittle}</h2>
+				)}
+				{heading && <p className='text-white/60 text-center text-base md:text-lg max-w-xl mx-auto leading-relaxed mt-4 font-light'>{heading}</p>}
+			</header>
+			{children}
+		</section>
+	);
+}
+</file>
 
-import Button from '@/components/ui/Button';
-import TextInput from '@/components/ui/TextInput';
-import Link from 'next/link';
-import Section from '@/components/ui/layout/Section';
+<file path="client/src/lib/supabase/storage.ts">
+import { createClient } from "./client";
 
-export default function LoginForm() {
-    const [state, formAction, isPending] = useActionState(signInAction, null);
+export const STORAGE_BUCKET = "dreamhair_crowns";
 
-    if (isPending) {
-        return <Loading message="Signing in..." />;
+export const uploadImage = async (file: File, path: string) => {
+    const supabase = createClient();
+    const fileExt = file.name.split(".").pop();
+    const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`;
+    const filePath = `${path}/${fileName}`;
+
+    const { error: uploadError } = await supabase.storage
+        .from(STORAGE_BUCKET)
+        .upload(filePath, file);
+
+    if (uploadError) {
+        throw uploadError;
     }
 
-    return (
-        <Section >
-            {state?.error && (
-                <div className='text-red-300 mb-4 mt-4 bg-red-500/10 border border-red-500/30 p-3 rounded-lg'>{state.error}</div>
-            )}
-            <form
-                action={formAction}
-                className='space-y-6 mt-6'>
-                <TextInput
-                    label='Email:'
-                    type='email'
-                    id='email'
-                    name='email'
-                    required
-                />
-                <TextInput
-                    label='Password:'
-                    type='password'
-                    id='password'
-                    name='password'
-                    required
-                />
-                <Button
-                    type='submit'
-                    variant='primary'
-                    className='w-full'
-                    size='lg'
-                    loading={isPending}>
-                    Sign In
-                </Button>
-            </form>
-            <p className='mt-6 text-white/70 text-center'>
-                Don&apos;t have an account? <Link  href='/register' className="text-amber-500 hover:text-amber-400 font-bold transition-colors duration-200">Sign Up</Link>
-            </p>
-        </Section>
-    );
+    const { data } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(filePath);
+
+    return data.publicUrl;
+};
+</file>
+
+<file path="client/src/lib/types/OrderTypes.d.ts">
+declare global {
+
+  interface OrderDetails {
+    userId: string;
+    items: CartItem[];
+    totalAmount: number;
+    shippingAddress: string;
+    paymentMethod: paymentMethod;
+  }
+
+  interface OrderItem {
+    name: string;
+    quantity: number;
+  }
+
+  type CartItem = ProductType & {
+    quantity: number;
+  };
+
+  interface Order {
+    orderId: string;
+    userId?: string;
+    orderDate: Date;
+    products: CartItem[];
+    quantity: number;
+    totalAmount: number;
+    status: 'pending' | 'processing' | 'completed' | 'cancelled' | 'waiting_for_payment';
+    type: 'Takeaway' | 'Photo boot' | 'Laundry';
+    location?: string;
+    paymentMethod?: paymentMethod;
+    deliveryAddress?: string;
+    shippingAddress?: string;
+  }
 }
+export { };
+</file>
+
+<file path="client/supabase_migrations/create_tables.sql">
+-- Enable necessary extensions
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
+-- -----------------------------------------------------------------------------
+-- 1. PROFILES & AUTHENTICATION
+-- -----------------------------------------------------------------------------
+
+-- Create profiles table (extends auth.users)
+CREATE TABLE public.profiles (
+  id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  email text,
+  display_name text,
+  phone text,
+  role text DEFAULT 'customer'::text CHECK (role IN ('customer', 'admin', 'staff', 'manager')),
+  uid text,
+  email_verified boolean DEFAULT false,
+  photo_url text,
+  address text,
+  city text,
+  state text,
+  zip_code text,
+  country text,
+  theme text DEFAULT 'system'::text,
+  tier_status text DEFAULT 'Bronze'::text,
+  referral_code text,
+  preferences jsonb DEFAULT '{"dietaryRestrictions": [], "favoriteItems": [], "communicationPreferences": {"sms": false, "email": true, "promotions": true}}'::jsonb,
+  saved_payment_methods jsonb DEFAULT '[]'::jsonb,
+  metadata jsonb DEFAULT '{}'::jsonb,
+  created_at timestamp with time zone DEFAULT now(),
+  updated_at timestamp with time zone DEFAULT now(),
+  last_login timestamp with time zone,
+  CONSTRAINT profiles_pkey PRIMARY KEY (id)
+);
+
+-- Create admins table (explicit admin tracking)
+CREATE TABLE public.admins (
+  user_id uuid NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT admins_pkey PRIMARY KEY (user_id)
+);
+
+-- Function to handle new user signup automatically
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS trigger
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public
+AS $$
+BEGIN
+  INSERT INTO public.profiles (id, email, display_name, uid, role, metadata)
+  VALUES (
+    NEW.id,
+    NEW.email,
+    COALESCE(NEW.raw_user_meta_data ->> 'display_name', NEW.email),
+    NEW.id::text,
+    COALESCE(NEW.raw_user_meta_data ->> 'role', 'customer'),
+    jsonb_build_object('raw_user_meta_data', NEW.raw_user_meta_data)
+  )
+  ON CONFLICT (id) DO NOTHING;
+  RETURN NEW;
+END;
+$$;
+
+-- Trigger for new user creation
+DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
+CREATE TRIGGER on_auth_user_created
+  AFTER INSERT ON auth.users
+  FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
+
+-- -----------------------------------------------------------------------------
+-- 2. PRODUCTS & CATEGORIES
+-- -----------------------------------------------------------------------------
+
+CREATE TABLE public.products_category (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  category_name text NOT NULL,
+  image text,
+  description text,
+  is_hidden boolean DEFAULT false,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT products_category_pkey PRIMARY KEY (id),
+  CONSTRAINT products_category_name_unique UNIQUE (category_name)
+);
+
+CREATE TABLE public.products (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  name text NOT NULL,
+  slug text,
+  description text,
+  price numeric DEFAULT 0,
+  category_name text REFERENCES public.products_category(category_name) ON UPDATE CASCADE ON DELETE SET NULL,
+  image_url text,
+  stock integer DEFAULT 0,
+  badge text,
+  is_hidden boolean DEFAULT false,
+  likes uuid[] DEFAULT '{}'::uuid[], -- Array of user UUIDs who liked the product
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT products_pkey PRIMARY KEY (id),
+  CONSTRAINT products_slug_unique UNIQUE (slug)
+);
+
+-- -----------------------------------------------------------------------------
+-- 3. ORDERS & SHOPPING
+-- -----------------------------------------------------------------------------
+
+CREATE TABLE public.orders (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  user_id uuid REFERENCES public.profiles(id) ON DELETE SET NULL,
+  items jsonb NOT NULL, -- Stores snapshot of cart items { name, qty, price, id }
+  total_price numeric NOT NULL DEFAULT 0,
+  total_quantity integer NOT NULL DEFAULT 0,
+  status text DEFAULT 'pending'::text CHECK (status IN ('pending', 'processing', 'completed', 'cancelled', 'deleted')),
+  created_at timestamp with time zone DEFAULT now(),
+  updated_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT orders_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE public.user_favorites (
+  user_id uuid NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
+  product_id uuid NOT NULL REFERENCES public.products(id) ON DELETE CASCADE,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT user_favorites_pkey PRIMARY KEY (user_id, product_id)
+);
+
+-- -----------------------------------------------------------------------------
+-- 4. SOCIAL & CONTENT
+-- -----------------------------------------------------------------------------
+
+CREATE TABLE public.comments (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  product_id uuid REFERENCES public.products(id) ON DELETE CASCADE,
+  user_id uuid REFERENCES public.profiles(id) ON DELETE SET NULL,
+  user_name text,
+  body text NOT NULL,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT comments_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE public.testimonials (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  text text NOT NULL,
+  author text NOT NULL,
+  rating integer DEFAULT 5,
+  likes uuid[] DEFAULT '{}'::uuid[],
+  comments jsonb DEFAULT '[]'::jsonb,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT testimonials_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE public.featured_items (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  name text NOT NULL,
+  description text NOT NULL,
+  image_url text,
+  likes uuid[] DEFAULT '{}'::uuid[],
+  comments jsonb DEFAULT '[]'::jsonb,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT featured_items_pkey PRIMARY KEY (id)
+);
+
+-- -----------------------------------------------------------------------------
+-- 5. UTILITY & SERVICES
+-- -----------------------------------------------------------------------------
+
+CREATE TABLE public.contact (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  name text NOT NULL,
+  email text NOT NULL,
+  phone text,
+  message text NOT NULL,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT contact_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE public.photo_boot_bookings (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  name text NOT NULL,
+  email text NOT NULL,
+  phone text,
+  date date NOT NULL,
+  time time without time zone NOT NULL,
+  package text NOT NULL,
+  people integer NOT NULL DEFAULT 1,
+  message text,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT photo_boot_bookings_pkey PRIMARY KEY (id)
+);
+
+-- -----------------------------------------------------------------------------
+-- 6. ROW LEVEL SECURITY (RLS)
+-- -----------------------------------------------------------------------------
+
+-- Enable RLS on all tables
+ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE admins ENABLE ROW LEVEL SECURITY;
+ALTER TABLE products ENABLE ROW LEVEL SECURITY;
+ALTER TABLE products_category ENABLE ROW LEVEL SECURITY;
+ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
+ALTER TABLE user_favorites ENABLE ROW LEVEL SECURITY;
+ALTER TABLE comments ENABLE ROW LEVEL SECURITY;
+ALTER TABLE testimonials ENABLE ROW LEVEL SECURITY;
+ALTER TABLE featured_items ENABLE ROW LEVEL SECURITY;
+ALTER TABLE contact ENABLE ROW LEVEL SECURITY;
+ALTER TABLE photo_boot_bookings ENABLE ROW LEVEL SECURITY;
+
+-- --- PROFILES ---
+-- Users can read their own profile
+CREATE POLICY "Users can read own profile" ON profiles FOR SELECT USING (auth.uid() = id);
+-- Users can update their own profile
+CREATE POLICY "Users can update own profile" ON profiles FOR UPDATE USING (auth.uid() = id);
+-- Admins can read all profiles
+CREATE POLICY "Admins can read all profiles" ON profiles FOR SELECT USING (EXISTS (SELECT 1 FROM admins WHERE user_id = auth.uid()));
+
+-- --- ADMINS ---
+-- Only admins can read the admins table
+CREATE POLICY "Admins read access" ON admins FOR SELECT USING (auth.uid() = user_id);
+
+-- --- PRODUCTS & CATEGORIES ---
+-- Public can read products
+CREATE POLICY "Public read products" ON products FOR SELECT USING (true);
+CREATE POLICY "Public read categories" ON products_category FOR SELECT USING (true);
+-- Only Admins can insert/update/delete products
+CREATE POLICY "Admins manage products" ON products FOR ALL USING (EXISTS (SELECT 1 FROM admins WHERE user_id = auth.uid()));
+CREATE POLICY "Admins manage categories" ON products_category FOR ALL USING (EXISTS (SELECT 1 FROM admins WHERE user_id = auth.uid()));
+
+-- --- ORDERS ---
+-- Users can read their own orders
+CREATE POLICY "Users read own orders" ON orders FOR SELECT USING (auth.uid() = user_id);
+-- Users can create orders
+CREATE POLICY "Users create orders" ON orders FOR INSERT WITH CHECK (auth.uid() = user_id);
+-- Admins can read all orders
+CREATE POLICY "Admins read all orders" ON orders FOR SELECT USING (EXISTS (SELECT 1 FROM admins WHERE user_id = auth.uid()));
+-- Admins can update orders (status changes)
+CREATE POLICY "Admins update orders" ON orders FOR UPDATE USING (EXISTS (SELECT 1 FROM admins WHERE user_id = auth.uid()));
+
+-- --- FAVORITES ---
+-- Users manage their own favorites
+CREATE POLICY "Users manage favorites" ON user_favorites FOR ALL USING (auth.uid() = user_id);
+
+-- --- COMMENTS ---
+-- Public can read comments
+CREATE POLICY "Public read comments" ON comments FOR SELECT USING (true);
+-- Authenticated users can create comments
+CREATE POLICY "Users create comments" ON comments FOR INSERT WITH CHECK (auth.uid() = user_id);
+-- Users can delete their own comments, Admins can delete any
+CREATE POLICY "Delete comments" ON comments FOR DELETE USING (auth.uid() = user_id OR EXISTS (SELECT 1 FROM admins WHERE user_id = auth.uid()));
+
+-- --- CONTENT (Testimonials, Featured Items) ---
+-- Public read
+CREATE POLICY "Public read testimonials" ON testimonials FOR SELECT USING (true);
+CREATE POLICY "Public read featured" ON featured_items FOR SELECT USING (true);
+-- Admin write
+CREATE POLICY "Admins manage testimonials" ON testimonials FOR ALL USING (EXISTS (SELECT 1 FROM admins WHERE user_id = auth.uid()));
+CREATE POLICY "Admins manage featured" ON featured_items FOR ALL USING (EXISTS (SELECT 1 FROM admins WHERE user_id = auth.uid()));
+
+-- --- CONTACT & BOOKINGS ---
+-- Public can insert (submit forms)
+CREATE POLICY "Public create contact" ON contact FOR INSERT WITH CHECK (true);
+CREATE POLICY "Public create booking" ON photo_boot_bookings FOR INSERT WITH CHECK (true);
+-- Admins can read/manage
+CREATE POLICY "Admins manage contact" ON contact FOR ALL USING (EXISTS (SELECT 1 FROM admins WHERE user_id = auth.uid()));
+CREATE POLICY "Admins manage bookings" ON photo_boot_bookings FOR ALL USING (EXISTS (SELECT 1 FROM admins WHERE user_id = auth.uid()));
+
+-- -----------------------------------------------------------------------------
+-- 7. STORAGE BUCKETS (Optional - run manually via dashboard if SQL not supported)
+-- -----------------------------------------------------------------------------
+-- Note: Creating buckets via SQL requires the `storage` extension and permissions.
+-- Ideally, create a bucket named 'pa-luxe-creation' in the Storage section of the dashboard
+-- and set it to Public.
+
+-- SQL to insert bucket configuration if your setup allows it:
+INSERT INTO storage.buckets (id, name, public) 
+VALUES ('pa-luxe-creation', 'pa-luxe-creation', true)
+ON CONFLICT (id) DO NOTHING;
+
+-- Storage Policy: Public Read
+CREATE POLICY "Public Access" ON storage.objects FOR SELECT USING (bucket_id = 'pa-luxe-creation');
+-- Storage Policy: Admin Upload/Delete
+CREATE POLICY "Admin Write" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'pa-luxe-creation' AND (EXISTS (SELECT 1 FROM admins WHERE user_id = auth.uid())));
+CREATE POLICY "Admin Delete" ON storage.objects FOR DELETE USING (bucket_id = 'pa-luxe-creation' AND (EXISTS (SELECT 1 FROM admins WHERE user_id = auth.uid())));
+-- Storage Policy: Authenticated Upload (for user profile photos)
+CREATE POLICY "User Upload" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'pa-luxe-creation' AND auth.role() = 'authenticated');
 </file>
 
 <file path="client/src/app/about/components/MilestonesAndVision.tsx">
@@ -15642,6 +15082,138 @@ const TargetMarketCallout: React.FC = () => {
 export default TargetMarketCallout;
 </file>
 
+<file path="client/src/app/shop/cart/components/CartFooter.tsx">
+'use client';
+import Button from '@/components/ui/Button';
+import { useCart } from '@/lib/context/CartContext';
+import { addOrder } from '@/lib/supabase/orders/orders';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { IoAddCircle, IoCheckmarkCircleSharp } from 'react-icons/io5';
+import { TbCancel } from 'react-icons/tb';
+import { HiShoppingCart } from 'react-icons/hi2';
+import PaymentModal from '@/components/payment/PaymentModal';
+
+const CartFooter = () => {
+	const router = useRouter();
+	const { cartItems, clearCart, totalPrice, totalQuantity } = useCart();
+	const [isPlacingOrder, setIsPlacingOrder] = useState(false);
+	const [showPaymentModal, setShowPaymentModal] = useState(false);
+
+	const handlePaymentClick = () => {
+		setShowPaymentModal(true);
+	};
+
+	const handlePaymentSelected = async (method: 'card' | 'eft') => {
+		setIsPlacingOrder(true);
+		try {
+			const { createClient } = await import('@/lib/supabase/client');
+			const supabase = createClient();
+			const { data: { user } } = await supabase.auth.getUser();
+
+			if (!user) {
+				alert('Please log in to place an order.');
+				router.push('/login');
+				return;
+			}
+
+			// Determine status based on method
+			const status = method === 'eft' ? 'waiting_for_payment' : 'processing';
+
+			await addOrder(user.id, cartItems, totalPrice, totalQuantity, status);
+			router.push('/orders');
+			clearCart();
+		} catch (error) {
+			console.error('Failed to place order: ', error);
+			alert('There was an issue placing your order. Please try again.');
+		} finally {
+			setIsPlacingOrder(false);
+			setShowPaymentModal(false);
+		}
+	};
+
+	const handleCancelOrder = () => {
+		clearCart();
+		router.back();
+	};
+
+	return (
+		<>
+			<footer className='fixed bottom-0 left-0 right-0 z-50'>
+				{/* Gradient Fade Top - Reduced height */}
+				<div className="absolute -top-12 left-0 w-full h-12 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+
+				<div className="bg-black/90 backdrop-blur-xl border-t border-white/10 pb-safe">
+					<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4'>
+						<div className='flex flex-col gap-4'>
+
+							{/* Receipt Summary - Compact */}
+							<div className="flex items-end justify-between border-b border-dashed border-white/20 pb-4">
+								<div className="flex flex-col gap-0.5">
+									<span className="text-white/50 text-xs uppercase tracking-widest">Total Items</span>
+									<span className="text-lg font-mono text-white">{totalQuantity}</span>
+								</div>
+								<div className="flex flex-col gap-0.5 text-right">
+									<span className="text-amber-500 text-xs uppercase tracking-widest font-bold">Total Amount</span>
+									<span className="text-3xl font-mono text-white tracking-tighter">
+										R{totalPrice.toFixed(2)}
+									</span>
+								</div>
+							</div>
+
+							{/* Action Buttons - Compact */}
+							<nav className='grid grid-cols-2 lg:flex gap-3'>
+								{/* Cancel */}
+								<button
+									onClick={handleCancelOrder}
+									className='col-span-1 lg:flex-none px-4 py-3 rounded-lg text-xs font-bold uppercase tracking-widest text-white/50 hover:text-white hover:bg-white/5 transition-colors'
+								>
+									Cancel
+								</button>
+
+								{/* Add More */}
+								<button
+									onClick={() => router.back()}
+									className='col-span-1 lg:flex-none px-4 py-3 rounded-lg text-xs font-bold uppercase tracking-widest text-amber-500 hover:text-amber-400 hover:bg-amber-500/10 transition-colors'
+								>
+									Add More
+								</button>
+
+								{/* Make Payment - Massive Button */}
+								{cartItems.length > 0 && (
+									<button
+										onClick={handlePaymentClick}
+										disabled={isPlacingOrder}
+										className='col-span-2 lg:flex-1 bg-amber-500 text-black text-base md:text-lg font-bold uppercase tracking-[0.2em] py-3 rounded-lg hover:bg-amber-400 hover:shadow-[0_0_30px_-10px_rgba(245,158,11,0.5)] transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1'
+									>
+										<div className="flex items-center justify-center gap-3">
+											<span>Make Payment</span>
+											<IoCheckmarkCircleSharp size={20} />
+										</div>
+									</button>
+								)}
+							</nav>
+						</div>
+					</div>
+				</div>
+			</footer>
+
+			{showPaymentModal && (
+				<PaymentModal
+					totalAmount={totalPrice}
+					onClose={() => setShowPaymentModal(false)}
+					onPaymentSelected={handlePaymentSelected}
+					isProcessing={isPlacingOrder}
+				/>
+			)}
+		</>
+	);
+};
+
+
+export default CartFooter;
+</file>
+
 <file path="client/src/components/Navbar/DesktopNavbar.tsx">
 'use client';
 import AppLink from '@/components/ui/Link';
@@ -15744,60 +15316,159 @@ const Loading = ({ message = 'Loading...' }: { message?: string }) => (
 export default Loading;
 </file>
 
-<file path="client/src/lib/supabase/client.ts">
-import { createBrowserClient } from '@supabase/ssr';
-import { Database } from '@/lib/types/database.types';
+<file path="client/src/lib/forms/LoginForm.tsx">
+'use client';
 
-export function createClient() {
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
-    console.log("no process.env.NEXT_PUBLIC_SUPABASE_URL")
-  }
-  if (!process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) {
-    console.log("no process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY")
-  }
-  return createBrowserClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
-  );
+import { useActionState } from 'react';
+import { signInAction } from '@/lib/actions/auth';
+import Loading from '@/components/ui/Loading';
+
+import Button from '@/components/ui/Button';
+import TextInput from '@/components/ui/TextInput';
+import Link from 'next/link';
+import Section from '@/components/ui/layout/Section';
+
+export default function LoginForm() {
+    const [state, formAction, isPending] = useActionState(signInAction, null);
+
+    if (isPending) {
+        return <Loading message="Signing in..." />;
+    }
+
+    return (
+        <Section >
+            {state?.error && (
+                <div className='text-red-300 mb-4 mt-4 bg-red-500/10 border border-red-500/30 p-3 rounded-lg'>{state.error}</div>
+            )}
+            <form
+                action={formAction}
+                className='space-y-6 mt-6'>
+                <TextInput
+                    label='Email:'
+                    type='email'
+                    id='email'
+                    name='email'
+                    required
+                />
+                <TextInput
+                    label='Password:'
+                    type='password'
+                    id='password'
+                    name='password'
+                    required
+                />
+                <Button
+                    type='submit'
+                    variant='primary'
+                    className='w-full'
+                    size='lg'
+                    loading={isPending}>
+                    Sign In
+                </Button>
+            </form>
+            <p className='mt-6 text-white/70 text-center'>
+                Don&apos;t have an account? <Link  href='/register' className="text-amber-500 hover:text-amber-400 font-bold transition-colors duration-200">Sign Up</Link>
+            </p>
+        </Section>
+    );
 }
 </file>
 
-<file path="client/src/lib/supabase/server.ts">
-import { createServerClient } from '@supabase/ssr';
-import { cookies } from 'next/headers';
-import { Database } from '@/lib/types/database.types';
+<file path="client/src/lib/supabase/orders/orders.ts">
+import { createClient } from '@/lib/supabase/client';
 
-import { SupabaseClient } from '@supabase/supabase-js';
-
-export async function createClient(): Promise<SupabaseClient<Database>> {
-  const cookieStore = await cookies();
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
-    console.log("no process.env.NEXT_PUBLIC_SUPABASE_URL")
-  }
-  if (!process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) {
-    console.log("no process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY")
-  }
-  return createServerClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return cookieStore.getAll();
-        },
-        setAll(cookiesToSet) {
-          try {
-            cookiesToSet.forEach(({ name, value }) => cookieStore.set(name, value));
-          } catch {
-            // The `setAll` method was called from a Server Component.
-            // This can be ignored if you have middleware refreshing
-            // user sessions.
-          }
-        },
-      },
-    }
-  );
+export interface Order {
+  id: string;
+  user_id: string;
+  items: CartItem[];
+  total_price: number;
+  total_quantity: number;
+  status: 'pending' | 'processing' | 'completed' | 'cancelled' | 'waiting_for_payment';
+  created_at: string;
+  updated_at: string;
 }
+
+export const addOrder = async (
+  userId: string,
+  items: CartItem[],
+  totalPrice: number,
+  totalQuantity: number,
+  status: Order['status'] = 'pending'
+) => {
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from('orders')
+    .insert({
+      user_id: userId,
+      items,
+      total_price: totalPrice,
+      total_quantity: totalQuantity,
+      status: status,
+    } as any)
+    .select()
+    .single();
+
+  if (error) {
+    console.error('Error creating order:', error);
+    throw new Error(error.message);
+  }
+
+  return data as Order;
+};
+
+export const getOrdersByUser = async (userId: string) => {
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from('orders')
+    .select('*')
+    .eq('user_id', userId)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Error fetching orders:', error);
+    return [];
+  }
+
+  return (data as Order[]) || [];
+};
+
+export const getOrdersByStatus = async (userId: string, status: string) => {
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from('orders')
+    .select('*')
+    .eq('user_id', userId)
+    .eq('status', status)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Error fetching orders:', error);
+    return [];
+  }
+
+  return (data as Order[]) || [];
+};
+
+export const updateOrderStatus = async (orderId: string, status: string) => {
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from('orders')
+    .update({ status, updated_at: new Date().toISOString() } as never)
+    .eq('id', orderId)
+    .select()
+    .single();
+
+  if (error) {
+    console.error('Error updating order:', error);
+    throw new Error(error.message);
+  }
+
+  return data as Order;
+};
 </file>
 
 <file path="client/src/app/about/components/OurCommitment.tsx">
@@ -15886,6 +15557,307 @@ const HeroSection: React.FC = () => {
 };
 
 export default HeroSection;
+</file>
+
+<file path="client/src/components/payment/PaymentModal.tsx">
+'use client';
+import React, { useState } from 'react';
+import { IoClose, IoCard, IoWallet, IoCopy } from 'react-icons/io5';
+import { HiBuildingLibrary } from 'react-icons/hi2';
+import Button from '../ui/Button';
+
+interface PaymentModalProps {
+    totalAmount: number;
+    onClose: () => void;
+    onPaymentSelected: (method: 'card' | 'eft') => Promise<void>;
+    isProcessing: boolean;
+}
+
+const PaymentModal: React.FC<PaymentModalProps> = ({ totalAmount, onClose, onPaymentSelected, isProcessing }) => {
+    const [method, setMethod] = useState<'card' | 'eft' | null>(null);
+    const [copied, setCopied] = useState(false);
+
+    const handleCopy = (text: string) => {
+        navigator.clipboard.writeText(text);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
+    const bankDetails = {
+        bank: 'FNB (First National Bank)',
+        accountName: 'Dreamhair Crowns',
+        accountNumber: '62849102938',
+        branchCode: '250655',
+        reference: 'Order Number',
+    };
+
+    return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+            <div className="relative w-full max-w-lg bg-neutral-900 border border-amber-500/20 rounded-2xl shadow-2xl overflow-hidden">
+                {/* Header */}
+                <div className="flex items-center justify-between p-6 border-b border-white/10 bg-white/5">
+                    <h2 className="text-xl font-bold text-white uppercase tracking-wider">
+                        Choose Payment Method
+                    </h2>
+                    <button
+                        onClick={onClose}
+                        className="p-2 text-white/50 hover:text-white transition-colors hover:bg-white/10 rounded-full"
+                    >
+                        <IoClose size={24} />
+                    </button>
+                </div>
+
+                {/* Content */}
+                <div className="p-6 space-y-6">
+                    <div className="text-center mb-8">
+                        <p className="text-sm text-yellow-500 uppercase tracking-widest mb-2">Total Amount</p>
+                        <p className="text-4xl font-bold text-white font-mono">
+                            R{totalAmount.toFixed(2)}
+                        </p>
+                    </div>
+
+                    {/* Method Selection */}
+                    {!method && (
+                        <div className="grid gap-4">
+                            <button
+                                onClick={() => setMethod('card')}
+                                className="flex items-center justify-between p-4 rounded-xl border border-white/10 bg-white/5 hover:border-amber-500/50 hover:bg-amber-500/10 transition-all group"
+                            >
+                                <div className="flex items-center gap-4">
+                                    <div className="p-3 bg-amber-500/10 rounded-full text-amber-500 group-hover:bg-amber-500 group-hover:text-black transition-colors">
+                                        <IoCard size={24} />
+                                    </div>
+                                    <div className="text-left">
+                                        <p className="font-bold text-white">Credit / Debit Card</p>
+                                        <p className="text-xs text-white/50">Instant processing via PayStack/Yoco</p>
+                                    </div>
+                                </div>
+                                <div className="w-4 h-4 rounded-full border border-white/30 group-hover:border-amber-500" />
+                            </button>
+
+                            <button
+                                onClick={() => setMethod('eft')}
+                                className="flex items-center justify-between p-4 rounded-xl border border-white/10 bg-white/5 hover:border-amber-500/50 hover:bg-amber-500/10 transition-all group"
+                            >
+                                <div className="flex items-center gap-4">
+                                    <div className="p-3 bg-amber-500/10 rounded-full text-amber-500 group-hover:bg-amber-500 group-hover:text-black transition-colors">
+                                        <HiBuildingLibrary size={24} />
+                                    </div>
+                                    <div className="text-left">
+                                        <p className="font-bold text-white">EFT / Bank Transfer</p>
+                                        <p className="text-xs text-white/50">Manual verification required</p>
+                                    </div>
+                                </div>
+                                <div className="w-4 h-4 rounded-full border border-white/30 group-hover:border-amber-500" />
+                            </button>
+                        </div>
+                    )}
+
+                    {/* Card Flow */}
+                    {method === 'card' && (
+                        <div className="animate-in slide-in-from-right-4 duration-300 space-y-6 relative">
+                            {/* Disabled Overlay */}
+                            <div className="absolute inset-0 z-10 bg-black/60 backdrop-blur-[2px] rounded-2xl flex flex-col items-center justify-center text-center p-6">
+                                <h3 className="text-2xl font-bold text-red-500 mb-2 uppercase tracking-wider">Coming Soon</h3>
+                                <p className="text-white/80 mb-6 max-w-[200px]">
+                                    Card payments are currently disabled. Please use EFT.
+                                </p>
+                                <Button
+                                    onClick={() => setMethod('eft')}
+                                    className="bg-amber-500 hover:bg-amber-400 text-black font-bold px-8 shadow-lg shadow-amber-500/20"
+                                >
+                                    Switch to EFT Payment
+                                </Button>
+                            </div>
+
+                            <form
+                                className="flex flex-col gap-5 p-6 rounded-2xl bg-[#0c0f14] shadow-[0px_187px_75px_rgba(0,0,0,0.01),0px_105px_63px_rgba(0,0,0,0.05)] relative opacity-50 pointer-events-none"
+                            >
+                                {/* Card Holder */}
+                                <div className="flex flex-col gap-1 relative group">
+                                    <label className="text-xs text-[#8b8e98] font-semibold absolute -top-[10px] left-[15px] bg-[#0c0f14] px-2 z-10">
+                                        Card holder full name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        disabled
+                                        placeholder="Enter your full name"
+                                        className="w-full h-[50px] indent-[15px] rounded-[15px] outline-none bg-transparent border border-[#21262e] text-[#aeaeae]"
+                                    />
+                                </div>
+
+                                {/* Card Number */}
+                                <div className="flex flex-col gap-1 relative group">
+                                    <label className="text-xs text-[#8b8e98] font-semibold absolute -top-[10px] left-[15px] bg-[#0c0f14] px-2 z-10">
+                                        Card Number
+                                    </label>
+                                    <input
+                                        type="number"
+                                        disabled
+                                        placeholder="0000 0000 0000 0000"
+                                        className="w-full h-[50px] indent-[15px] rounded-[15px] outline-none bg-transparent border border-[#21262e] text-[#aeaeae]"
+                                    />
+                                </div>
+
+                                {/* Split: Expiry & CVV */}
+                                <div className="flex flex-row justify-between w-full gap-[15px]">
+                                    <div className="flex flex-col gap-1 relative group w-full">
+                                        <label className="text-xs text-[#8b8e98] font-semibold absolute -top-[10px] left-[15px] bg-[#0c0f14] px-2 z-10">
+                                            Expiry Date
+                                        </label>
+                                        <input
+                                            type="text"
+                                            disabled
+                                            placeholder="01/23"
+                                            className="w-full h-[50px] indent-[15px] rounded-[15px] outline-none bg-transparent border border-[#21262e] text-[#aeaeae]"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col gap-1 relative group w-full">
+                                        <label className="text-xs text-[#8b8e98] font-semibold absolute -top-[10px] left-[15px] bg-[#0c0f14] px-2 z-10">
+                                            CVV
+                                        </label>
+                                        <input
+                                            type="number"
+                                            disabled
+                                            placeholder="CVV"
+                                            className="w-full h-[50px] indent-[15px] rounded-[15px] outline-none bg-transparent border border-[#21262e] text-[#aeaeae]"
+                                        />
+                                    </div>
+                                </div>
+
+                                <button
+                                    type="button"
+                                    disabled
+                                    className="mt-5 py-5 rounded-[25px] font-medium text-xl flex items-center justify-center border-2 border-transparent bg-[#21262e] text-white/50 cursor-not-allowed w-full"
+                                >
+                                    Checkout
+                                </button>
+                            </form>
+
+                            <button
+                                onClick={() => setMethod(null)}
+                                className="w-full text-center text-sm text-white/40 hover:text-white mt-4 relative z-20"
+                            >
+                                Select a different method
+                            </button>
+                        </div>
+                    )}
+
+                    {/* EFT Flow */}
+                    {method === 'eft' && (
+                        <div className="space-y-6 animate-in slide-in-from-right-4 duration-300">
+                            <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-6 space-y-4">
+                                <div className="flex items-center justify-center gap-2 text-amber-500 mb-2">
+                                    <HiBuildingLibrary size={20} />
+                                    <span className="font-bold uppercase tracking-wider">Banking Details</span>
+                                </div>
+
+                                <div className="space-y-3">
+                                    {Object.entries(bankDetails).map(([key, value]) => (
+                                        <div key={key} className="flex justify-between items-center text-sm border-b border-dashed border-amber-500/20 pb-2 last:border-0">
+                                            <span className="text-white/60 capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</span>
+                                            <span className="text-white font-mono flex items-center gap-2">
+                                                {value}
+                                                {['accountNumber', 'branchCode'].includes(key) && (
+                                                    <button onClick={() => handleCopy(value)} className="hover:text-amber-500">
+                                                        <IoCopy size={12} />
+                                                    </button>
+                                                )}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div className="text-center pt-2">
+                                    {copied && <span className="text-xs text-green-400">Copied to clipboard!</span>}
+                                </div>
+                            </div>
+
+                            <div className="text-xs text-center text-white/40">
+                                Please use your Order Number as the reference.
+                                <br />
+                                Proof of payment can be sent to payments@dreamhaircrowns.co.za
+                            </div>
+
+                            <Button
+                                onClick={() => onPaymentSelected('eft')}
+                                disabled={isProcessing}
+                                className="w-full bg-amber-600 hover:bg-amber-700"
+                            >
+                                {isProcessing ? 'Placing Order...' : 'I Promise to Pay'}
+                            </Button>
+
+                            <button
+                                onClick={() => setMethod(null)}
+                                className="w-full text-center text-sm text-white/40 hover:text-white"
+                            >
+                                Select a different method
+                            </button>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default PaymentModal;
+</file>
+
+<file path="client/src/lib/supabase/client.ts">
+import { createBrowserClient } from '@supabase/ssr';
+import { Database } from '@/lib/types/database.types';
+
+export function createClient() {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    console.log("no process.env.NEXT_PUBLIC_SUPABASE_URL")
+  }
+  if (!process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) {
+    console.log("no process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY")
+  }
+  return createBrowserClient<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
+  );
+}
+</file>
+
+<file path="client/src/lib/supabase/server.ts">
+import { createServerClient } from '@supabase/ssr';
+import { cookies } from 'next/headers';
+import { Database } from '@/lib/types/database.types';
+
+import { SupabaseClient } from '@supabase/supabase-js';
+
+export async function createClient(): Promise<SupabaseClient<Database>> {
+  const cookieStore = await cookies();
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    console.log("no process.env.NEXT_PUBLIC_SUPABASE_URL")
+  }
+  if (!process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) {
+    console.log("no process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY")
+  }
+  return createServerClient<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return cookieStore.getAll();
+        },
+        setAll(cookiesToSet) {
+          try {
+            cookiesToSet.forEach(({ name, value }) => cookieStore.set(name, value));
+          } catch {
+            // The `setAll` method was called from a Server Component.
+            // This can be ignored if you have middleware refreshing
+            // user sessions.
+          }
+        },
+      },
+    }
+  );
+}
 </file>
 
 <file path="client/src/components/Footer/Footer.tsx">
