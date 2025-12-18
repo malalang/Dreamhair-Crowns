@@ -7,19 +7,16 @@ import { useState } from 'react';
 import { IoAddCircle, IoCheckmarkCircleSharp } from 'react-icons/io5';
 import { TbCancel } from 'react-icons/tb';
 import { HiShoppingCart } from 'react-icons/hi2';
-import PaymentModal from '@/components/payment/PaymentModal';
+import PaymentModal from '@/app/shop/cart/components/PaymentModal';
 
 const CartFooter = () => {
 	const router = useRouter();
 	const { cartItems, clearCart, totalPrice, totalQuantity } = useCart();
 	const [isPlacingOrder, setIsPlacingOrder] = useState(false);
 	const [showPaymentModal, setShowPaymentModal] = useState(false);
+	const [currentOrderId, setCurrentOrderId] = useState<string | null>(null);
 
-	const handlePaymentClick = () => {
-		setShowPaymentModal(true);
-	};
-
-	const handlePaymentSelected = async (method: 'card' | 'eft') => {
+	const handlePaymentClick = async () => {
 		setIsPlacingOrder(true);
 		try {
 			const { createClient } = await import('@/lib/supabase/client');
@@ -32,15 +29,36 @@ const CartFooter = () => {
 				return;
 			}
 
-			// Determine status based on method
-			const status = method === 'eft' ? 'waiting_for_payment' : 'processing';
+			// Create order immediately with 'waiting_for_payment'
+			const order = await addOrder(user.id, cartItems, totalPrice, totalQuantity, 'waiting_for_payment');
+			setCurrentOrderId(order.id);
+			setShowPaymentModal(true);
+		} catch (error) {
+			console.error('Failed to initialize order: ', error);
+			alert('There was an issue initializing your order. Please try again.');
+		} finally {
+			setIsPlacingOrder(false);
+		}
+	};
 
-			await addOrder(user.id, cartItems, totalPrice, totalQuantity, status);
+	const handlePaymentSelected = async (method: 'card' | 'eft') => {
+		if (!currentOrderId) return;
+		setIsPlacingOrder(true);
+		try {
+			// Update status based on method
+			// EFT -> 'payment_review' (Waiting for Payment Confirmation)
+			// Card -> 'payment_review' (Simulated success) or 'processing' if immediate
+			// User asked for 'waiting for payment confirmation' for EFT.
+			const status = method === 'eft' ? 'payment_review' : 'processing';
+
+			const { updateOrderStatus } = await import('@/lib/supabase/orders/orders');
+			await updateOrderStatus(currentOrderId, status);
+
 			router.push('/orders');
 			clearCart();
 		} catch (error) {
-			console.error('Failed to place order: ', error);
-			alert('There was an issue placing your order. Please try again.');
+			console.error('Failed to update order: ', error);
+			alert('There was an issue confirming your payment. Please contact support.');
 		} finally {
 			setIsPlacingOrder(false);
 			setShowPaymentModal(false);

@@ -15,11 +15,12 @@ type Props = {
 
 const initialState: OrderActionState = {};
 const STATUSES: OrderStatus[] = [
-  "pending",
+  "waiting_for_payment",
+  "payment_review",
   "processing",
-  "completed",
+  "shipped",
+  "delivered",
   "cancelled",
-  "deleted",
 ];
 
 export const UpdateOrderStatusForm = ({ orderId, currentStatus }: Props) => {

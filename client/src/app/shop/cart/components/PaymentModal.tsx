@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { IoClose, IoCard, IoWallet, IoCopy } from 'react-icons/io5';
 import { HiBuildingLibrary } from 'react-icons/hi2';
-import Button from '../ui/Button';
+import Button from '../../../../components/ui/Button';
 
 interface PaymentModalProps {
     totalAmount: number;
@@ -95,7 +95,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ totalAmount, onClose, onPay
                     {method === 'card' && (
                         <div className="animate-in slide-in-from-right-4 duration-300 space-y-6 relative">
                             {/* Disabled Overlay */}
-                            <div className="absolute inset-0 z-10 bg-black/60 backdrop-blur-[2px] rounded-2xl flex flex-col items-center justify-center text-center p-6">
+                            <div className="absolute inset-0 z-10 bg-black/20 backdrop-blur-[2px] rounded-2xl flex flex-col items-center justify-center text-center p-6">
                                 <h3 className="text-2xl font-bold text-red-500 mb-2 uppercase tracking-wider">Coming Soon</h3>
                                 <p className="text-white/80 mb-6 max-w-[200px]">
                                     Card payments are currently disabled. Please use EFT.
@@ -211,10 +211,12 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ totalAmount, onClose, onPay
                                 </div>
                             </div>
 
-                            <div className="text-xs text-center text-white/40">
-                                Please use your Order Number as the reference.
-                                <br />
-                                Proof of payment can be sent to payments@dreamhaircrowns.co.za
+                            <div className="text-xs text-center text-white/40 space-y-2">
+                                <p>Please use your Order Number as the reference.</p>
+                                <p className="text-amber-500/80 font-medium">
+                                    Please go to your banking app and make the payment, then come back here to confirm.
+                                </p>
+                                <p>Proof of payment can be sent to payments@dreamhaircrowns.co.za</p>
                             </div>
 
                             <Button
@@ -222,7 +224,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ totalAmount, onClose, onPay
                                 disabled={isProcessing}
                                 className="w-full bg-amber-600 hover:bg-amber-700"
                             >
-                                {isProcessing ? 'Placing Order...' : 'I Promise to Pay'}
+                                {isProcessing ? 'Confirming...' : 'Confirm Payment'}
                             </Button>
 
                             <button

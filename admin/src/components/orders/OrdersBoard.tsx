@@ -10,9 +10,11 @@ type Props = {
 };
 
 const STATUS_COLUMNS: SupabaseOrderRecord["status"][] = [
-  "pending",
-  "processing",
-  "completed",
+  "waiting_for_payment", // 1. Waiting for Payment
+  "payment_review",      // 2. Waiting for Payment Confirmation
+  "processing",          // 3. Waiting for Shipping
+  "shipped",             // 4. Your order is on the way
+  "delivered",           // 5. Delivered
   "cancelled",
 ];
 

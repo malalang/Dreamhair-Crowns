@@ -6,7 +6,7 @@ export interface Order {
   items: CartItem[];
   total_price: number;
   total_quantity: number;
-  status: 'pending' | 'processing' | 'completed' | 'cancelled' | 'waiting_for_payment';
+  status: 'waiting_for_payment' | 'payment_review' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
   created_at: string;
   updated_at: string;
 }
@@ -16,7 +16,7 @@ export const addOrder = async (
   items: CartItem[],
   totalPrice: number,
   totalQuantity: number,
-  status: Order['status'] = 'pending'
+  status: Order['status'] = 'waiting_for_payment'
 ) => {
   const supabase = createClient();
 
