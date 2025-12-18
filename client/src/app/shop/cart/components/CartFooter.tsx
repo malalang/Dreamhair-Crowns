@@ -29,13 +29,15 @@ const CartFooter = () => {
 				return;
 			}
 
-			// Create order immediately with 'waiting_for_payment'
+			// Create order immediately with 'pending' to ensure compatibility with RLS/Constraints
+			// We can update it to 'waiting_for_payment' either here or treating 'pending' as such.
+			// For now, let's try to stick to 'pending' for creation to fix the error.
 			const order = await addOrder(user.id, cartItems, totalPrice, totalQuantity, 'waiting_for_payment');
 			setCurrentOrderId(order.id);
 			setShowPaymentModal(true);
 		} catch (error) {
 			console.error('Failed to initialize order: ', error);
-			alert('There was an issue initializing your order. Please try again.');
+			alert(`There was an issue initializing your order: ${error instanceof Error ? error.message : 'Unknown error'}`);
 		} finally {
 			setIsPlacingOrder(false);
 		}
